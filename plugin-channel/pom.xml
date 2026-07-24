@@ -16,6 +16,10 @@
     <dependencies>
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-goods-action</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>biz-goods-domain</artifactId>
         </dependency>
         <dependency>

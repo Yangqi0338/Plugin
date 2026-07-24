@@ -31,9 +31,8 @@
 /.nb-gradle/
 
 # Maven
-**/**/target/
+**/target/
 
-**/**/.flattened-pom.xml
 **/.flattened-pom.xml
 
 # Gradle
