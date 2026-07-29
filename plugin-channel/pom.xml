@@ -7,17 +7,64 @@
     <parent>
         <groupId>com.newzkl.platform</groupId>
         <artifactId>Plugin</artifactId>
-        <version>${revision}</version>
+        <version>${plugin.revision}</version>
     </parent>
 
     <artifactId>plugin-channel</artifactId>
     <description>渠道商身份插件</description>
 
     <dependencies>
+        <!-- ===== 全量 biz-action 接线 (入口 starter 经本 plugin 传递拿到 controller; 裁身份时删条目) ===== -->
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-account-action</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-auth-action</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-content-action</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-finance-action</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>biz-goods-action</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-market-action</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-notify-action</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-order-action</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-social-bang-action</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-store-action</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-sys-action</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-user-action</artifactId>
+        </dependency>
+
+        <!-- ===== 本 plugin SPI 扩展点实现所需 ===== -->
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>biz-goods-domain</artifactId>

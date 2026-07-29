@@ -10,8 +10,8 @@
         <version>${plugin.revision}</version>
     </parent>
 
-    <artifactId>plugin-supplier</artifactId>
-    <description>供应商身份插件</description>
+    <artifactId>plugin-audit</artifactId>
+    <description>审核插件</description>
 
     <dependencies>
         <!-- ===== 全量 biz-action 接线 (入口 starter 经本 plugin 传递拿到 controller; 裁身份时删条目) ===== -->
@@ -80,6 +80,11 @@
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>core-utils</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.graalvm.js</groupId>
+            <artifactId>js-scriptengine</artifactId>
         </dependency>
     </dependencies>
 </project>
