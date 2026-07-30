@@ -70,3 +70,5 @@ app-test/
 #AI
 .omx
 .claude/worktrees/
+.codegraph/
+.codebase-memory/
