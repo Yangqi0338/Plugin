@@ -11,60 +11,10 @@
     </parent>
 
     <artifactId>plugin-audit</artifactId>
-    <description>审核插件</description>
+    <description>审批流插件 (审批引擎 + SPU 工单执行)</description>
 
     <dependencies>
-        <!-- ===== 全量 biz-action 接线 (入口 starter 经本 plugin 传递拿到 controller; 裁身份时删条目) ===== -->
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-account-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-auth-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-content-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-finance-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-goods-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-market-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-notify-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-order-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-social-bang-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-store-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-sys-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-user-action</artifactId>
-        </dependency>
-
-        <!-- ===== 本 plugin SPI 扩展点实现所需 ===== -->
+        <!-- ===== adapter 层转调所需 Base biz domain ===== -->
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>biz-goods-domain</artifactId>
@@ -75,16 +25,41 @@
         </dependency>
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>ddd-application</artifactId>
+            <artifactId>biz-market-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-account-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-sys-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base.core</groupId>
+            <artifactId>core-mq-domain</artifactId>
+        </dependency>
+
+        <!-- ===== 基座 ===== -->
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>ddd-action</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>ddd-infrastructure</artifactId>
         </dependency>
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>core-utils</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>org.graalvm.js</groupId>
-            <artifactId>js-scriptengine</artifactId>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
     </dependencies>
 </project>

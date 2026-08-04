@@ -23,6 +23,10 @@
         <module>plugin-channel</module>
         <module>plugin-supplier</module>
         <module>plugin-operator</module>
+        <module>plugin-hdh</module>
+        <module>plugin-bi</module>
+        <module>plugin-mmt</module>
+        <module>plugin-openapi</module>
     </modules>
 
     <properties>
@@ -74,6 +78,21 @@
             <dependency>
                 <groupId>com.newzkl.platform</groupId>
                 <artifactId>plugin-audit</artifactId>
+                <version>${plugin.revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newzkl.platform</groupId>
+                <artifactId>plugin-hdh</artifactId>
+                <version>${plugin.revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newzkl.platform</groupId>
+                <artifactId>plugin-bi</artifactId>
+                <version>${plugin.revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newzkl.platform</groupId>
+                <artifactId>plugin-mmt</artifactId>
                 <version>${plugin.revision}</version>
             </dependency>
 
