@@ -1,6 +1,7 @@
 package com.newzkl.platform.plugin.hdh.model.req;
 
 
+import com.newzkl.platform.base.common.core.model.dto.Money;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -69,7 +70,7 @@ public class HuiDingHuoCreateOrderReq extends HuiDingHuoBaseReq {
      * 商品总金额（必填，用于校验价格变动）
      */
     @NotNull(message = "商品总金额不能为空")
-    private BigDecimal price;
+    private Money price;
 
     /**
      * 购买商品的备注（可选）

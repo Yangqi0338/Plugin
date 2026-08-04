@@ -4,17 +4,21 @@ package com.newzkl.platform.plugin.hdh;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson2.JSONObject;
-import com.newzkl.platform.base.biz.order.domain.service.ThirdPartyOrderResult;
 import com.newzkl.platform.base.biz.order.domain.spi.ThirdPartyOrderStrategy;
 import com.newzkl.platform.base.biz.order.model.dto.OrderDTO;
+import com.newzkl.platform.base.biz.order.model.dto.SkuCountDTO;
 import com.newzkl.platform.base.biz.order.model.support.api.order.OrderSkuVO;
 import com.newzkl.platform.base.biz.order.model.vo.ShipVO;
+import com.newzkl.platform.base.common.core.model.dto.Money;
+import com.newzkl.platform.base.common.ddd.facade.ThirdPartyOrderDTO;
+import com.newzkl.platform.base.common.ddd.facade.ThirdPartyOrderResult;
 import com.newzkl.platform.base.common.ddd.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.ddd.model.enums.order.PlatformTypeEnum;
 import com.newzkl.platform.base.common.ddd.model.properties.PalletProperties;
 import com.newzkl.platform.plugin.hdh.model.req.HuiDingHuoCreateOrderReq;
 import com.newzkl.platform.plugin.hdh.model.res.HuiDingHuoCreateOrderRes;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,6 +28,7 @@ import java.util.stream.Collectors;
  * 惠订货第三方下单策略实现
  */
 @Slf4j
+@Component
 public class HuiDingHuoOrderStrategy implements ThirdPartyOrderStrategy {
 	
 	@Override
@@ -34,6 +39,11 @@ public class HuiDingHuoOrderStrategy implements ThirdPartyOrderStrategy {
 		HuiDingHuoCreateOrderRes result = HuiDingHuoApiUtils.createOrder(req);
 		// 适配返回结果
 		return new HuiDingHuoOrderResultAdapter(result, req);
+	}
+	
+	@Override
+	public ThirdPartyOrderResult delivery(String outOrderNo, List<SkuCountDTO> skuCountDTOList, String expressCompanyName, String expressNo, Long channelId) {
+		return null;
 	}
 	
 	@Override
@@ -51,7 +61,7 @@ public class HuiDingHuoOrderStrategy implements ThirdPartyOrderStrategy {
 			request.setResponseJson(JSONObject.toJSONString(order));
 			request.setRequestStatus(CommonEnum.RequestStatusEnum.getByCode(order.getSuccess()));
 			request.setErrorMessage(order.getMessage());
-			orderRepository.save(request);
+//			orderRepository.save(request);
 			log.info("惠订货订单补偿 id: {} , 补偿结果: {}", request.getBizOrderNo(), order.getCode());
 		} catch (Exception e) {
 			log.error("惠订货订单补偿失败，调用API异常。订单号: {}", request.getBizOrderNo(), e);
@@ -86,7 +96,7 @@ public class HuiDingHuoOrderStrategy implements ThirdPartyOrderStrategy {
 
 		// 设置订单信息
 		req.setUserOrderNum(String.valueOf(order.getId()));
-        req.setPrice(BigDecimal.valueOf(order.getSupplierAmount()).divide(new BigDecimal("100"))); // 金额单位转换
+        req.setPrice(order.getSupplierAmount().divide(new BigDecimal("100"))); // 金额单位转换
 		req.setDesc(order.getRemark());
 
 		// 构建商品列表
@@ -108,7 +118,7 @@ public class HuiDingHuoOrderStrategy implements ThirdPartyOrderStrategy {
                  sku.setChannelType("2");
                  sku.setBuyNum(2);
              });
-             req.setPrice(new BigDecimal(2));
+             req.setPrice(Money.of("2"));
              log.info("生产代理商品-" + JSONUtil.toJsonStr(req));
          }
 		return req;

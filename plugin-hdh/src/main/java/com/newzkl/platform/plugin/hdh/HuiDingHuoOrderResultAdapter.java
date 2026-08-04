@@ -3,9 +3,11 @@ package com.newzkl.platform.plugin.hdh;
 
 
 import com.alibaba.fastjson2.JSONObject;
-import com.newzkl.platform.base.biz.order.domain.service.ThirdPartyOrderResult;
-import com.newzkl.platform.base.biz.order.domain.service.hdh.huidinghuo.req.HuiDingHuoCreateOrderReq;
-import com.newzkl.platform.base.biz.order.domain.service.hdh.huidinghuo.res.HuiDingHuoCreateOrderRes;
+
+import com.newzkl.platform.base.common.ddd.facade.ThirdPartyOrderResult;
+import com.newzkl.platform.plugin.hdh.model.req.HuiDingHuoCreateOrderReq;
+import com.newzkl.platform.plugin.hdh.model.res.HuiDingHuoCreateOrderRes;
+
 
 import java.util.List;
 
