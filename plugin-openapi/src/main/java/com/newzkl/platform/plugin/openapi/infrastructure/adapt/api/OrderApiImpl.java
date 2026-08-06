@@ -1,5 +1,7 @@
-package com.newzkl.platform.plugin.openapi.application.service.impl;
+package com.newzkl.platform.plugin.openapi.infrastructure.adapt.api;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.newzkl.platform.base.biz.order.facade.IOrderFacade;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderAggVO;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderConfirmReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderFreightReq;
@@ -9,51 +11,54 @@ import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderSubmitR
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderVO;
 import com.newzkl.platform.base.biz.order.facade.model.order.SpuOrderStateVO;
 import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
-import com.newzkl.platform.plugin.openapi.application.service.IOrderService;
 import com.newzkl.platform.plugin.openapi.domain.adapt.api.OrderApi;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
- * 交易
+ * 交易跨域出站端口实现
  *
- * @author muc_fang
+ * <p>直调 Base biz-order {@code IOrderFacade}; 分页返回由 mybatis-plus
+ * {@code Page} 转对外 {@code ApiPage}</p>
+ *
+ * @author KC
  */
-@Service
+@Component
 @RequiredArgsConstructor
-public class OrderServiceImpl implements IOrderService {
+public class OrderApiImpl implements OrderApi {
 
-    private final OrderApi orderApi;
+    private final IOrderFacade orderFacade;
 
     @Override
     public ApiOrderRes submit(Long accountId, ApiOrderSubmitReq orderReq) {
-        return orderApi.submit(accountId, orderReq);
+        return orderFacade.apiSubmitOrder(accountId, orderReq);
     }
 
     @Override
     public ApiPage<ApiOrderVO> list(Long accountId, ApiOrderReq spuOrderQuery) {
-        return orderApi.list(accountId, spuOrderQuery);
+        Page<ApiOrderVO> page = orderFacade.apiList(accountId, spuOrderQuery);
+        return ApiPage.of(page.getRecords(), (int) page.getCurrent(), (int) page.getSize(), page.getTotal());
     }
 
     @Override
     public ApiOrderAggVO detail(Long accountId, String outOrderNo) {
-        return orderApi.detail(accountId, outOrderNo);
+        return orderFacade.apiDetail(accountId, outOrderNo);
     }
 
     @Override
     public void confirm(Long accountId, ApiOrderConfirmReq confirmReq) {
-        orderApi.confirm(accountId, confirmReq);
+        orderFacade.apiConfirm(accountId, confirmReq);
     }
 
     @Override
     public Long freight(Long accountId, ApiOrderFreightReq orderReq) {
-        return orderApi.freight(accountId, orderReq);
+        return orderFacade.apiFreight(accountId, orderReq);
     }
 
     @Override
     public List<SpuOrderStateVO> orderState(Long accountId, List<String> outOrderNoList) {
-        return orderApi.orderState(accountId, outOrderNoList);
+        return orderFacade.apiOrderState(accountId, outOrderNoList);
     }
 }

@@ -6,11 +6,10 @@ import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSkuVO;
 import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuDetailVO;
 import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuStateVO;
 import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuVO;
-import com.zkl.scm.goods.rpc.model.hdh.Item;
-import com.zkl.scm.market.rpc.model.api.ApiChannelSpuRelationVO;
-import com.zkl.scm.market.rpc.model.api.SelectListApiReq;
-import com.zkl.scm.market.rpc.model.vo.MarketRpcVO;
-import com.zkl.scm.rpc.model.ApiPage;
+import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiChannelSpuRelationVO;
+import com.newzkl.platform.base.biz.goods.rpc.model.openapi.SelectListApiReq;
+import com.newzkl.platform.base.biz.goods.rpc.model.openapi.MarketRpcVO;
+import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 
 import java.util.List;
 
@@ -70,8 +69,6 @@ public interface IGoodsService {
     List<ApiCategoryVO> categoryList(Long accountId, Long pid);
 
     List<ApiSkuStockVO> skuStock(Long accountId, List<Long> skuIdList);
-
-    void hdhEvent(Item detail);
 
     /**
      * 修改选品商品标签

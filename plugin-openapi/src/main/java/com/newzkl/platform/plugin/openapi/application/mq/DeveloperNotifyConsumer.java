@@ -12,7 +12,7 @@ import com.newzkl.platform.base.common.core.mq.infrastructure.annotation.MQConsu
 import com.newzkl.platform.base.common.core.mq.infrastructure.consumer.AbstractMessageMQPushConsumer;
 import com.newzkl.platform.base.common.core.mq.model.constant.MQ;
 import com.newzkl.platform.base.common.core.mq.model.notify.NotifyEventMq;
-import com.newzkl.platform.base.common.ddd.model.enums.CommonEnum;
+import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.ddd.model.enums.order.PlatformTypeEnum;
 import com.newzkl.platform.plugin.openapi.domain.repository.IDeveloperRepository;
 import com.newzkl.platform.plugin.openapi.model.constants.NotifyContants;

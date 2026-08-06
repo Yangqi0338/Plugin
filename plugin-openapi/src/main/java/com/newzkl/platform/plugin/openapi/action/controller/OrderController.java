@@ -1,13 +1,19 @@
 package com.newzkl.platform.plugin.openapi.action.controller;
 
 import com.newzkl.platform.plugin.openapi.action.cmd.OrderCmd;
-import com.zkl.scm.developer.annotation.OpenApi;
-import com.zkl.scm.developer.constants.Constants;
-import com.zkl.scm.developer.utils.DeveloperContextUtil;
-import com.zkl.scm.model.web.PlatformResult;
-import com.zkl.scm.openapi.application.service.IOrderService;
-import com.zkl.scm.rpc.model.ApiPage;
-import com.zkl.scm.sale.rpc.model.order.SpuOrderStateVO;
+import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderAggVO;
+import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderConfirmReq;
+import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderFreightReq;
+import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderReq;
+import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderRes;
+import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderSubmitReq;
+import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderVO;
+import com.newzkl.platform.base.biz.order.facade.model.order.SpuOrderStateVO;
+import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
+import com.newzkl.platform.base.common.core.model.res.PlatformResult;
+import com.newzkl.platform.plugin.openapi.model.constants.Constants;
+import com.newzkl.platform.plugin.openapi.model.util.DeveloperContextUtil;
+import com.newzkl.platform.plugin.openapi.application.service.IOrderService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -53,9 +59,9 @@ public class OrderController {
      * @return
      */
     @PostMapping("freight")
-    public PlatformResult<Integer> freight(@Validated @RequestBody ApiOrderFreightReq orderCommand) {
+    public PlatformResult<Long> freight(@Validated @RequestBody ApiOrderFreightReq orderCommand) {
         Long accountId = DeveloperContextUtil.get(Constants.ACCOUNT_ID, Long.class);
-        Integer freight = orderService.freight(accountId, orderCommand);
+        Long freight = orderService.freight(accountId, orderCommand);
         return PlatformResult.success(freight);
     }
     /**

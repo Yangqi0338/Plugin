@@ -3,9 +3,9 @@ package com.newzkl.platform.plugin.hdh;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 
-import com.newzkl.platform.base.biz.order.application.service.OrderService;
 import com.newzkl.platform.base.biz.order.domain.adapt.api.GoodsApi;
 import com.newzkl.platform.base.biz.order.domain.adapt.repository.IOrderRepository;
+import com.newzkl.platform.base.biz.order.domain.service.IOrderDomain;
 import com.newzkl.platform.base.biz.order.facade.model.hdh.ItemInfo;
 import com.newzkl.platform.base.biz.order.facade.model.hdh.OrderCallbackRequest;
 import com.newzkl.platform.base.biz.order.facade.model.hdh.PkgInfo;
@@ -35,7 +35,7 @@ public class HdhEvent {
     private IOrderRepository orderRepository;
     
     @Autowired
-    private OrderService orderService;
+    private IOrderDomain orderDomain;
 
     @Autowired
     private GoodsApi spuApi;
@@ -219,7 +219,7 @@ public class HdhEvent {
             // 若有有效发货商品，执行发货
             if (!CollUtil.isEmpty(deliverItemList)) {
                 deliverCommand.setDeliverItemCommandList(deliverItemList);
-                orderService.deliverCreate(deliverCommand);
+                orderDomain.deliverCreate(deliverCommand);
                 log.info("SPU订单发货命令已提交，SPU订单ID：{}，快递单号：{}，发货商品数：{}", spuOrderId, expressNo, deliverItemList.size());
             }
             else {

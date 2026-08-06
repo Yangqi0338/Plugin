@@ -1,17 +1,15 @@
 package com.newzkl.platform.plugin.openapi.action.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.newzkl.platform.base.biz.account.model.req.ChannelBaseSyncReq;
-import com.newzkl.platform.base.biz.account.model.req.ChannelCdkUseReq;
 import com.newzkl.platform.base.biz.account.model.req.ChannelCodeSyncReq;
 import com.newzkl.platform.base.biz.account.model.req.ChannelGoodsSyncReq;
 import com.newzkl.platform.base.biz.account.model.req.ChannelOptionSyncReq;
-import com.newzkl.platform.base.common.ddd.model.res.PlatformResult;
+import com.newzkl.platform.base.common.core.model.res.PlatformResult;
+import com.newzkl.platform.plugin.openapi.application.service.IChannelService;
+import com.newzkl.platform.plugin.openapi.model.constants.Constants;
+import com.newzkl.platform.plugin.openapi.model.util.DeveloperContextUtil;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 开放平台-渠道商
+ *
+ * <p>D-30 能力缺口: syncBase (IChannelFacade 未建) / useCdk / cdkList (CDK 4 模型 Base 无)
+ * 三端点暂移除, 待 Base 补渠道 facade + CDK 域后回填
+ *
  * @author muc_fang
  */
 @RestController("开放平台-渠道")
@@ -27,20 +29,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 public class ChannelController {
-    
-    private final IChannelFacade channelFacade;
+
     private final IChannelService channelService;
 
-    /**
-     * 同步渠道商信息
-     */
-    @PostMapping("/syncBase")
-    public PlatformResult<Void> syncBase(@Validated @RequestBody ChannelBaseSyncReq req) {
-        log.info("同步渠道商信息:" + JSONObject.toJSONString(req));
-        Long accountId = DeveloperContextUtil.get(Constants.ACCOUNT_ID, Long.class);
-        channelFacade.sync(accountId, req);
-        return PlatformResult.success();
-    }
     /**
      * 同步商品类别信息
      */
@@ -50,6 +41,7 @@ public class ChannelController {
         log.info("同步商品类别信息:" + JSONObject.toJSONString(req));
         return PlatformResult.success();
     }
+
     /**
      * 同步兑换码信息
      */
@@ -59,6 +51,7 @@ public class ChannelController {
         channelService.syncCode(req);
         return PlatformResult.success();
     }
+
     /**
      * 同步期权
      */
@@ -68,24 +61,5 @@ public class ChannelController {
         log.info("同步期权:" + JSONObject.toJSONString(req));
         channelService.syncOption(accountId, req);
         return PlatformResult.success();
-    }
-    /**
-     * 使用兑换码
-     */
-    @PostMapping("/useCdk")
-    public PlatformResult<ThirdUseStoreCdkRes> useCdk(@Validated @RequestBody ChannelCdkUseReq req) {
-        Long appId = DeveloperContextUtil.get(Constants.APP_ID, Long.class);
-        Integer serviceId = CommonEnum.SystemType.MK.getCode();
-        log.info("使用兑换码:" + JSONObject.toJSONString(req));
-        return PlatformResult.success(channelService.useCdk(req, serviceId));
-    }
-    /**
-     * 兑换码列表
-     */
-    @PostMapping("/cdkList")
-    public PlatformResult<ApiPage<CdkVO>> cdkList(@Validated @RequestBody CdkApiQueryReq req) {
-        Long appId = DeveloperContextUtil.get(Constants.APP_ID, Long.class);
-        Integer serviceId = CommonEnum.SystemType.MK.getCode();
-        return PlatformResult.success(channelService.cdkList(req, serviceId));
     }
 }

@@ -11,6 +11,8 @@ import com.newzkl.platform.base.common.core.model.exception.BaseErrorCode;
 import com.newzkl.platform.base.common.core.model.exception.ThrowsException;
 import com.newzkl.platform.base.common.core.utils.spring.SecurityContextHolder;
 import com.newzkl.platform.base.common.ddd.model.enums.RoleEnum;
+import com.newzkl.platform.base.common.core.model.res.PlatformResult;
+import com.newzkl.platform.plugin.openapi.model.constants.Constants;
 import com.newzkl.platform.plugin.openapi.domain.DeveloperApi;
 import com.newzkl.platform.plugin.openapi.model.vo.DeveloperAuthVO;
 import com.newzkl.platform.plugin.openapi.model.util.DeveloperContextUtil;
@@ -23,7 +25,6 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.apache.dubbo.common.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.lang.Nullable;
@@ -118,7 +119,7 @@ public class SignatureFilter implements Filter {
 
     private Map<String,Object> buildParam(String bodyInfo,HttpServletRequest request){
         Map<String, Object> params = null;
-        if(StringUtils.isEmpty(bodyInfo)){
+        if(StrUtil.isEmpty(bodyInfo)){
             params = new HashMap<String, Object>();
         } else {
             params = JSON.parseObject(bodyInfo,Map.class);
@@ -147,7 +148,7 @@ public class SignatureFilter implements Filter {
      */
     private void failResponse(ServletResponse servletResponse, String failMsg) throws IOException {
         ServletOutputStream out = servletResponse.getOutputStream();
-        out.write(JsonUtils.toJson(ScmResult.fail(failMsg)).getBytes());
+        out.write(JSON.toJSONString(PlatformResult.fail(failMsg)).getBytes());
         out.flush();
         out.close();
     }

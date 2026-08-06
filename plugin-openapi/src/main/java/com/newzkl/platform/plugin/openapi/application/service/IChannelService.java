@@ -1,25 +1,20 @@
 package com.newzkl.platform.plugin.openapi.application.service;
 
-import com.zkl.scm.rpc.model.ApiPage;
-import com.zkl.scm.rpc.user.ThirdUseStoreCdkRes;
-import com.zkl.scm.user.rpc.model.channel.ChannelCdkUseReq;
-import com.zkl.scm.user.rpc.model.channel.ChannelCodeSyncReq;
-import com.zkl.scm.user.rpc.model.channel.ChannelOptionSyncReq;
-import com.zkl.scm.user.rpc.model.role.CdkApiQueryReq;
-import com.zkl.scm.user.rpc.model.role.CdkVO;
+import com.newzkl.platform.base.biz.account.model.req.ChannelCodeSyncReq;
+import com.newzkl.platform.base.biz.account.model.req.ChannelOptionSyncReq;
 
 /**
+ * 渠道商交互业务
+ *
+ * <p>D-30 能力缺口: 原 scm 尚含 useCdk/cdkList (兑换码), 依赖 CDK 4 模型
+ * (ChannelCdkUseReq/CdkApiQueryReq/ThirdUseStoreCdkRes/CdkVO), Base 全仓无对应,
+ * 且 IChannelFacade 未建 → 已从接口移除, 待 Base 补 CDK 域能力后回填
+ *
  * @author muc_fang
- * @Description: 渠道商交互业务
- * @date 2023/12/159:57
  */
 public interface IChannelService {
 
     void syncCode(ChannelCodeSyncReq channelCodeSyncReq);
 
     void syncOption(Long accountId, ChannelOptionSyncReq req);
-
-    ThirdUseStoreCdkRes useCdk(ChannelCdkUseReq req, Integer serviceId);
-
-    ApiPage<CdkVO> cdkList(CdkApiQueryReq req, Integer serviceId);
 }

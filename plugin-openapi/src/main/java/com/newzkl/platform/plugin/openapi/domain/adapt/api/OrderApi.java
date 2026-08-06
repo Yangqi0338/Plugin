@@ -1,4 +1,4 @@
-package com.newzkl.platform.plugin.openapi.application.service;
+package com.newzkl.platform.plugin.openapi.domain.adapt.api;
 
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderAggVO;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderConfirmReq;
@@ -13,55 +13,65 @@ import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 import java.util.List;
 
 /**
- * @author muc_fang
- * @Description: 交易
- * @date 2023/12/159:57
+ * 交易跨域出站端口
+ *
+ * <p>openapi 插件对 biz-order 域订单能力的调用收敛于此, 对等旧
+ * {@code @DubboReference IOrderFacade}</p>
+ *
+ * @author KC
  */
-public interface IOrderService {
+public interface OrderApi {
+
     /**
      * 下单
      *
-     * @param accountId
-     * @param orderReq
-     * @return
+     * @param accountId 账号主键
+     * @param orderReq  下单请求
+     * @return 下单结果
      */
     ApiOrderRes submit(Long accountId, ApiOrderSubmitReq orderReq);
+
     /**
-     * 列表
+     * 订单列表
      *
-     * @param accountId
-     * @param spuOrderQuery
-     * @return
+     * @param accountId     账号主键
+     * @param spuOrderQuery 订单查询
+     * @return 订单分页
      */
     ApiPage<ApiOrderVO> list(Long accountId, ApiOrderReq spuOrderQuery);
+
     /**
-     * 明细
+     * 订单明细
      *
-     * @param accountId
-     * @param orderId
-     * @return
+     * @param accountId  账号主键
+     * @param outOrderNo 外部订单号
+     * @return 订单聚合详情
      */
-    ApiOrderAggVO detail(Long accountId, String orderId);
+    ApiOrderAggVO detail(Long accountId, String outOrderNo);
+
     /**
      * 确认收货
-     * @param accountId
-     * @param confirmReq
+     *
+     * @param accountId  账号主键
+     * @param confirmReq 确认请求
      */
     void confirm(Long accountId, ApiOrderConfirmReq confirmReq);
+
     /**
      * 查询运费
      *
-     * @param accountId
-     * @param orderReq
-     * @return
+     * @param accountId 账号主键
+     * @param orderReq  运费请求
+     * @return 运费
      */
     Long freight(Long accountId, ApiOrderFreightReq orderReq);
+
     /**
      * 订单状态
      *
-     * @param accountId
-     * @param orderIdList
-     * @return
+     * @param accountId      账号主键
+     * @param outOrderNoList 外部订单号列表
+     * @return 订单状态列表
      */
-    List<SpuOrderStateVO> orderState(Long accountId, List<String> orderIdList);
+    List<SpuOrderStateVO> orderState(Long accountId, List<String> outOrderNoList);
 }

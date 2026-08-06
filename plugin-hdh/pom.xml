@@ -28,6 +28,20 @@
             <artifactId>biz-order-domain</artifactId>
         </dependency>
 
+        <!-- ===== 三方支付异步回调(汇付) NotifyController 所需 ===== -->
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-finance-application</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-finance-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-finance-model</artifactId>
+        </dependency>
+
         <!-- ===== 基座 ===== -->
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>

@@ -1,10 +1,10 @@
 package com.newzkl.platform.plugin.openapi.domain;
 
 
-import com.github.pagehelper.PageInfo;
-import com.zkl.scm.openapi.domain.developer.model.command.DeveloperCommand;
-import com.zkl.scm.openapi.domain.developer.model.query.DeveloperQuery;
-import com.zkl.scm.openapi.domain.developer.model.vo.DeveloperVO;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.newzkl.platform.plugin.openapi.model.command.DeveloperCommand;
+import com.newzkl.platform.plugin.openapi.model.query.DeveloperQuery;
+import com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO;
 
 /**
 * 开发者
@@ -28,7 +28,7 @@ public interface IDeveloperDomain {
      * @param developerQuery
      * @return
      */
-    PageInfo<DeveloperVO> developerVOList(DeveloperQuery developerQuery);
+    Page<DeveloperVO> developerVOList(DeveloperQuery developerQuery);
 
     /**
      * 开发者值对象

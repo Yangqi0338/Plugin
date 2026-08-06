@@ -1,11 +1,11 @@
 package com.newzkl.platform.plugin.openapi.action.config;
 
-import com.zkl.scm.developer.DeveloperApi;
-import com.zkl.scm.developer.model.DeveloperAuthVO;
-import com.zkl.scm.model.exception.BaseErrorCode;
-import com.zkl.scm.model.exception.ThrowsException;
-import com.zkl.scm.openapi.domain.developer.model.vo.DeveloperVO;
-import com.zkl.scm.openapi.domain.developer.service.IDeveloperDomain;
+import com.newzkl.platform.plugin.openapi.domain.DeveloperApi;
+import com.newzkl.platform.plugin.openapi.model.vo.DeveloperAuthVO;
+import com.newzkl.platform.base.common.core.model.exception.BaseErrorCode;
+import com.newzkl.platform.base.common.core.model.exception.ThrowsException;
+import com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO;
+import com.newzkl.platform.plugin.openapi.domain.IDeveloperDomain;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

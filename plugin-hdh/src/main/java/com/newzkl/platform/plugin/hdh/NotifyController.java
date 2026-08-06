@@ -15,7 +15,7 @@ import com.newzkl.platform.base.biz.finance.model.purse.vo.AccountTripartitePurs
 import com.newzkl.platform.base.common.core.model.exception.BaseErrorCode;
 import com.newzkl.platform.base.common.core.model.exception.PlatformException;
 import com.newzkl.platform.base.common.core.redis.utils.RedisUtil;
-import com.newzkl.platform.base.common.ddd.model.res.PlatformResult;
+import com.newzkl.platform.base.common.core.model.res.PlatformResult;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

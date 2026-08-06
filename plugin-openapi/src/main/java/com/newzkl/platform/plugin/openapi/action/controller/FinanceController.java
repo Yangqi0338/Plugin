@@ -1,5 +1,11 @@
 package com.newzkl.platform.plugin.openapi.action.controller;
 
+import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderRes;
+import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiSyncAmountRecordVO;
+import com.newzkl.platform.base.common.core.model.res.PlatformResult;
+import com.newzkl.platform.plugin.openapi.application.service.IFinanceService;
+import com.newzkl.platform.plugin.openapi.model.constants.Constants;
+import com.newzkl.platform.plugin.openapi.model.util.DeveloperContextUtil;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -8,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 @RestController("开放平台-财富")
 @RequestMapping("/api/finance")

@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.openapi.model.entity;
 
-import com.zkl.scm.web.id.SnowflakeIdAble;
+import com.newzkl.platform.base.common.core.utils.generator.SnowflakeIdAble;
 import lombok.Data;
 
 /**

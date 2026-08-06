@@ -3,7 +3,7 @@ package com.newzkl.platform.plugin.bi.action.order;
 import com.newzkl.platform.base.biz.order.domain.service.IOrderDomain;
 import com.newzkl.platform.base.biz.order.model.dto.IndexCountRes;
 import com.newzkl.platform.base.common.ddd.model.query.TimeQuery;
-import com.newzkl.platform.base.common.ddd.model.res.PlatformResult;
+import com.newzkl.platform.base.common.core.model.res.PlatformResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

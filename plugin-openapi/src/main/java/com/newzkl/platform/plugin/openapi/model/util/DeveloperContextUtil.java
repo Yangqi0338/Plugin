@@ -4,7 +4,6 @@ package com.newzkl.platform.plugin.openapi.model.util;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.ttl.TransmittableThreadLocal;
-import com.zkl.scm.model.utils.StringUtils;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,10 +30,11 @@ public class DeveloperContextUtil
         return Convert.toStr(map.getOrDefault(key, StrUtil.EMPTY));
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> T get(String key, Class<T> clazz)
     {
         Map<String, Object> map = getLocalMap();
-        return StrUtil.cast(map.getOrDefault(key, null));
+        return (T) map.getOrDefault(key, null);
     }
 
     public static Map<String, Object> getLocalMap()

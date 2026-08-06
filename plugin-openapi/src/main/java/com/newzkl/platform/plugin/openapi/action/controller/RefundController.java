@@ -1,15 +1,22 @@
 package com.newzkl.platform.plugin.openapi.action.controller;
 
-import com.zkl.scm.developer.annotation.OpenApi;
-import com.zkl.scm.developer.constants.Constants;
-import com.zkl.scm.developer.utils.DeveloperContextUtil;
-import com.zkl.scm.model.constants.common.YytEnum;
-import com.zkl.scm.model.exception.BaseErrorCode;
-import com.zkl.scm.model.exception.ThrowsException;
-import com.zkl.scm.model.web.PlatformResult;
-import com.zkl.scm.openapi.application.service.IRefundService;
-import com.zkl.scm.openapi.interfaces.controller.RefundCmd;
-import com.zkl.scm.rpc.model.ApiPage;
+import com.newzkl.platform.base.biz.finance.model.enums.order.ExpressEnum;
+import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiFreightAddressReq;
+import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundAggVO;
+import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundFreightAddressVO;
+import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundFreightReq;
+import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundReq;
+import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundStateVO;
+import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundSubmitReq;
+import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundVO;
+import com.newzkl.platform.base.common.core.model.exception.BaseErrorCode;
+import com.newzkl.platform.base.common.core.model.exception.ThrowsException;
+import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
+import com.newzkl.platform.base.common.core.model.res.PlatformResult;
+import com.newzkl.platform.plugin.openapi.action.cmd.RefundCmd;
+import com.newzkl.platform.plugin.openapi.application.service.IRefundService;
+import com.newzkl.platform.plugin.openapi.model.constants.Constants;
+import com.newzkl.platform.plugin.openapi.model.util.DeveloperContextUtil;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -59,9 +66,9 @@ public class RefundController {
      */
     @PostMapping("/submitFreight")
     public PlatformResult<Void> submitFreight(@RequestBody ApiRefundFreightReq refundFreightReq) {
-        YytEnum.ExpressType expressType = YytEnum.ExpressType.getByValue(refundFreightReq.getFreightCompanyName().trim());
+        ExpressEnum.ExpressType expressType = ExpressEnum.ExpressType.getByValue(refundFreightReq.getFreightCompanyName().trim());
         if(expressType == null){
-            expressType = YytEnum.ExpressType.getByCodeLike(refundFreightReq.getFreightCompanyName());
+            expressType = ExpressEnum.ExpressType.getByCodeLike(refundFreightReq.getFreightCompanyName());
             if(expressType == null){
                 ThrowsException.exception(BaseErrorCode.PARAM, "请填写指定的物流公司名称简称, 如 顺丰、韵达、申通、中通、汇通、圆通、极兔、邮政");
             }

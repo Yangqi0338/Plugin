@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.openapi.model.query;
 
-import com.zkl.scm.model.web.PageQuery;
+import com.newzkl.platform.base.common.ddd.model.query.PageQuery;
 import lombok.Data;
 import java.util.List;
 

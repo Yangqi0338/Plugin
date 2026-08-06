@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.audit.action;
 
-import com.newzkl.platform.base.common.ddd.model.res.PlatformResult;
+import com.newzkl.platform.base.common.core.model.res.PlatformResult;
 import com.newzkl.platform.plugin.audit.action.cmd.AuditExecuteCommand;
 import com.newzkl.platform.plugin.audit.action.cmd.AuditRefuseExecuteCommand;
 import com.newzkl.platform.plugin.audit.port.AdminAccountPort;

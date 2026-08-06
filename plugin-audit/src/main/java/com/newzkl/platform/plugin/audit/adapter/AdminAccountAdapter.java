@@ -2,7 +2,7 @@ package com.newzkl.platform.plugin.audit.adapter;
 
 import com.newzkl.platform.base.biz.sys.domain.service.AdminAccountDomain;
 import com.newzkl.platform.base.biz.sys.model.adminaccount.res.AdminAccountRes;
-import com.newzkl.platform.base.common.core.utils.biz.SecurityUtils;
+import com.newzkl.platform.base.common.ddd.utils.auth.SecurityUtils;
 import com.newzkl.platform.plugin.audit.port.AdminAccountPort;
 import com.newzkl.platform.plugin.audit.workflow.model.AuditAccountView;
 import lombok.RequiredArgsConstructor;

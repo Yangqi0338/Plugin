@@ -16,15 +16,13 @@ public class FilterConfig {
     private HttpServletRequestReplacedFilter httpServletRequestReplacedFilter;
     @Autowired
     private SignatureFilter signatureFilter;
-    @Autowired
-    private HdhCallBackFilter hdhCallBackFilter;
 
     @Bean
     public FilterRegistrationBean httpServletRequestReplacedFilterRegistration() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(httpServletRequestReplacedFilter);
         //拦截所有的请求，给每个请求都包装一下，拦截器中再判断是否需要拦截处理
-        registrationBean.addUrlPatterns("/api/*", "/hdh/notify/*");
+        registrationBean.addUrlPatterns("/api/*");
         //给自定义的filter设置顺序，值越小，优先级越高，建议可以稍微高一些，防止影响框架的一些filter
         registrationBean.setOrder(10);
         return registrationBean;
@@ -37,16 +35,6 @@ public class FilterConfig {
         filter.addUrlPatterns("/api/*");
         filter.setName("signatureFilter");
         filter.setOrder(11);
-        return filter;
-    }
-
-    @Bean
-    public FilterRegistrationBean<HdhCallBackFilter> hdhCallBackFilterRegistration() {
-        FilterRegistrationBean<HdhCallBackFilter> filter = new FilterRegistrationBean<>();
-        filter.setFilter(hdhCallBackFilter);
-        filter.addUrlPatterns("/hdh/notify/*");
-        filter.setName("hdhCallBackFilter");
-        filter.setOrder(12);
         return filter;
     }
 }

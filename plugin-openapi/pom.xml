@@ -29,6 +29,18 @@
         </dependency>
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-order-facade</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-order-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-finance-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>biz-account-domain</artifactId>
         </dependency>
         <dependency>
@@ -42,10 +54,6 @@
         <dependency>
             <groupId>com.newzkl.platform.Base.core</groupId>
             <artifactId>core-mq-infrastructure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-order-domain</artifactId>
         </dependency>
 
         <!-- ===== 基座 ===== -->

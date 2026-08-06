@@ -1,14 +1,14 @@
 package com.newzkl.platform.plugin.openapi.domain.impl;
 
 
-import com.github.pagehelper.PageInfo;
-import com.zkl.scm.openapi.domain.developer.model.command.DeveloperCommand;
-import com.zkl.scm.openapi.domain.developer.model.entity.Developer;
-import com.zkl.scm.openapi.domain.developer.model.query.DeveloperQuery;
-import com.zkl.scm.openapi.domain.developer.model.vo.DeveloperVO;
-import com.zkl.scm.openapi.domain.developer.repository.IDeveloperRepository;
-import com.zkl.scm.openapi.domain.developer.service.IDeveloperDomain;
-import com.zkl.scm.web.utils.TransferUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.newzkl.platform.plugin.openapi.model.command.DeveloperCommand;
+import com.newzkl.platform.plugin.openapi.model.entity.Developer;
+import com.newzkl.platform.plugin.openapi.model.query.DeveloperQuery;
+import com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO;
+import com.newzkl.platform.plugin.openapi.domain.repository.IDeveloperRepository;
+import com.newzkl.platform.plugin.openapi.domain.IDeveloperDomain;
+import com.newzkl.platform.base.common.core.utils.common.TransferUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class DeveloperDomainImpl implements IDeveloperDomain {
         return developerRepository.developerVO(developerId);
     }
     @Override
-    public PageInfo<DeveloperVO> developerVOList(DeveloperQuery developerQuery) {
+    public Page<DeveloperVO> developerVOList(DeveloperQuery developerQuery) {
         return developerRepository.developerVOList(developerQuery);
     }
 

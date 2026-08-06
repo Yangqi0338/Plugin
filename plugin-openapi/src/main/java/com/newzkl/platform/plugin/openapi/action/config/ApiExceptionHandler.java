@@ -3,7 +3,7 @@ package com.newzkl.platform.plugin.openapi.action.config;
 
 import com.newzkl.platform.base.common.core.model.exception.BaseErrorCode;
 import com.newzkl.platform.base.common.ddd.action.config.GlobalExceptionHandler;
-import com.newzkl.platform.base.common.ddd.model.res.PlatformResult;
+import com.newzkl.platform.base.common.core.model.res.PlatformResult;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;

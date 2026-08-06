@@ -4,7 +4,7 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.newzkl.platform.base.common.core.utils.generator.SnowflakeIdAble;
-import com.newzkl.platform.base.common.ddd.model.res.PlatformResult;
+import com.newzkl.platform.base.common.core.model.res.PlatformResult;
 import com.newzkl.platform.plugin.audit.port.SpuReadPort;
 import com.newzkl.platform.plugin.audit.worktable.constant.WorktableConst;
 import com.newzkl.platform.plugin.audit.worktable.processor.WorktableFactory;

@@ -1,13 +1,12 @@
 package com.newzkl.platform.plugin.openapi.application.rpc;
 
-import com.zkl.scm.openapi.domain.developer.model.command.DeveloperCommand;
-import com.zkl.scm.openapi.domain.developer.model.vo.DeveloperVO;
-import com.zkl.scm.openapi.domain.developer.service.IDeveloperDomain;
-import com.zkl.scm.openapi.facade.IDeveloperFacade;
-import com.zkl.scm.openapi.model.DeveloperInitReq;
-import com.zkl.scm.openapi.model.DeveloperRpcVO;
-import com.zkl.scm.web.utils.TransferUtils;
-import org.apache.dubbo.config.annotation.DubboService;
+import com.newzkl.platform.plugin.openapi.model.command.DeveloperCommand;
+import com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO;
+import com.newzkl.platform.plugin.openapi.domain.IDeveloperDomain;
+import com.newzkl.platform.plugin.openapi.facade.IDeveloperFacade;
+import com.newzkl.platform.plugin.openapi.model.req.DeveloperInitReq;
+import com.newzkl.platform.plugin.openapi.model.vo.DeveloperRpcVO;
+import com.newzkl.platform.base.common.core.utils.common.TransferUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +16,6 @@ import java.util.function.Function;
  * @author fang
  */
 @Service
-@DubboService
 public class DeveloperFacade implements IDeveloperFacade {
 
     private final IDeveloperDomain developerDomain;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zkl.scm.openapi.infrastructure.dao.DeveloperDAO">
+<mapper namespace="com.newzkl.platform.plugin.openapi.infrastructure.dao.DeveloperDAO">
   <sql id="insert_column">
         `id` ,
         `app_id` ,
@@ -34,7 +34,7 @@
       </if>
     </set>
   </sql>
-  <insert id="insert" parameterType="com.zkl.scm.openapi.infrastructure.entity.DeveloperDO">
+  <insert id="insert" parameterType="com.newzkl.platform.plugin.openapi.infrastructure.entity.DeveloperDO">
     insert into developer (<include refid="insert_column"></include>)
     values
     (
@@ -47,7 +47,7 @@
         #{model.notifyAddress,jdbcType=VARCHAR}
     )
   </insert>
-  <insert id="insertBatch" parameterType="com.zkl.scm.openapi.infrastructure.entity.DeveloperDO">
+  <insert id="insertBatch" parameterType="com.newzkl.platform.plugin.openapi.infrastructure.entity.DeveloperDO">
     insert into developer (<include refid="insert_column"></include>)
     values
     <foreach collection="modelList" item="item" separator=",">
@@ -81,19 +81,19 @@
       </foreach>
     </where>
   </delete>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zkl.scm.openapi.infrastructure.entity.DeveloperDO">
+  <update id="updateByPrimaryKeySelective" parameterType="com.newzkl.platform.plugin.openapi.infrastructure.entity.DeveloperDO">
     update developer t
     <include refid="set"></include>
     where id = #{model.id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.zkl.scm.openapi.infrastructure.entity.DeveloperDO">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.newzkl.platform.plugin.openapi.infrastructure.entity.DeveloperDO">
     select 
     <include refid="column" />
     from developer
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByQuery"
-          parameterType="com.zkl.scm.openapi.domain.developer.model.query.DeveloperQuery">
+          parameterType="com.newzkl.platform.plugin.openapi.model.query.DeveloperQuery">
     delete from developer t
     <where>
       <include refid="where"></include>
@@ -106,7 +106,7 @@
       <include refid="where"></include>
     </where>
   </update>
-  <select id="listByQuery" parameterType="com.zkl.scm.openapi.domain.developer.model.query.DeveloperQuery" resultType="com.zkl.scm.openapi.domain.developer.model.vo.DeveloperVO">
+  <select id="listByQuery" parameterType="com.newzkl.platform.plugin.openapi.model.query.DeveloperQuery" resultType="com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO">
     select
       t.*
     from developer t
@@ -114,7 +114,7 @@
       <include refid="where"></include>
     </where>
   </select>
-  <select id="countByQuery" resultType="java.lang.Integer" parameterType="com.zkl.scm.openapi.domain.developer.model.query.DeveloperQuery">
+  <select id="countByQuery" resultType="java.lang.Integer" parameterType="com.newzkl.platform.plugin.openapi.model.query.DeveloperQuery">
     select
       count(t.id)
     from developer t
@@ -123,14 +123,14 @@
     </where>
   </select>
   <!--                                          分割线                                                -->
-  <select id="developerVOByAppId" resultType="com.zkl.scm.openapi.domain.developer.model.vo.DeveloperVO"
+  <select id="developerVOByAppId" resultType="com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO"
           parameterType="java.lang.String">
     select
     <include refid="column" />
     from developer
     where app_id = #{appId,jdbcType=BIGINT}
   </select>
-    <select id="developerVOByAccountId" resultType="com.zkl.scm.openapi.domain.developer.model.vo.DeveloperVO"
+    <select id="developerVOByAccountId" resultType="com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO"
             parameterType="java.lang.Long">
       select
       <include refid="column" />

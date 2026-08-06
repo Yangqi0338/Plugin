@@ -1,19 +1,16 @@
 package com.newzkl.platform.plugin.openapi.infrastructure.repository;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.zkl.scm.model.constants.common.Number;
-import com.zkl.scm.openapi.domain.developer.model.entity.Developer;
-import com.zkl.scm.openapi.domain.developer.model.query.DeveloperQuery;
-import com.zkl.scm.openapi.domain.developer.model.vo.DeveloperVO;
-import com.zkl.scm.openapi.domain.developer.repository.IDeveloperRepository;
-import com.zkl.scm.openapi.infrastructure.assembler.DeveloperAssembler;
-import com.zkl.scm.openapi.infrastructure.dao.DeveloperDAO;
-import com.zkl.scm.openapi.infrastructure.entity.DeveloperDO;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.newzkl.platform.plugin.openapi.model.entity.Developer;
+import com.newzkl.platform.plugin.openapi.model.query.DeveloperQuery;
+import com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO;
+import com.newzkl.platform.plugin.openapi.domain.repository.IDeveloperRepository;
+import com.newzkl.platform.plugin.openapi.infrastructure.assembler.DeveloperAssembler;
+import com.newzkl.platform.plugin.openapi.infrastructure.dao.DeveloperDAO;
+import com.newzkl.platform.plugin.openapi.infrastructure.entity.DeveloperDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 
 /**
 * 用户账号
@@ -44,13 +41,9 @@ public class DeveloperRepositoryImpl implements IDeveloperRepository {
         return developerAssembler.doToVO(developerDO);
     }
     @Override
-    public PageInfo<DeveloperVO> developerVOList(DeveloperQuery developerQuery) {
-        if(developerQuery.getPageNo() > Number.ZERO){
-            PageHelper.startPage(developerQuery.getPageNo(), developerQuery.getPageSize());
-        }
-        List<DeveloperVO> developerVO = developerDAO.listByQuery(developerQuery);
-        PageInfo<DeveloperVO> page = new PageInfo<DeveloperVO>( developerVO);
-        return page;
+    public Page<DeveloperVO> developerVOList(DeveloperQuery developerQuery) {
+        Page<DeveloperVO> page = new Page<>(developerQuery.getPageNo(), developerQuery.getPageSize());
+        return developerDAO.listByQuery(page, developerQuery);
     }
 
     @Override

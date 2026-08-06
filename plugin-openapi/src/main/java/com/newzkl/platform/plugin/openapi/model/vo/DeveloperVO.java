@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.openapi.model.vo;
 
-import com.zkl.scm.model.web.BaseVO;
+import com.newzkl.platform.base.common.ddd.model.vo.BaseVO;
 import lombok.Data;
 
 /**

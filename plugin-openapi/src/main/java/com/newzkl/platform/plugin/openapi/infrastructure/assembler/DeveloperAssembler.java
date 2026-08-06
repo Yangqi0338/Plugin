@@ -1,9 +1,9 @@
 package com.newzkl.platform.plugin.openapi.infrastructure.assembler;
 
-import com.zkl.scm.openapi.domain.developer.model.entity.Developer;
-import com.zkl.scm.openapi.domain.developer.model.vo.DeveloperVO;
-import com.zkl.scm.openapi.infrastructure.assembler.DeveloperConvert;
-import com.zkl.scm.openapi.infrastructure.entity.DeveloperDO;
+import com.newzkl.platform.plugin.openapi.model.entity.Developer;
+import com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO;
+import com.newzkl.platform.plugin.openapi.infrastructure.assembler.DeveloperConvert;
+import com.newzkl.platform.plugin.openapi.infrastructure.entity.DeveloperDO;
 import org.mapstruct.Mapper;
 
 /**

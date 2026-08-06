@@ -5,18 +5,27 @@ package com.newzkl.platform.plugin.openapi.infrastructure.entity;
 //import com.gitee.sunchenbin.mybatis.actable.annotation.TableComment;
 //import com.gitee.sunchenbin.mybatis.actable.annotation.Unique;
 //import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
-import com.zkl.scm.mybatis.model.BaseDO;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 /**
+ * 开发者持久化对象
+ *
  * @author muc_fang
- * @Description:
- * @date 2023/12/1510:06
  */
 @Data
-//@Table(name = "developer")
-//@TableComment("用户账号")
-public class DeveloperDO extends BaseDO {
+public class DeveloperDO implements Serializable {
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updateTime;
 
     //@Column(type = MySqlTypeConstant.BIGINT,isKey = true,isAutoIncrement = false, comment = "appId、开发者ID")
     private Long id;

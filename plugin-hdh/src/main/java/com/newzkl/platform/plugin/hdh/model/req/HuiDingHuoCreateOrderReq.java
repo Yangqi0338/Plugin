@@ -1,7 +1,7 @@
 package com.newzkl.platform.plugin.hdh.model.req;
 
 
-import com.newzkl.platform.base.common.core.model.dto.Money;
+import com.newzkl.platform.base.common.core.model.money.Money;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
