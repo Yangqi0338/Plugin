@@ -1,14 +1,14 @@
 package com.newzkl.platform.plugin.openapi.application.service.impl;
 
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiCategoryVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiChannelSpuRelationVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSkuStockVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSkuVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuDetailVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuStateVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.MarketRpcVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.SelectListApiReq;
+
+import com.newzkl.platform.base.common.ddd.facade.ApiCategoryVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiChannelSpuRelationVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSkuVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSpuDetailVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSpuStateVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSpuVO;
+import com.newzkl.platform.base.common.ddd.facade.MarketRpcVO;
+import com.newzkl.platform.base.common.ddd.facade.SelectListApiReq;
 import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 import com.newzkl.platform.plugin.openapi.application.service.IGoodsService;
 import com.newzkl.platform.plugin.openapi.domain.adapt.api.GoodsApi;
@@ -56,11 +56,6 @@ public class GoodsServiceImpl implements IGoodsService {
     @Override
     public List<ApiCategoryVO> categoryList(Long accountId, Long pid) {
         return goodsApi.categoryList(accountId, pid);
-    }
-
-    @Override
-    public List<ApiSkuStockVO> skuStock(Long accountId, List<Long> skuIdList) {
-        return goodsApi.skuStock(accountId, skuIdList);
     }
 
     @Override

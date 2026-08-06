@@ -2,6 +2,7 @@ package com.newzkl.platform.plugin.hdh;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson2.JSON;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -178,11 +179,18 @@ public class HuiDingHuoApiUtils implements InitializingBean {
             log.info("调用会订货API[{}] - URL: {}, 入参JSON: {}, 签名: {}", metadata.getRequestType().getSimpleName(), fullUrl,
                     jsonData, sign);
 
-//            String responseStr = HttpClientUtils.httpPostRequest(fullUrl, headers, jsonData);
-//            log.info("调用会订货API[{}]返回参数: {}", metadata.getRequestType().getSimpleName(), responseStr);
+            Map<String, String> headerMap = headers.entrySet().stream()
+                    .collect(Collectors.toMap(Map.Entry::getKey, e -> String.valueOf(e.getValue())));
+            String responseStr = HttpRequest.post(fullUrl)
+                    .addHeaders(headerMap)
+                    .body(jsonData)
+                    .timeout(100000)
+                    .execute()
+                    .body();
+            log.info("调用会订货API[{}]返回参数: {}", metadata.getRequestType().getSimpleName(), responseStr);
 
             // 8. 解析响应
-            Res response = JSONUtil.toBean(JSONUtil.toJsonStr(params), metadata.getResponseType());
+            Res response = JSONUtil.toBean(responseStr, metadata.getResponseType());
             if (response == null) {
                 throw new PlatformException(BaseErrorCode.EXECUTE, "API响应为空，接口：" + metadata.getUrl());
             }

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.plugin.openapi.model.command.DeveloperCommand;
 import com.newzkl.platform.plugin.openapi.model.entity.Developer;
 import com.newzkl.platform.plugin.openapi.model.query.DeveloperQuery;
-import com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO;
+import com.newzkl.platform.plugin.openapi.model.vo.DeveloperRes;
 import com.newzkl.platform.plugin.openapi.domain.repository.IDeveloperRepository;
 import com.newzkl.platform.plugin.openapi.domain.IDeveloperDomain;
 import com.newzkl.platform.base.common.core.utils.common.TransferUtils;
@@ -29,21 +29,21 @@ public class DeveloperDomainImpl implements IDeveloperDomain {
         return developerRepository.developerSave(developer);
     }
     @Override
-    public DeveloperVO developerVO(Long developerId) {
+    public DeveloperRes developerVO(Long developerId) {
         return developerRepository.developerVO(developerId);
     }
     @Override
-    public Page<DeveloperVO> developerVOList(DeveloperQuery developerQuery) {
+    public Page<DeveloperRes> developerVOList(DeveloperQuery developerQuery) {
         return developerRepository.developerVOList(developerQuery);
     }
 
     @Override
-    public DeveloperVO developerVOByAppId(String appId) {
+    public DeveloperRes developerVOByAppId(String appId) {
         return developerRepository.developerVOByAppId(appId);
     }
 
     @Override
-    public DeveloperVO developerVOByAccountId(Long accountId) {
+    public DeveloperRes developerVOByAccountId(Long accountId) {
         return developerRepository.developerVOByAccountId(accountId);
     }
 }

@@ -25,13 +25,6 @@ public class GoodsCmd {
         private List<Long> spuIdList;
     }
     @Data
-    public static class SkuIdListReq {
-        /**
-         * skuId集合
-         */
-        private List<Long> skuIdList;
-    }
-    @Data
     public static class CategoryListReq {
         /**
          * 上级ID: 0或不传表示查询所有分类

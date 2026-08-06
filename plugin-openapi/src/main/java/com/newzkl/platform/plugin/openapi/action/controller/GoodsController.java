@@ -2,17 +2,17 @@ package com.newzkl.platform.plugin.openapi.action.controller;
 
 import cn.hutool.core.date.DateUtil;
 import com.newzkl.platform.base.biz.goods.model.goods.vo.spu.GoldVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiCategoryVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiChannelSpuRelationVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSkuStockVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSkuVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuDetailVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuStateVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.MarketRpcVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.SelectListApiReq;
-import com.newzkl.platform.base.biz.market.model.enums.MarketTypeEnum;
+
 import com.newzkl.platform.base.common.core.redis.utils.RedisUtil;
+import com.newzkl.platform.base.common.ddd.facade.ApiCategoryVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiChannelSpuRelationVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSkuVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSpuDetailVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSpuStateVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSpuVO;
+import com.newzkl.platform.base.common.ddd.facade.MarketRpcVO;
+import com.newzkl.platform.base.common.ddd.facade.SelectListApiReq;
+import com.newzkl.platform.base.common.ddd.model.enums.market.MarketTypeEnum;
 import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 import com.newzkl.platform.base.common.core.model.res.PlatformResult;
 import com.newzkl.platform.plugin.openapi.action.cmd.GoodsCmd;
@@ -79,14 +79,6 @@ public class GoodsController {
     public PlatformResult<List<ApiSkuVO>> skuList(@RequestBody GoodsCmd.SpuIdListReq spuIdsReq) {
         Long accountId = DeveloperContextUtil.get(Constants.ACCOUNT_ID, Long.class);
         return PlatformResult.success(goodsService.skuList(accountId, spuIdsReq.getSpuIdList()));
-    }
-    /**
-     * 查询SKU库存
-     */
-    @PostMapping("/skuStock")
-    public PlatformResult<List<ApiSkuStockVO>> skuStock(@RequestBody GoodsCmd.SkuIdListReq skuIdListReq) {
-        Long accountId = DeveloperContextUtil.get(Constants.ACCOUNT_ID, Long.class);
-        return PlatformResult.success(goodsService.skuStock(accountId, skuIdListReq.getSkuIdList()));
     }
     /**
      * 查询SPU详情

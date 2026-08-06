@@ -1,14 +1,14 @@
 package com.newzkl.platform.plugin.openapi.domain.adapt.api;
 
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiCategoryVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiChannelSpuRelationVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSkuStockVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSkuVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuDetailVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuStateVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.MarketRpcVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.SelectListApiReq;
+
+import com.newzkl.platform.base.common.ddd.facade.ApiCategoryVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiChannelSpuRelationVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSkuVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSpuDetailVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSpuStateVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSpuVO;
+import com.newzkl.platform.base.common.ddd.facade.MarketRpcVO;
+import com.newzkl.platform.base.common.ddd.facade.SelectListApiReq;
 import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 
 import java.util.List;
@@ -78,15 +78,6 @@ public interface GoodsApi {
      * @return 分类列表
      */
     List<ApiCategoryVO> categoryList(Long accountId, Long pid);
-
-    /**
-     * SKU 库存
-     *
-     * @param accountId 账号主键
-     * @param skuIdList SKU 主键列表
-     * @return SKU 库存列表
-     */
-    List<ApiSkuStockVO> skuStock(Long accountId, List<Long> skuIdList);
 
     /**
      * 修改选品商品标签

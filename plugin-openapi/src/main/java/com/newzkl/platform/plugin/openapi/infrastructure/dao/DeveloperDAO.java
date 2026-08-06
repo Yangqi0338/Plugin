@@ -1,11 +1,10 @@
 package com.newzkl.platform.plugin.openapi.infrastructure.dao;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.newzkl.platform.plugin.openapi.model.query.DeveloperQuery;
-import com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.newzkl.platform.base.common.ddd.infrastructure.support.BaseLambdaQueryWrapper;
 import com.newzkl.platform.plugin.openapi.infrastructure.entity.DeveloperDO;
+import com.newzkl.platform.plugin.openapi.model.query.DeveloperQuery;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 开发者 DAO
@@ -13,46 +12,21 @@ import org.apache.ibatis.annotations.Param;
  * @author fang
  */
 @Mapper
-public interface DeveloperDAO {
+public interface DeveloperDAO extends BaseMapper<DeveloperDO> {
 
     /**
-     * 插入开发者
+     * 构建开发者查询条件
      *
-     * @param model 开发者DO
-     * @return 影响行数
-     */
-    int insert(@Param("model") DeveloperDO model);
-
-    /**
-     * 主键查询
-     *
-     * @param id 主键
-     * @return 开发者DO
-     */
-    DeveloperDO selectByPrimaryKey(@Param("id") Long id);
-
-    /**
-     * 条件分页查询
-     *
-     * @param page  分页参数
      * @param query 查询条件
-     * @return 开发者VO分页
+     * @return 查询包装器
      */
-    Page<DeveloperVO> listByQuery(Page<?> page, @Param("query") DeveloperQuery query);
-
-    /**
-     * 按appId查询
-     *
-     * @param appId 开发者appId
-     * @return 开发者VO
-     */
-    DeveloperVO developerVOByAppId(@Param("appId") String appId);
-
-    /**
-     * 按账号ID查询
-     *
-     * @param accountId 账号ID
-     * @return 开发者VO
-     */
-    DeveloperVO developerVOByAccountId(@Param("accountId") Long accountId);
+    default BaseLambdaQueryWrapper<DeveloperDO> getLw(DeveloperQuery query) {
+        BaseLambdaQueryWrapper<DeveloperDO> wrapper = new BaseLambdaQueryWrapper<DeveloperDO>()
+                .notNullEq(DeveloperDO::getId, query.getId())
+                .notEmptyIn(DeveloperDO::getId, query.getIdList())
+                .notEmptyEq(DeveloperDO::getAppId, query.getAppId())
+                .notNullEq(DeveloperDO::getAccountId, query.getAccountId());
+        wrapper.orderByDesc(DeveloperDO::getCreateTime);
+        return wrapper;
+    }
 }

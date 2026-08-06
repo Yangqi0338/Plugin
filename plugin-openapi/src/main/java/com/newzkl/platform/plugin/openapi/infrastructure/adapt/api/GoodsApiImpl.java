@@ -1,15 +1,21 @@
 package com.newzkl.platform.plugin.openapi.infrastructure.adapt.api;
 
+import cn.hutool.core.collection.CollUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.newzkl.platform.base.biz.goods.application.goods.service.spu.SpuCategoryService;
 import com.newzkl.platform.base.biz.goods.application.goods.service.spu.SpuService;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiCategoryVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiChannelSpuRelationVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSkuStockVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSkuVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuDetailVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuStateVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.ApiSpuVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.MarketRpcVO;
-import com.newzkl.platform.base.biz.goods.rpc.model.openapi.SelectListApiReq;
+import com.newzkl.platform.base.biz.market.domain.market.service.MarketDomain;
+import com.newzkl.platform.base.biz.market.domain.relation.service.GoodsRelationDomain;
+import com.newzkl.platform.base.biz.market.model.query.relation.GoodsListPageQuery;
+import com.newzkl.platform.base.common.ddd.facade.ApiCategoryVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiChannelSpuRelationVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSkuVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSpuDetailVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSpuStateVO;
+import com.newzkl.platform.base.common.ddd.facade.ApiSpuVO;
+import com.newzkl.platform.base.common.ddd.facade.MarketRpcVO;
+import com.newzkl.platform.base.common.ddd.facade.SelectListApiReq;
+import com.newzkl.platform.base.common.ddd.model.enums.goods.GoodsRelationEnum;
 import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 import com.newzkl.platform.plugin.openapi.domain.adapt.api.GoodsApi;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +26,10 @@ import java.util.List;
 /**
  * 商品跨域出站端口实现
  *
- * <p>照 biz-order {@code SpuApiImpl} 范式: 已迁能力真调 Base biz-goods
- * {@code SpuService}; 未迁能力显式抛 {@code UnsupportedOperationException}
- * 而非静默返回空, 缺口登记 rebuild/docs/planning/deferred-issues.md D-30</p>
+ * <p>照 biz-order {@code OrderApiImpl} 范式: 已迁能力真调 Base biz-goods
+ * {@code SpuService}/{@code SpuCategoryService} 与 biz-market
+ * {@code GoodsRelationDomain}/{@code MarketDomain}。biz-market 无 application/facade
+ * 层, 直注 domain service。</p>
  *
  * @author KC
  */
@@ -31,13 +38,38 @@ import java.util.List;
 public class GoodsApiImpl implements GoodsApi {
 
     private final SpuService spuService;
+    private final SpuCategoryService spuCategoryService;
+    private final GoodsRelationDomain goodsRelationDomain;
+    private final MarketDomain marketDomain;
 
     @Override
-    public ApiPage<ApiChannelSpuRelationVO> selectList(Long accountId, SelectListApiReq selectListApiReq) {
-        throw new UnsupportedOperationException(
-                "TODO[capability-gap]: 选品列表待迁; Base GoodsRelationDomain.channelSpuRelationList "
-                        + "的 XML 引 ${req.sortSQL} 但 GoodsListPageQuery 无该字段, SelectListApiReq "
-                        + "的 sortField/sortMode→sortSQL 映射未迁, 不臆造映射");
+    public ApiPage<ApiChannelSpuRelationVO> selectList(Long accountId, SelectListApiReq req) {
+        GoodsListPageQuery query = new GoodsListPageQuery();
+        query.setUserId(accountId);
+        query.setRelationType(GoodsRelationEnum.GoodsRelation.SELECT_GOODS.getRelationType());
+        query.setGoodsIdList(req.getSpuIdList());
+        query.setGoodsName(req.getSpuName());
+        query.setSpuState(req.getSpuState());
+        query.setCategoryId(req.getCategoryId());
+        query.setMarketId(req.getMarketId());
+        query.setPageNo(req.getPageNo());
+        query.setPageSize(req.getPageSize());
+        // sortField(0 销量/1 金额) 白名单映射列名; sortMode(0 升/1 降) 按下标一一对应
+        List<Integer> sortField = req.getSortField();
+        List<Integer> sortMode = req.getSortMode();
+        if (CollUtil.isNotEmpty(sortField)) {
+            for (int i = 0; i < sortField.size(); i++) {
+                GoodsRelationEnum.Field field = GoodsRelationEnum.Field.getByCode(sortField.get(i));
+                if (field == null) {
+                    continue;
+                }
+                boolean isDesc = sortMode != null && i < sortMode.size()
+                        && Integer.valueOf(1).equals(sortMode.get(i));
+                query.addSortField(field.getValue(), isDesc);
+            }
+        }
+        Page<ApiChannelSpuRelationVO> page = goodsRelationDomain.channelSpuRelationList(query);
+        return ApiPage.of(page.getRecords(), (int) page.getCurrent(), (int) page.getSize(), page.getTotal());
     }
 
     @Override
@@ -52,8 +84,7 @@ public class GoodsApiImpl implements GoodsApi {
 
     @Override
     public ApiSpuDetailVO spuDetail(Long accountId, Long spuId) {
-        throw new UnsupportedOperationException(
-                "TODO[capability-gap]: SPU 详情待迁; Base biz-goods SpuService 未迁 apiSpuDetail");
+        return spuService.apiSpuDetail(accountId, spuId);
     }
 
     @Override
@@ -63,28 +94,16 @@ public class GoodsApiImpl implements GoodsApi {
 
     @Override
     public List<ApiCategoryVO> categoryList(Long accountId, Long pid) {
-        throw new UnsupportedOperationException(
-                "TODO[capability-gap]: 分类列表待迁; Base biz-goods SpuCategoryService 对外 api "
-                        + "categoryList(accountId,pid) 未迁");
-    }
-
-    @Override
-    public List<ApiSkuStockVO> skuStock(Long accountId, List<Long> skuIdList) {
-        throw new UnsupportedOperationException(
-                "TODO[capability-gap]: SKU 库存待迁; Base biz-goods SpuService 未迁 skuStock");
+        return spuCategoryService.apiCategoryList(accountId, pid);
     }
 
     @Override
     public void updateMarketGoodsLabel(Long accountId, Long goodsId, String productLabel) {
-        throw new UnsupportedOperationException(
-                "TODO[capability-gap]: 改选品标签待迁; Base GoodsRelationDomain 只收已构造 "
-                        + "UpdateGoodsRelationReq{id,goodsInfo}, scm 语义需先按 (accountId,goodsId,"
-                        + "SELECT_GOODS) 查 relation 拿 id+goodsInfo 再回填 label, 该 lookup 未迁 Base");
+        goodsRelationDomain.updateMarketGoodsLabel(accountId, goodsId, productLabel);
     }
 
     @Override
     public List<MarketRpcVO> queryAccountBindMarket(Long accountId) {
-        throw new UnsupportedOperationException(
-                "TODO[capability-gap]: 查绑定市场待迁; Base biz-market 未迁 queryAccountBindMarket");
+        return marketDomain.queryAccountBindMarket(accountId);
     }
 }

@@ -33,7 +33,7 @@ public class WorktableDataAdapter implements WorktableDataPort {
     public Long save(String dataVoJson) {
         AuditDataWorkTableVO vo = JSON.parseObject(dataVoJson, AuditDataWorkTableVO.class);
         AuditDataWorkTable entity = auditDataWorkTableRepository.voToAuditDataWorkTable(vo);
-        return auditDataWorkTableRepository.auditDataWorkTableSave(entity);
+        return auditDataWorkTableRepository.auditDataWorkTableInsert(entity);
     }
 
     @Override
@@ -69,6 +69,6 @@ public class WorktableDataAdapter implements WorktableDataPort {
         }
         vo.setSkuSalePriceJson(skuSalePriceJson);
         AuditDataWorkTable entity = auditDataWorkTableRepository.voToAuditDataWorkTable(vo);
-        auditDataWorkTableRepository.auditDataWorkTableSave(entity);
+        auditDataWorkTableRepository.auditDataWorkTableEdit(entity);
     }
 }

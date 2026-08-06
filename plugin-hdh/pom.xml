@@ -27,6 +27,14 @@
             <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>biz-order-domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-order-infrastructure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-order-facade</artifactId>
+        </dependency>
 
         <!-- ===== 三方支付异步回调(汇付) NotifyController 所需 ===== -->
         <dependency>
@@ -54,6 +62,10 @@
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>core-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base.core</groupId>
+            <artifactId>core-job-infrastructure</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>

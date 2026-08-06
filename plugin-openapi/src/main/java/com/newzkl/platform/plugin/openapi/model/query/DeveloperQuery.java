@@ -19,4 +19,12 @@ public class DeveloperQuery extends PageQuery {
      * ID集合
      */
     private List<Long> idList;
+    /**
+     * 开发者appId
+     */
+    private String appId;
+    /**
+     * 账号ID
+     */
+    private Long accountId;
 }

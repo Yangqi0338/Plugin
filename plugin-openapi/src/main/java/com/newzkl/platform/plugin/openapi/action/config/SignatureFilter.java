@@ -83,7 +83,7 @@ public class SignatureFilter implements Filter {
                     return;
                 }
                 //开发者的密钥
-                String secret = loadingCache.get(appId).getSecret();
+                String secret = loadingCache.get(appId).secret();
                 //获取参数Map
                 InputStream is= request.getInputStream();
                 bodyInfo = IOUtils.toString(is, "utf-8");
@@ -98,8 +98,8 @@ public class SignatureFilter implements Filter {
                     return;
                 } else {
                     //存储账号ID
-                    DeveloperContextUtil.set(Constants.ACCOUNT_ID, loadingCache.get(appId).getAccountId());
-                    SecurityContextHolder.set(TokenConstants.DETAILS_ACCOUNT_ID, loadingCache.get(appId).getAccountId());
+                    DeveloperContextUtil.set(Constants.ACCOUNT_ID, loadingCache.get(appId).accountId());
+                    SecurityContextHolder.set(TokenConstants.DETAILS_ACCOUNT_ID, loadingCache.get(appId).accountId());
                     SecurityContextHolder.set(TokenConstants.DETAILS_COMPANY_ROLE, RoleEnum.CompanyRole.CHANNEL.getCode());
                 }
             } catch (Exception e) {

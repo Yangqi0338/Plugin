@@ -1,7 +1,7 @@
 package com.newzkl.platform.plugin.openapi.facade;
 
 import com.newzkl.platform.plugin.openapi.model.req.DeveloperInitReq;
-import com.newzkl.platform.plugin.openapi.model.vo.DeveloperRpcVO;
+import com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO;
 
 /**
  * 开发者对外门面
@@ -15,7 +15,7 @@ public interface IDeveloperFacade {
      * @param accountId 账号ID
      * @return 开发者对外信息
      */
-    DeveloperRpcVO developerVOByAccountId(Long accountId);
+    DeveloperVO developerVOByAccountId(Long accountId);
 
     /**
      * 初始化开发者

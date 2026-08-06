@@ -16,7 +16,7 @@ import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.ddd.model.enums.order.PlatformTypeEnum;
 import com.newzkl.platform.plugin.openapi.domain.repository.IDeveloperRepository;
 import com.newzkl.platform.plugin.openapi.model.constants.NotifyContants;
-import com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO;
+import com.newzkl.platform.plugin.openapi.model.vo.DeveloperRes;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -49,7 +49,7 @@ public class DeveloperNotifyConsumer extends AbstractMessageMQPushConsumer<Notif
         }
         String requestBody = mq.getEventContent();
         for (Long accountId : mq.getAccountIds()) {
-            DeveloperVO developer = developerRepository.developerVOByAccountId(accountId);
+            DeveloperRes developer = developerRepository.developerVOByAccountId(accountId);
             if (developer == null || StrUtil.isBlank(developer.getNotifyAddress())) {
                 log.warn("开发者通知跳过 无回调地址 accountId={}", accountId);
                 continue;
@@ -64,7 +64,7 @@ public class DeveloperNotifyConsumer extends AbstractMessageMQPushConsumer<Notif
      * @param developer   开发者(含回调地址+appId)
      * @param requestBody 事件体 JSON
      */
-    private void pushOne(DeveloperVO developer, String requestBody) {
+    private void pushOne(DeveloperRes developer, String requestBody) {
         String url = developer.getNotifyAddress();
         String appId = developer.getAppId();
         HttpRequest httpRequest = HttpRequest.post(url)

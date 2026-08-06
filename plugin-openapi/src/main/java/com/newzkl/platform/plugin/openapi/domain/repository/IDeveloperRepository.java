@@ -4,7 +4,7 @@ package com.newzkl.platform.plugin.openapi.domain.repository;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.plugin.openapi.model.entity.Developer;
 import com.newzkl.platform.plugin.openapi.model.query.DeveloperQuery;
-import com.newzkl.platform.plugin.openapi.model.vo.DeveloperVO;
+import com.newzkl.platform.plugin.openapi.model.vo.DeveloperRes;
 
 /**
 * 开发者
@@ -28,15 +28,15 @@ public interface IDeveloperRepository {
      * @param developerId
      * @return
      */
-    DeveloperVO developerVO(Long developerId);
+    DeveloperRes developerVO(Long developerId);
     /**
      * 开发者-值对象列表
      * @param developerQuery
      * @return
      */
-    Page<DeveloperVO> developerVOList(DeveloperQuery developerQuery);
+    Page<DeveloperRes> developerVOList(DeveloperQuery developerQuery);
 
-    DeveloperVO developerVOByAppId(String appId);
+    DeveloperRes developerVOByAppId(String appId);
 
-    DeveloperVO developerVOByAccountId(Long accountId);
+    DeveloperRes developerVOByAccountId(Long accountId);
 }

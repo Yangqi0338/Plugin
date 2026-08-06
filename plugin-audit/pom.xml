@@ -36,6 +36,10 @@
             <artifactId>biz-sys-domain</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-finance-facade</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.newzkl.platform.Base.core</groupId>
             <artifactId>core-mq-domain</artifactId>
         </dependency>
