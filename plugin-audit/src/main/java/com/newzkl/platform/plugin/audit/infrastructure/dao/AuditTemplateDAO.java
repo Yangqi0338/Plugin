@@ -1,7 +1,7 @@
 package com.newzkl.platform.plugin.audit.infrastructure.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.newzkl.platform.plugin.audit.infrastructure.dao.po.AuditPluginTemplateDO;
+import com.newzkl.platform.plugin.audit.infrastructure.entity.AuditTemplateDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface AuditPluginTemplateDAO extends BaseMapper<AuditPluginTemplateDO> {
+public interface AuditTemplateDAO extends BaseMapper<AuditTemplateDO> {
 }

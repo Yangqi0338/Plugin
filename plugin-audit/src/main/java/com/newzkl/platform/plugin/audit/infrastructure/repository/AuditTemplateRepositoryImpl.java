@@ -1,7 +1,7 @@
 package com.newzkl.platform.plugin.audit.infrastructure.repository;
 
 import com.newzkl.platform.base.common.core.utils.common.TransferUtils;
-import com.newzkl.platform.plugin.audit.infrastructure.dao.AuditPluginTemplateDAO;
+import com.newzkl.platform.plugin.audit.infrastructure.dao.AuditTemplateDAO;
 import com.newzkl.platform.plugin.audit.workflow.model.AuditTemplate;
 import com.newzkl.platform.plugin.audit.workflow.repository.AuditTemplateRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class AuditTemplateRepositoryImpl implements AuditTemplateRepository {
 
-    private final AuditPluginTemplateDAO auditPluginTemplateDAO;
+    private final AuditTemplateDAO auditPluginTemplateDAO;
 
     @Override
     public AuditTemplate getAuditTemplate(Long templateId) {

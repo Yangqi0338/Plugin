@@ -10,6 +10,7 @@ import com.newzkl.platform.plugin.openapi.model.constants.Constants;
 import com.newzkl.platform.plugin.openapi.model.util.DeveloperContextUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author muc_fang
  */
-@RestController("开放平台-渠道")
+@RestController("openApiChannelController")
 @RequestMapping("/api/channel")
 @Slf4j
 @RequiredArgsConstructor

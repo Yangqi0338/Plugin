@@ -8,6 +8,7 @@ import com.newzkl.platform.plugin.openapi.model.constants.Constants;
 import com.newzkl.platform.plugin.openapi.model.util.DeveloperContextUtil;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.annotation.Resource;
 
-@RestController("开放平台-财富")
+/**
+ * 开放平台-财富
+ *
+ * @author muc_fang
+ */
+@RestController("openApiFinanceController")
 @RequestMapping("/api/finance")
 @Setter(onMethod_ = @Autowired)
 @Validated

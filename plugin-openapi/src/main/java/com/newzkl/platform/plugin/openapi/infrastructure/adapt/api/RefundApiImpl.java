@@ -1,7 +1,7 @@
 package com.newzkl.platform.plugin.openapi.infrastructure.adapt.api;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.newzkl.platform.base.biz.order.facade.IRefundFacade;
+import com.newzkl.platform.base.biz.order.facade.RefundFacade;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiFreightAddressReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundAggVO;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundFreightAddressVO;
@@ -25,11 +25,11 @@ import java.util.List;
  *
  * @author KC
  */
-@Component
+@Component("openApiRefundApi")
 @RequiredArgsConstructor
 public class RefundApiImpl implements RefundApi {
 
-    private final IRefundFacade refundFacade;
+    private final RefundFacade refundFacade;
 
     @Override
     public Long submit(Long accountId, ApiRefundSubmitReq refundSubmitReq) {

@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author muc_fang
  */
-@Service
+@Service("openApiOrderService")
 @RequiredArgsConstructor
 public class OrderServiceImpl implements IOrderService {
 

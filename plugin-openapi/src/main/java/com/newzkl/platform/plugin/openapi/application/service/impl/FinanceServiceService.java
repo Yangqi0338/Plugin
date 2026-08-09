@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * <p>D-30 能力缺口: 原 scm 走 {@code IAccountPurseApi.channelSyncByDownStream}
  * (渠道下游充值金额同步), Base 侧无对等出站能力, 暂留桩待 Base biz-account/purse 补齐对外 api
  */
-@Service
+@Service("openApiFinanceService")
 public class FinanceServiceService implements IFinanceService {
 
     @Override

@@ -1,7 +1,7 @@
 package com.newzkl.platform.plugin.openapi.infrastructure.adapt.api;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.newzkl.platform.base.biz.order.facade.IOrderFacade;
+import com.newzkl.platform.base.biz.order.facade.OrderFacade;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderAggVO;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderConfirmReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderFreightReq;
@@ -25,11 +25,11 @@ import java.util.List;
  *
  * @author KC
  */
-@Component
+@Component("openApiOrderApi")
 @RequiredArgsConstructor
 public class OrderApiImpl implements OrderApi {
 
-    private final IOrderFacade orderFacade;
+    private final OrderFacade orderFacade;
 
     @Override
     public ApiOrderRes submit(Long accountId, ApiOrderSubmitReq orderReq) {

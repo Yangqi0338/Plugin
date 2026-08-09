@@ -33,7 +33,7 @@ import java.util.List;
  *
  * @author KC
  */
-@Component
+@Component("openApiGoodsApi")
 @RequiredArgsConstructor
 public class GoodsApiImpl implements GoodsApi {
 

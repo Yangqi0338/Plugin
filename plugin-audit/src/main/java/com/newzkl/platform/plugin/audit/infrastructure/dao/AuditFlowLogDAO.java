@@ -1,16 +1,16 @@
 package com.newzkl.platform.plugin.audit.infrastructure.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.newzkl.platform.plugin.audit.infrastructure.dao.po.AuditPluginFlowDO;
+import com.newzkl.platform.plugin.audit.infrastructure.entity.AuditFlowLogDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
- * 审批流 DAO
+ * 审批日志 DAO
  *
  * @author KC
  */
 @Mapper
 @Repository
-public interface AuditPluginFlowDAO extends BaseMapper<AuditPluginFlowDO> {
+public interface AuditFlowLogDAO extends BaseMapper<AuditFlowLogDO> {
 }

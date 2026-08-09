@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  *
  * @author muc_fang
  */
-@Service
+@Service("openApiChannelService")
 public class ChannelServiceImpl implements IChannelService {
 
     @Override

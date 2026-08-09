@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author muc_fang
  */
-@Service
+@Service("openApiGoodsService")
 @RequiredArgsConstructor
 public class GoodsServiceImpl implements IGoodsService {
 

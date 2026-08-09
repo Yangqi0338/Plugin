@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author muc_fang
  */
-@Service
+@Service("openApiRefundService")
 @RequiredArgsConstructor
 public class RefundServiceImpl implements IRefundService {
 

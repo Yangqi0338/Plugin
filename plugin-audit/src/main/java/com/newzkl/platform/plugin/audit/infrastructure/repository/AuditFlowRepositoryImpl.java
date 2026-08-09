@@ -2,8 +2,8 @@ package com.newzkl.platform.plugin.audit.infrastructure.repository;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.newzkl.platform.base.common.core.utils.common.TransferUtils;
-import com.newzkl.platform.plugin.audit.infrastructure.dao.AuditPluginFlowDAO;
-import com.newzkl.platform.plugin.audit.infrastructure.dao.po.AuditPluginFlowDO;
+import com.newzkl.platform.plugin.audit.infrastructure.dao.AuditFlowDAO;
+import com.newzkl.platform.plugin.audit.infrastructure.entity.AuditFlowDO;
 import com.newzkl.platform.plugin.audit.workflow.model.AuditFlow;
 import com.newzkl.platform.plugin.audit.workflow.repository.AuditFlowRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +20,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuditFlowRepositoryImpl implements AuditFlowRepository {
 
-    private final AuditPluginFlowDAO auditPluginFlowDAO;
+    private final AuditFlowDAO auditPluginFlowDAO;
 
     @Override
     public void createAuditFlow(AuditFlow auditFlow) {
-        AuditPluginFlowDO flowDO = TransferUtils.transfer(auditFlow, AuditPluginFlowDO::new);
+        AuditFlowDO flowDO = TransferUtils.transfer(auditFlow, AuditFlowDO::new);
         auditPluginFlowDAO.insert(flowDO);
     }
 
@@ -35,7 +35,7 @@ public class AuditFlowRepositoryImpl implements AuditFlowRepository {
 
     @Override
     public void updateAuditFlow(AuditFlow auditFlow) {
-        auditPluginFlowDAO.updateById(TransferUtils.transfer(auditFlow, AuditPluginFlowDO::new));
+        auditPluginFlowDAO.updateById(TransferUtils.transfer(auditFlow, AuditFlowDO::new));
     }
 
     @Override
@@ -43,9 +43,9 @@ public class AuditFlowRepositoryImpl implements AuditFlowRepository {
         if (flowIdList == null || flowIdList.isEmpty()) {
             return;
         }
-        LambdaUpdateWrapper<AuditPluginFlowDO> wrapper = new LambdaUpdateWrapper<AuditPluginFlowDO>()
-                .in(AuditPluginFlowDO::getId, flowIdList)
-                .set(AuditPluginFlowDO::getIsNew, isNew);
+        LambdaUpdateWrapper<AuditFlowDO> wrapper = new LambdaUpdateWrapper<AuditFlowDO>()
+                .in(AuditFlowDO::getId, flowIdList)
+                .set(AuditFlowDO::getIsNew, isNew);
         auditPluginFlowDAO.update(null, wrapper);
     }
 }

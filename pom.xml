@@ -81,6 +81,11 @@
             </dependency>
             <dependency>
                 <groupId>com.newzkl.platform</groupId>
+                <artifactId>plugin-openapi</artifactId>
+                <version>${plugin.revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newzkl.platform</groupId>
                 <artifactId>plugin-audit</artifactId>
                 <version>${plugin.revision}</version>
             </dependency>

@@ -1,13 +1,17 @@
 package com.newzkl.platform.plugin.audit.adapter;
 
-import com.newzkl.platform.base.biz.sys.domain.service.AdminAccountDomain;
-import com.newzkl.platform.base.biz.sys.model.adminaccount.res.AdminAccountRes;
+import com.newzkl.platform.base.biz.account.domain.service.AccountDomain;
+import com.newzkl.platform.base.biz.account.facade.AccountFacade;
+import com.newzkl.platform.base.biz.account.model.vo.AccountVO;
+import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.ddd.utils.auth.SecurityUtils;
 import com.newzkl.platform.plugin.audit.port.AdminAccountPort;
 import com.newzkl.platform.plugin.audit.workflow.model.AuditAccountView;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 
 /**
  * 管理员账号适配器
@@ -22,7 +26,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AdminAccountAdapter implements AdminAccountPort {
 
-    private final AdminAccountDomain adminAccountDomain;
+    private final AccountDomain accountDomain;
 
     @Override
     public AuditAccountView currentAccount() {
@@ -31,11 +35,11 @@ public class AdminAccountAdapter implements AdminAccountPort {
 
     @Override
     public AuditAccountView byId(Long accountId) {
-        AdminAccountRes res = adminAccountDomain.adminAccountVO(accountId);
+        AccountVO res = accountDomain.account(CommonEnum.Client.ADMIN, accountId);
         if (res == null) {
             return null;
         }
-        return new AuditAccountView(res.getId(), res.getUsername(), firstRoleId(res.getAroleIdList()));
+        return new AuditAccountView(res.getId(), res.getUsername(), 0L);
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.newzkl.platform.plugin.audit.infrastructure.dao.po;
+package com.newzkl.platform.plugin.audit.infrastructure.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.newzkl.platform.base.common.ddd.infrastructure.mybatis.model.AuditBaseDO;
@@ -12,8 +12,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("audit_flow")
-public class AuditPluginFlowDO extends AuditBaseDO {
+@TableName
+public class AuditFlowDO extends AuditBaseDO {
 
     /** 审批模板主键 */
     private Long templateId;

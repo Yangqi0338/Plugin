@@ -21,6 +21,7 @@ import com.newzkl.platform.plugin.openapi.model.constants.Constants;
 import com.newzkl.platform.plugin.openapi.model.util.DeveloperContextUtil;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +35,7 @@ import java.util.Objects;
  * 开放平台-商品
  * @author muc_fang
  */
-@RestController("开放平台-商品")
+@RestController("openApiGoodsController")
 @RequestMapping("/api/goods")
 @Setter(onMethod_ = @Autowired)
 @Validated
