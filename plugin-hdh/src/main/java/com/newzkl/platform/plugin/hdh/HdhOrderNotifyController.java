@@ -5,6 +5,7 @@ import cn.hutool.json.JSONUtil;
 import com.newzkl.platform.base.biz.order.facade.OrderFacade;
 import com.newzkl.platform.base.biz.order.facade.model.hdh.OrderCallbackRequest;
 import com.newzkl.platform.base.biz.order.facade.model.hdh.OrderCallbackResponse;
+import com.newzkl.platform.base.common.ddd.model.properties.PalletProperties;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,12 +54,11 @@ public class HdhOrderNotifyController {
         OrderCallbackResponse response = new OrderCallbackResponse();
         response.setSuccess(0);
         try {
-            // 中泽 D 平台采购单: userOrderNum 以 "D" 开头, 转发至 zzDOrderUrl
-            // TODO[deferred]: zzDOrderUrl 需从配置读取, PalletProperties 无此静态字段, 暂用空串占位
+            // 中泽 D 平台采购单: userOrderNum 以 "D" 开头, 转发至 zzDOrderUrl (配置 pallet.zz-d-order-url)
             if (callbackRequest != null
                     && callbackRequest.getUserOrderNum() != null
                     && callbackRequest.getUserOrderNum().startsWith("D")) {
-                String zzDOrderUrl = "";
+                String zzDOrderUrl = PalletProperties.zzDOrderUrl;
                 log.info("中泽D平台订单回调转发 outOrderNo={} url={}", callbackRequest.getUserOrderNum(), zzDOrderUrl);
                 HttpRequest.post(zzDOrderUrl)
                         .contentType("application/json")

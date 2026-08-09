@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.newzkl.platform</groupId>
+        <artifactId>Plugin</artifactId>
+        <version>${plugin.revision}</version>
+    </parent>
+
+    <artifactId>plugin-rule-template</artifactId>
+    <description>装修模板规则引擎插件 (样板店/装修模板规则)</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>core-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>ddd-action</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-store-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-store-application</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-store-model</artifactId>
+        </dependency>
+    </dependencies>
+</project>

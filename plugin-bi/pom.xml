@@ -15,6 +15,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>core-utils</artifactId>
         </dependency>
@@ -24,7 +29,50 @@
         </dependency>
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>ddd-action</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>biz-order-domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-order-facade</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-account-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-account-application</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-goods-domain</artifactId>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>${lombok-mapstruct-binding.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -26,6 +26,7 @@
         <module>plugin-hdh</module>
         <module>plugin-bi</module>
         <module>plugin-mmt</module>
+        <module>plugin-rule-template</module>
         <module>plugin-openapi</module>
     </modules>
 

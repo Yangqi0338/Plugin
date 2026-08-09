@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.audit.adapter;
 
-import com.newzkl.platform.base.biz.market.domain.distribution.service.DistributionDomain;
+import com.newzkl.platform.base.biz.market.domain.distribution.DistributionDomain;
 import com.newzkl.platform.base.biz.market.model.event.distribution.WorkTableUpDownEventMq;
 import com.newzkl.platform.base.biz.market.model.req.distribution.DistributionsBatchUpdateReq;
 import com.newzkl.platform.plugin.audit.port.DistributionPort;

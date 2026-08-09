@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.newzkl.platform.base.common.core.mybatis.entity.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.dromara.autotable.annotation.Index;
 
 import java.io.Serializable;
 
@@ -14,12 +15,14 @@ import java.io.Serializable;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("developer")
-public class DeveloperDO extends BaseDO implements Serializable {
+@TableName
+public class DeveloperDO extends BaseDO {
     
+    @Index
     private String appId;
     private String appName;
     private String secret;
+    @Index
     private Long accountId;
     private String remark;
     private String notifyAddress;
