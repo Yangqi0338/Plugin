@@ -28,6 +28,7 @@
         <module>plugin-mmt</module>
         <module>plugin-rule-template</module>
         <module>plugin-openapi</module>
+        <module>plugin-gateway</module>
     </modules>
 
     <properties>
@@ -87,6 +88,11 @@
             <dependency>
                 <groupId>com.newzkl.platform</groupId>
                 <artifactId>plugin-audit</artifactId>
+                <version>${plugin.revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newzkl.platform</groupId>
+                <artifactId>plugin-gateway</artifactId>
                 <version>${plugin.revision}</version>
             </dependency>
             <dependency>
