@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.openapi.model.entity;
 
-import com.newzkl.platform.base.common.core.utils.generator.SnowflakeIdAble;
+import com.newzkl.platform.base.common.core.utils.generator.SnowflakeGenerator;
 import lombok.Data;
 
 /**
@@ -39,6 +39,6 @@ public class Developer{
 	private String notifyAddress;
 
 	public void init() {
-		this.id = SnowflakeIdAble.getSnowflakeId();
+		this.id = SnowflakeGenerator.getSnowflakeId();
 	}
 }

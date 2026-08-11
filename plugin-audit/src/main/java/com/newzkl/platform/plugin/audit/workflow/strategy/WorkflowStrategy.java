@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson2.JSON;
 import com.newzkl.platform.base.common.core.model.exception.PlatformException;
 import com.newzkl.platform.base.common.core.utils.common.TransferUtils;
-import com.newzkl.platform.base.common.core.utils.generator.SnowflakeIdAble;
+import com.newzkl.platform.base.common.core.utils.generator.SnowflakeGenerator;
 import com.newzkl.platform.plugin.audit.workflow.constant.AuditEnum;
 import com.newzkl.platform.plugin.audit.workflow.constant.AuditErrorCode;
 import com.newzkl.platform.plugin.audit.workflow.dag.NodeProcessHandler;
@@ -59,7 +59,7 @@ public abstract class WorkflowStrategy<T> {
     public Long apply(Long templateId, AuditAccountView account, T dataVO) {
         check(account.accountId(), dataVO);
         AuditFlow auditFlow = AuditFlow.builder()
-                .id(SnowflakeIdAble.getSnowflakeId())
+                .id(SnowflakeGenerator.getSnowflakeId())
                 .accountId(account.accountId())
                 .username(account.username())
                 .roleId(account.roleId())

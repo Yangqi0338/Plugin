@@ -4,7 +4,9 @@ package com.newzkl.platform.plugin.hdh;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson2.JSONObject;
+import com.newzkl.platform.base.biz.order.domain.service.ThirdPartyOrderDomain;
 import com.newzkl.platform.base.biz.order.domain.spi.ThirdPartyOrderStrategy;
+import com.newzkl.platform.base.biz.order.facade.model.order.ThirdPartyOrderRecordDTO;
 import com.newzkl.platform.base.biz.order.model.dto.OrderDTO;
 import com.newzkl.platform.base.biz.order.model.dto.SkuCountDTO;
 import com.newzkl.platform.base.biz.order.model.support.api.order.OrderSkuVO;
@@ -17,6 +19,7 @@ import com.newzkl.platform.base.common.ddd.model.enums.order.PlatformTypeEnum;
 import com.newzkl.platform.base.common.ddd.model.properties.PalletProperties;
 import com.newzkl.platform.plugin.hdh.model.req.HuiDingHuoCreateOrderReq;
 import com.newzkl.platform.plugin.hdh.model.res.HuiDingHuoCreateOrderRes;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +32,10 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class HuiDingHuoOrderStrategy implements ThirdPartyOrderStrategy {
+	
+	private final ThirdPartyOrderDomain thirdPartyOrderDomain;
 	
 	@Override
 	public ThirdPartyOrderResult create(List<OrderSkuVO> outGoods, OrderDTO order) {
@@ -47,8 +53,9 @@ public class HuiDingHuoOrderStrategy implements ThirdPartyOrderStrategy {
 	}
 	
 	@Override
-	public void compensation(ThirdPartyOrderDTO request) {
+	public void compensation(ThirdPartyOrderRecordDTO request) {
 		log.info("开始补偿惠订货订单: {}", request.getBizOrderNo());
+		if (!request.getInterfaceName().equals("create")) return;
 		try {
 			// 1. 反序列化请求参数 (假设是 HuiDingHuoCreateOrderReq)
 			HuiDingHuoCreateOrderReq createOrderReq = JSONObject.parseObject(request.getRequestJson(), HuiDingHuoCreateOrderReq.class);
@@ -57,11 +64,11 @@ public class HuiDingHuoOrderStrategy implements ThirdPartyOrderStrategy {
 			HuiDingHuoCreateOrderRes order = HuiDingHuoApiUtils.createOrder(createOrderReq);
 			
 			// 3. 处理成功结果
-			// request.setResponseJson(objectMapper.writeValueAsString(response));
 			request.setResponseJson(JSONObject.toJSONString(order));
 			request.setRequestStatus(CommonEnum.RequestStatusEnum.getByCode(order.getSuccess()));
 			request.setErrorMessage(order.getMessage());
-//			orderRepository.save(request);
+			// TODO
+//			thirdPartyOrderDomain.recordAction(request.getPlatformType(), request.getBizOrderNo(),request.getBizOrderNo());
 			log.info("惠订货订单补偿 id: {} , 补偿结果: {}", request.getBizOrderNo(), order.getCode());
 		} catch (Exception e) {
 			log.error("惠订货订单补偿失败，调用API异常。订单号: {}", request.getBizOrderNo(), e);

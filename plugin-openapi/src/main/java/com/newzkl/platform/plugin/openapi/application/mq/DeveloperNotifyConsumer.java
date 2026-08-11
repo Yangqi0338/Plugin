@@ -32,7 +32,7 @@ import java.util.UUID;
  * @author KC
  */
 @Slf4j
-@MQConsumer(topic = MQ.Scm_Main, consumerGroup = MQ.Tag.DEVELOPER_NOTIFY_EVENT_MESSAGE, tag = {MQ.Tag.DEVELOPER_NOTIFY_EVENT})
+@MQConsumer(consumerGroup = MQ.Tag.DEVELOPER_NOTIFY_EVENT_MESSAGE, tag = {MQ.Tag.DEVELOPER_NOTIFY_EVENT})
 public class DeveloperNotifyConsumer extends AbstractMessageMQPushConsumer<NotifyEventMq> {
 
     private static final String INTERFACE_NOTIFY = "notify";

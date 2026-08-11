@@ -121,14 +121,6 @@
             <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>biz-course-infrastructure</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-activity-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-activity-infrastructure</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>

@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.openapi.action.controller;
 
-import com.newzkl.platform.base.biz.finance.model.enums.order.ExpressEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.order.ExpressEnum;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiFreightAddressReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundAggVO;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundFreightAddressVO;
@@ -19,7 +19,6 @@ import com.newzkl.platform.plugin.openapi.model.constants.Constants;
 import com.newzkl.platform.plugin.openapi.model.util.DeveloperContextUtil;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
