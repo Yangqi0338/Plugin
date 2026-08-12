@@ -22,7 +22,6 @@
         <module>plugin-audit</module>
         <module>plugin-channel</module>
         <module>plugin-supplier</module>
-        <module>plugin-operator</module>
         <module>plugin-hdh</module>
         <module>plugin-bi</module>
         <module>plugin-mmt</module>
