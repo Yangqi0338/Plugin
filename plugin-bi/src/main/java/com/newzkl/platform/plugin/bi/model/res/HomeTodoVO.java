@@ -7,32 +7,27 @@ import java.io.Serializable;
 /**
  * 首页工作台 - 待办事项
  *
- * <p>对应用户首页「待办事项」卡片: 各状态待处理数量。</p>
+ * <p>对应用户首页「待办事项」卡片, 原型 6 项:
+ * 等待付款 / 等待发货 / 售后中 / 库存紧张 / 商品售罄 / 待核验存证。</p>
  */
 @Data
 public class HomeTodoVO implements Serializable {
 
-    /** 待付款订单数 */
+    /** 等待付款 */
     private Integer waitPayCount;
 
-    /** 待发货订单数 */
+    /** 等待发货 */
     private Integer waitDeliveryCount;
 
-    /** 待收货订单数 */
-    private Integer waitReceiveCount;
-
-    /** 售后中订单数 */
+    /** 售后中 */
     private Integer refundingCount;
 
-    /** 待审核商品数 */
-    private Integer waitAuditGoodsCount;
-
-    /** 待审核入驻商户数 */
-    private Integer waitAuditMerchantCount;
-
-    /** 库存预警数 */
+    /** 库存紧张 */
     private Integer stockWarnCount;
 
-    /** 待核验存证数 */
+    /** 商品售罄 */
+    private Integer soldOutCount;
+
+    /** 待核验存证 */
     private Integer waitVerifyCount;
 }
