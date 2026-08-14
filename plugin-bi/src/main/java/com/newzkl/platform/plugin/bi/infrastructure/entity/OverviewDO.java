@@ -1,0 +1,34 @@
+package com.newzkl.platform.plugin.bi.infrastructure.entity;
+
+import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
+import com.newzkl.platform.plugin.bi.domain.annotation.BITableName;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.math.BigDecimal;
+
+/**
+ * 首页·实时概况宽表(一个查询对应一个宽表)
+ *
+ * <p>字段 = 实时概况查询展示字段, 事件落库时累加。
+ * 实时表: dws_realtime_admin_overview_trend(今日, 无 bizDate)
+ * 日表:   dws_day_admin_overview_trend(T+1, 含 bizDate, 供昨日对比/本月累计)</p>
+ */
+@EqualsAndHashCode(callSuper = true)
+@Data
+@BITableName(client = CommonEnum.Client.ADMIN)
+public class OverviewDO extends BIBaseDO {
+
+    /** 今日交易额(元), 订单支付时 +amount */
+    private BigDecimal todayGmv;
+
+    /** 今日支付订单(笔), 订单支付时 +1 */
+    private Integer todayPayOrderCount;
+
+    /** 今日新增会员(人), 会员注册时 +1 */
+    private Integer todayMemberCount;
+
+    /** 今日上链存证(条), 上链事件时 +1 */
+    private Integer todayEvidenceCount;
+    
+}
