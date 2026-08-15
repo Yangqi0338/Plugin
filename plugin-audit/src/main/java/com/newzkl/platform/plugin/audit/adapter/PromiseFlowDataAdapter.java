@@ -1,5 +1,6 @@
 package com.newzkl.platform.plugin.audit.adapter;
 
+import com.newzkl.platform.base.common.ddd.model.enums.RoleEnum;
 import com.newzkl.platform.plugin.audit.port.PromiseFlowDataPort;
 import org.springframework.stereotype.Component;
 
@@ -38,7 +39,7 @@ public class PromiseFlowDataAdapter implements PromiseFlowDataPort {
     }
 
     @Override
-    public List<Long> oldFlowIds(Long accountId, Long roleId) {
+    public List<Long> oldFlowIds(Long accountId, RoleEnum.CompanyRole role) {
         throw new UnsupportedOperationException("TODO[infra-gap]: Base 缺保证金审批数据实体与 Repository, oldFlowIds 无从转调");
     }
 }

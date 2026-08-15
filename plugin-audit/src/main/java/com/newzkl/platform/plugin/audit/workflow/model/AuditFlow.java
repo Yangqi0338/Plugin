@@ -1,5 +1,6 @@
 package com.newzkl.platform.plugin.audit.workflow.model;
 
+import com.newzkl.platform.base.common.ddd.model.enums.RoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,7 +28,7 @@ public class AuditFlow {
     private Long accountId;
 
     /** 申请人角色主键 */
-    private Long roleId;
+    private RoleEnum.CompanyRole role;
 
     /** 申请人账号名称 */
     private String username;

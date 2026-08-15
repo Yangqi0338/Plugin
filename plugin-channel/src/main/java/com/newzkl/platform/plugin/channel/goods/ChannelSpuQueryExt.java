@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
  *
  * @author KC
  */
-@IdentityImpl(1002L)
+@IdentityImpl(RoleEnum.CompanyRole.CHANNEL)
 @RequiredArgsConstructor
 public class ChannelSpuQueryExt implements SpuQueryExt {
 

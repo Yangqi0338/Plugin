@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
  *
  * @author KC
  */
-@IdentityImpl(1001L)
+@IdentityImpl(RoleEnum.CompanyRole.SUPPLIER)
 @RequiredArgsConstructor
 public class SupplierSpuQueryExt implements SpuQueryExt {
 

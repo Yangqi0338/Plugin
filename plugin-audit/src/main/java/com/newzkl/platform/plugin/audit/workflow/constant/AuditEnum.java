@@ -25,23 +25,16 @@ public final class AuditEnum {
     @AllArgsConstructor
     public enum TemplateType {
 
-        /** 角色申请审批模板 */
-        ROLE_APPLY(1L, "角色申请审批模板"),
-
         /** 保证金缴纳审批模板 */
         PROMISE_FLOW(2L, "保证金缴纳审批模板"),
 
         /** SPU上传审批模板 */
         SPU_CREATE(3L, "SPU上传审批模板"),
 
-        /** 品牌申请审批模板 */
-        BRAND_CREATE(4L, "品牌申请审批模板"),
-
         /** SPU工单审批模板 */
         SPU_WORK_TABLE(5L, "SPU工单审批模板"),
-
-        /** 实名认证审批模板 */
-        NAME_AUTH(6L, "实名认证审批模板");
+        
+        ;
 
         private final Long code;
         private final String value;

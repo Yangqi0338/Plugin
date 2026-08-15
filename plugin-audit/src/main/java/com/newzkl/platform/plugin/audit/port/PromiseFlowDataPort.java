@@ -1,5 +1,7 @@
 package com.newzkl.platform.plugin.audit.port;
 
+import com.newzkl.platform.base.common.ddd.model.enums.RoleEnum;
+
 import java.util.List;
 
 /**
@@ -39,8 +41,9 @@ public interface PromiseFlowDataPort {
      * 查同组旧审批流主键, 用于将旧申请置为非最新
      *
      * @param accountId 账号主键
-     * @param roleId 角色主键
+     * @param role      角色主键
+     *
      * @return 旧审批流主键列表
      */
-    List<Long> oldFlowIds(Long accountId, Long roleId);
+    List<Long> oldFlowIds(Long accountId, RoleEnum.CompanyRole role);
 }

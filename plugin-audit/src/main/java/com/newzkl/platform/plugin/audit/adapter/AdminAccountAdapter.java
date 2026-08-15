@@ -4,6 +4,7 @@ import com.newzkl.platform.base.biz.account.domain.service.AccountDomain;
 import com.newzkl.platform.base.biz.account.facade.AccountFacade;
 import com.newzkl.platform.base.biz.account.model.vo.AccountVO;
 import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.RoleEnum;
 import com.newzkl.platform.base.common.ddd.utils.auth.SecurityUtils;
 import com.newzkl.platform.plugin.audit.port.AdminAccountPort;
 import com.newzkl.platform.plugin.audit.workflow.model.AuditAccountView;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  *
  * <p>currentAccount 取自登录态 SecurityUtils; byId 转调 biz-sys AdminAccountDomain</p>
  *
- * <p>AdminAccountRes 无独立 roleId 字段, 仅有 aroleIdList (逗号分隔角色串), byId 取首个角色为 roleId 尽力而为</p>
+ * <p>AdminAccountRes 无独立 role 字段, 仅有 aroleIdList (逗号分隔角色串), byId 取首个角色为 role 尽力而为</p>
  *
  * @author KC
  */
@@ -30,7 +31,7 @@ public class AdminAccountAdapter implements AdminAccountPort {
 
     @Override
     public AuditAccountView currentAccount() {
-        return new AuditAccountView(SecurityUtils.getAccountId(), SecurityUtils.getUsername(), SecurityUtils.getRoleId());
+        return new AuditAccountView(SecurityUtils.getAccountId(), SecurityUtils.getUsername(), SecurityUtils.getRole());
     }
 
     @Override
@@ -39,7 +40,7 @@ public class AdminAccountAdapter implements AdminAccountPort {
         if (res == null) {
             return null;
         }
-        return new AuditAccountView(res.getId(), res.getUsername(), 0L);
+        return new AuditAccountView(res.getId(), res.getUsername(), null);
     }
 
     /**

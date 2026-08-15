@@ -27,7 +27,6 @@
         <module>plugin-mmt</module>
         <module>plugin-rule-template</module>
         <module>plugin-openapi</module>
-        <module>plugin-gateway</module>
     </modules>
 
     <properties>

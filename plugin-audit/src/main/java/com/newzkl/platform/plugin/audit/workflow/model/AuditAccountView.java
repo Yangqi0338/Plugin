@@ -1,5 +1,6 @@
 package com.newzkl.platform.plugin.audit.workflow.model;
 
+import com.newzkl.platform.base.common.ddd.model.enums.RoleEnum;
 import io.soabase.recordbuilder.core.RecordBuilder;
 
 /**
@@ -19,6 +20,6 @@ public record AuditAccountView(
         String username,
 
         /** 角色主键 */
-        Long roleId
+        RoleEnum.CompanyRole role
 ) {
 }

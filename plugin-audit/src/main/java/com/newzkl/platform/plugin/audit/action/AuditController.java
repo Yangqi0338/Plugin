@@ -89,18 +89,6 @@ public class AuditController {
     }
 
     /**
-     * 角色申请审批分页
-     *
-     * @param pageQuery 分页查询 JSON
-     * @return 分页结果
-     */
-    // TODO[auth-defer]: 源 @Limit(role_audit, get)
-    @PostMapping("/page/roleApply")
-    public PlatformResult<?> pageRoleApply(@RequestBody String pageQuery) {
-        return PlatformResult.success(pageByType(AuditEnum.TemplateType.ROLE_APPLY.getCode(), pageQuery));
-    }
-
-    /**
      * 保证金缴纳审批分页
      *
      * @param pageQuery 分页查询 JSON
@@ -110,18 +98,6 @@ public class AuditController {
     @PostMapping("/page/promisePay")
     public PlatformResult<?> pagePromisePay(@RequestBody String pageQuery) {
         return PlatformResult.success(pageByType(AuditEnum.TemplateType.PROMISE_FLOW.getCode(), pageQuery));
-    }
-
-    /**
-     * 品牌申请审批分页
-     *
-     * @param pageQuery 分页查询 JSON
-     * @return 分页结果
-     */
-    // TODO[auth-defer]: 源 @Limit(brand_audit + brand, get)
-    @PostMapping("/page/brand")
-    public PlatformResult<?> pageBrand(@RequestBody String pageQuery) {
-        return PlatformResult.success(pageByType(AuditEnum.TemplateType.BRAND_CREATE.getCode(), pageQuery));
     }
 
     /**
@@ -137,18 +113,6 @@ public class AuditController {
     }
 
     /**
-     * 实名认证审批分页
-     *
-     * @param pageQuery 分页查询 JSON
-     * @return 分页结果
-     */
-    // TODO[auth-defer]: 源 @Limit(name_audit, get)
-    @PostMapping("/page/nameAuth")
-    public PlatformResult<?> pageNameAuth(@RequestBody String pageQuery) {
-        return PlatformResult.success(pageByType(AuditEnum.TemplateType.NAME_AUTH.getCode(), pageQuery));
-    }
-
-    /**
      * 工单审批分页
      *
      * @param pageQuery 分页查询 JSON
@@ -161,7 +125,7 @@ public class AuditController {
     }
 
     /**
-     * 按模板类型分页, 从当前登录人取 accountId/roleId
+     * 按模板类型分页, 从当前登录人取 accountId/role
      *
      * @param templateType 审批模板类型
      * @param pageQuery 分页查询 JSON
@@ -169,6 +133,6 @@ public class AuditController {
      */
     private Object pageByType(Long templateType, String pageQuery) {
         AuditAccountView account = adminAccountPort.currentAccount();
-        return workflowFactory.getPolicy(templateType).pageJson(account.accountId(), account.roleId(), pageQuery);
+        return workflowFactory.getPolicy(templateType).pageJson(account.accountId(), account.role(), pageQuery);
     }
 }

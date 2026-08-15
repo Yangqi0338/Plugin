@@ -2,6 +2,7 @@ package com.newzkl.platform.plugin.supplier.config;
 
 import com.newzkl.platform.base.common.ddd.application.spi.IdentityImpl;
 import com.newzkl.platform.base.common.ddd.application.spi.demo.IdentityConfigExt;
+import com.newzkl.platform.base.common.ddd.model.enums.RoleEnum;
 
 /**
  * 身份配置提供-供应商实现(演示)。
@@ -10,7 +11,7 @@ import com.newzkl.platform.base.common.ddd.application.spi.demo.IdentityConfigEx
  *
  * @author KC
  */
-@IdentityImpl(1001L)
+@IdentityImpl(RoleEnum.CompanyRole.SUPPLIER)
 public class SupplierConfigProvider implements IdentityConfigExt {
 
     @Override

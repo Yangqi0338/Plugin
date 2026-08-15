@@ -5,7 +5,7 @@ ALTER TABLE
   MODIFY COLUMN `template_id` bigint NULL COMMENT 'templateId',
   MODIFY COLUMN `account_id` bigint NULL COMMENT 'accountId',
   MODIFY COLUMN `username` varchar(255) NULL COMMENT 'username' AFTER `account_id`,
-  MODIFY COLUMN `role_id` bigint NULL COMMENT 'roleId' AFTER `username`,
+  MODIFY COLUMN `role_id` bigint NULL COMMENT 'role' AFTER `username`,
   MODIFY COLUMN `state` int NULL COMMENT 'state',
   MODIFY COLUMN `current_code` varchar(255) NULL COMMENT 'currentCode',
   MODIFY COLUMN `context_params` varchar(255) NULL COMMENT 'contextParams' AFTER `current_code`,
