@@ -9,7 +9,7 @@ import com.newzkl.platform.plugin.bi.infrastructure.entity.supplier.SupplierHome
 import com.newzkl.platform.plugin.bi.infrastructure.entity.supplier.SupplierSettleTrendDO;
 import com.newzkl.platform.plugin.bi.model.query.SupplierHomeQuery;
 import com.newzkl.platform.plugin.bi.model.res.SupplierHomeRes;
-import com.newzkl.platform.plugin.bi.model.res.SupplierHomeRes.SettleTrendItem;
+import com.newzkl.platform.plugin.bi.model.res.SupplierSettleTrendItemRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -42,17 +42,17 @@ public class SupplierStatDomain {
     }
 
     /** 供应商供货结算趋势(按月份) */
-    public List<SettleTrendItem> settleTrend(SupplierHomeQuery query) {
+    public List<SupplierSettleTrendItemRes> settleTrend(SupplierHomeQuery query) {
         query.addField("month");
         query.addSumField("amount");
         query.addGroupField("month");
         query.initSortField("month", false);
         BizCountMap countMap = realtimeRepo.sum(SupplierSettleTrendDO.class, new LambdaQueryWrapper<>(), query);
-        List<SettleTrendItem> list = new ArrayList<>();
+        List<SupplierSettleTrendItemRes> list = new ArrayList<>();
         if (countMap != null) {
             List<SupplierSettleTrendDO> rows = countMap.camelKeyCountMap().toList(SupplierSettleTrendDO.class);
             for (SupplierSettleTrendDO row : rows) {
-                SettleTrendItem item = new SettleTrendItem();
+                SupplierSettleTrendItemRes item = new SupplierSettleTrendItemRes();
                 item.setMonth(row.getMonth());
                 item.setAmount(row.getAmount());
                 list.add(item);

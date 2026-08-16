@@ -4,10 +4,11 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * 供应商 HOME 总览
+ *
+ * <p>供货结算趋势(万元)见独立接口 {@code /bi/supplier/settleTrend} → List&lt;SupplierSettleTrendItemRes&gt;。</p>
  */
 @Data
 public class SupplierHomeRes implements Serializable {
@@ -35,20 +36,4 @@ public class SupplierHomeRes implements Serializable {
 
     /** 回款及时率(%) */
     private BigDecimal settlementRate;
-
-    /** 供货结算趋势(万元) */
-    private List<SettleTrendItem> settleTrendList;
-
-    /**
-     * 结算趋势项
-     */
-    @Data
-    public static class SettleTrendItem {
-
-        /** 月份(3月) */
-        private String month;
-
-        /** 结算金额(万元) */
-        private BigDecimal amount;
-    }
 }

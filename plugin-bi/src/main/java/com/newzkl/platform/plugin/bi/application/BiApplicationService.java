@@ -40,8 +40,10 @@ import com.newzkl.platform.plugin.bi.model.res.EvidenceOverviewRes;
 import com.newzkl.platform.plugin.bi.model.res.RankGoodsRes;
 import com.newzkl.platform.plugin.bi.model.res.RankStoreRes;
 import com.newzkl.platform.plugin.bi.model.res.ChannelHomeRes;
+import com.newzkl.platform.plugin.bi.model.res.ChannelWeekTradeItemRes;
 import com.newzkl.platform.plugin.bi.model.res.ServiceHomeRes;
 import com.newzkl.platform.plugin.bi.model.res.SupplierHomeRes;
+import com.newzkl.platform.plugin.bi.model.res.SupplierSettleTrendItemRes;
 import com.newzkl.platform.plugin.bi.model.res.SupplierOverviewRes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -290,18 +292,24 @@ public class BiApplicationService {
 
     public SupplierHomeRes supplierHome() {
         SupplierHomeQuery query = new SupplierHomeQuery();
-        SupplierHomeRes res = supplierStatDomain.home(query);
-        res.setSettleTrendList(supplierStatDomain.settleTrend(query));
-        return res;
+        return supplierStatDomain.home(query);
+    }
+
+    /** 供应商供货结算趋势(万元), 独立接口 */
+    public List<SupplierSettleTrendItemRes> supplierSettleTrend() {
+        return supplierStatDomain.settleTrend(new SupplierHomeQuery());
     }
 
     // ==================== 渠道商 HOME ====================
 
     public ChannelHomeRes channelHome() {
         ChannelHomeQuery query = new ChannelHomeQuery();
-        ChannelHomeRes res = channelStatDomain.home(query);
-        res.setWeekTradeList(channelStatDomain.weekTrade(query));
-        return res;
+        return channelStatDomain.home(query);
+    }
+
+    /** 渠道商本周交易走势(销售额, 万元), 独立接口 */
+    public List<ChannelWeekTradeItemRes> channelWeekTrade() {
+        return channelStatDomain.weekTrade(new ChannelHomeQuery());
     }
 
     // ==================== 服务商 HOME ====================

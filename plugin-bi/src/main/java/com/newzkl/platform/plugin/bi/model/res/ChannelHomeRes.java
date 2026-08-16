@@ -4,10 +4,11 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * 渠道商 HOME 总览
+ *
+ * <p>本周交易走势见独立接口 {@code /bi/channel/weekTrade} → List&lt;ChannelWeekTradeItemRes&gt;。</p>
  */
 @Data
 public class ChannelHomeRes implements Serializable {
@@ -32,20 +33,4 @@ public class ChannelHomeRes implements Serializable {
 
     /** 已用商品席位 */
     private Integer seatUsed;
-
-    /** 本周交易走势(销售额, 万元) */
-    private List<WeekTradeItem> weekTradeList;
-
-    /**
-     * 周交易项
-     */
-    @Data
-    public static class WeekTradeItem {
-
-        /** 星期(周一) */
-        private String weekDay;
-
-        /** 销售额(万元) */
-        private BigDecimal amount;
-    }
 }
