@@ -19,18 +19,23 @@ import java.time.LocalDateTime;
 @Data
 public abstract class BIBaseDO extends BaseIdDO {
 
-    /** 统计所属端 */
+    /** 统计所属端
+     */
     private CommonEnum.Client client;
 
-    /** 用户ID(如果统计到用户粒度) */
+    /** 用户ID(如果统计到用户粒度)
+     */
     private Long userId;
 
-    /** 事件类型(枚举) */
+    /** 事件类型(枚举)
+     */
     private BiEventType eventType;
 
-    /** 事件时间 */
+    /** 事件时间
+     */
     private LocalDateTime eventTime;
 
-    /** 对应事实表记录ID(用于明细追溯) */
+    /** 对应事实表记录ID(用于明细追溯)
+     */
     private Long factId;
 }

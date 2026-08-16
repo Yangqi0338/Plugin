@@ -17,15 +17,19 @@ import java.math.BigDecimal;
 @Data
 public class FactRefundDO extends BaseDO {
 
-    /** 订单ID */
+    /** 订单ID
+     */
     private Long orderId;
 
-    /** 事件类型 */
+    /** 事件类型
+     */
     private BiEventType eventType;
 
-    /** 所属端 */
+    /** 所属端
+     */
     private CommonEnum.Client client;
 
-    /** 退款金额(元) */
+    /** 退款金额(元)
+     */
     private BigDecimal amount;
 }

@@ -15,24 +15,31 @@ import lombok.EqualsAndHashCode;
 @TableName
 public class FactBlockchainDO extends BaseDO {
 
-    /** 存证业务ID */
+    /** 存证业务ID
+     */
     private Long evidenceId;
 
-    /** 事件类型(EVIDENCE/VERIFY) */
+    /** 事件类型(EVIDENCE/VERIFY)
+     */
     private BiEventType eventType;
 
-    /** 所属端 */
+    /** 所属端
+     */
     private CommonEnum.Client client;
 
-    /** 用户 */
+    /** 用户
+     */
     private Long userId;
 
-    /** 存证类型 */
+    /** 存证类型
+     */
     private String bizType;
 
-    /** 存证编号 */
+    /** 存证编号
+     */
     private String certNo;
 
-    /** 状态 */
+    /** 状态
+     */
     private String status;
 }

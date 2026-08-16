@@ -23,6 +23,21 @@ public class BiProperties {
     /** 待办缓存过期时间(秒) */
     private long todoCacheTtl = 30;
 
+    /** 商品中心缓存过期时间(秒) */
+    private long productCacheTtl = 60;
+
+    /** 会员中心缓存过期时间(秒) */
+    private long memberCacheTtl = 60;
+
+    /** 门店管理缓存过期时间(秒) */
+    private long storeCacheTtl = 60;
+
+    /** 财务结算缓存过期时间(秒) */
+    private long financeCacheTtl = 60;
+
+    /** 知链存证缓存过期时间(秒) */
+    private long evidenceCacheTtl = 60;
+
     /** 供应商管理缓存过期时间(秒) */
     private long supplierCacheTtl = 60;
 

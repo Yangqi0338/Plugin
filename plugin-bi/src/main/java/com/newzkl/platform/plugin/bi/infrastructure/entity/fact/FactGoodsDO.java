@@ -15,19 +15,24 @@ import lombok.EqualsAndHashCode;
 @TableName
 public class FactGoodsDO extends BaseDO {
 
-    /** SPU */
+    /** SPU
+     */
     private Long spuId;
 
-    /** 所属端 */
+    /** 所属端
+     */
     private CommonEnum.Client client;
 
-    /** 门店 */
+    /** 门店
+     */
     private Long storeId;
 
-    /** 事件类型(SUBMIT/AUDIT/UP/DOWN) */
+    /** 事件类型(SUBMIT/AUDIT/UP/DOWN)
+     */
     private BiEventType eventType;
 
-    /** 商品状态(WAIT_AUDIT/ON_SALE/OFF_SALE) */
+    /** 商品状态(WAIT_AUDIT/ON_SALE/OFF_SALE)
+     */
     private String status;
     
 }

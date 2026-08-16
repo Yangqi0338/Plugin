@@ -1,5 +1,11 @@
 package com.newzkl.platform.plugin.bi.infrastructure.repository;
 
+import cn.hutool.core.date.DateTime;
+import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import com.newzkl.platform.base.common.core.model.money.Money;
+import com.newzkl.platform.base.common.ddd.infrastructure.mybatis.model.BizCountMap;
+import com.newzkl.platform.base.common.ddd.model.query.QuerySupport;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.BIBaseDO;
 import com.newzkl.platform.plugin.bi.domain.repository.StatDayRepository;
 import com.newzkl.platform.plugin.bi.infrastructure.dao.DayWideTableDAO;
@@ -8,7 +14,6 @@ import com.newzkl.platform.plugin.bi.infrastructure.dao.TableNameResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -29,24 +34,30 @@ public class StatDayRepositoryImpl implements StatDayRepository {
     }
 
     @Override
-    public BigDecimal sumField(Class<? extends BIBaseDO> entityClass,
-                               LocalDate from, LocalDate to, String fieldName) {
-        return dayDAO.sumField(TableNameResolver.dayTable(entityClass), from, to, fieldName);
+    public <T extends BIBaseDO, R> Money sumField(Class<T> entityClass, DateTime from, DateTime to,
+                                                  SFunction<T, R> field) {
+        return dayDAO.sumField(TableNameResolver.dayTable(entityClass), from, to,
+                StatRealtimeRepositoryImpl.columnOf(field));
     }
 
     @Override
-    public int count(Class<? extends BIBaseDO> entityClass, LocalDate from, LocalDate to) {
+    public int count(Class<? extends BIBaseDO> entityClass, DateTime from, DateTime to) {
         return dayDAO.count(TableNameResolver.dayTable(entityClass), from, to);
     }
 
     @Override
-    public List<Map<String, Object>> selectByDateRange(Class<? extends BIBaseDO> entityClass,
-                                                       LocalDate from, LocalDate to) {
+    public List<Map<String, Object>> selectByDateRange(Class<? extends BIBaseDO> entityClass, DateTime from, DateTime to) {
         return dayDAO.selectByDateRange(TableNameResolver.dayTable(entityClass), from, to);
     }
 
     @Override
     public void deleteAll(Class<? extends BIBaseDO> entityClass) {
         dayDAO.deleteAll(TableNameResolver.dayTable(entityClass));
+    }
+    
+    @Override
+    public <T extends BIBaseDO> BizCountMap sum(Class<T> entityClass, AbstractWrapper<?, ?, ?> queryWrapper, QuerySupport querySupport) {
+        BizCountMap countMap = dayDAO.sumMapOne(TableNameResolver.dayTable(entityClass), queryWrapper, querySupport);
+        return countMap;
     }
 }

@@ -17,16 +17,20 @@ import lombok.EqualsAndHashCode;
 @TableName
 public class FactMemberDO extends BaseDO {
 
-    /** 会员ID */
+    /** 会员ID
+     */
     private Long memberId;
 
-    /** 事件类型(注册/注销/确权) */
+    /** 事件类型(注册/注销/确权)
+     */
     private BiEventType eventType;
 
-    /** 所属端 */
+    /** 所属端
+     */
     private CommonEnum.Client client;
 
-    /** 会员等级 */
+    /** 会员等级
+     */
     private String level;
     
 }

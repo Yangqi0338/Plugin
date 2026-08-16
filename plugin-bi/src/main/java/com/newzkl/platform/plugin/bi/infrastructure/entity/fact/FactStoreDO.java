@@ -15,19 +15,24 @@ import lombok.EqualsAndHashCode;
 @Data
 public class FactStoreDO extends BaseDO {
 
-    /** 门店ID */
+    /** 门店ID
+     */
     private Long storeId;
 
-    /** 事件类型(入驻/审核/证书签发) */
+    /** 事件类型(入驻/审核/证书签发)
+     */
     private BiEventType eventType;
 
-    /** 所属端 */
+    /** 所属端
+     */
     private CommonEnum.Client client;
 
-    /** 所属商户 */
+    /** 所属商户
+     */
     private Long merchantId;
 
-    /** 状态 */
+    /** 状态
+     */
     private String status;
     
 }

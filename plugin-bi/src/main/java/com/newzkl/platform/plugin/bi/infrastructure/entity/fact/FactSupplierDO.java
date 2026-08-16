@@ -17,25 +17,32 @@ import java.math.BigDecimal;
 @Data
 public class FactSupplierDO extends BaseDO {
 
-    /** 供应商ID */
+    /** 供应商ID
+     */
     private Long supplierId;
 
-    /** 事件类型(入驻/退出/升级/动销/账期) */
+    /** 事件类型(入驻/退出/升级/动销/账期)
+     */
     private BiEventType eventType;
 
-    /** 所属端 */
+    /** 所属端
+     */
     private CommonEnum.Client client;
 
-    /** 等级(战略/核心) */
+    /** 等级(战略/核心)
+     */
     private String level;
 
-    /** 涉及商品数 */
+    /** 涉及商品数
+     */
     private Integer goodsCount;
 
-    /** 动销金额(元) */
+    /** 动销金额(元)
+     */
     private BigDecimal sellAmount;
 
-    /** 应付货款在途(元) */
+    /** 应付货款在途(元)
+     */
     private BigDecimal payableInTransit;
     
 }

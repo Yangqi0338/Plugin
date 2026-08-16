@@ -31,6 +31,15 @@ public final class BiRedisKey {
     /** 品类占比 */
     public static final String CATEGORY = "bi:category:";
 
+    /** 门店管理 */
+    public static final String STORE = "bi:store:";
+
+    /** 财务结算 */
+    public static final String FINANCE = "bi:finance:";
+
+    /** 知链存证 */
+    public static final String EVIDENCE = "bi:evidence:";
+
     /** 商品排行 */
     public static final String RANK_GOODS = "bi:rank:goods:";
 

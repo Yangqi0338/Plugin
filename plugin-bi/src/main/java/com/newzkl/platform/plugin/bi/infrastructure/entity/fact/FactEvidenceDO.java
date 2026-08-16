@@ -15,24 +15,31 @@ import lombok.EqualsAndHashCode;
 @Data
 public class FactEvidenceDO extends BaseDO {
 
-    /** 存证ID */
+    /** 存证ID
+     */
     private Long evidenceId;
 
-    /** 事件类型(上链/核验通过/核验失败) */
+    /** 事件类型(上链/核验通过/核验失败)
+     */
     private BiEventType eventType;
 
-    /** 所属端 */
+    /** 所属端
+     */
     private CommonEnum.Client client;
 
-    /** 用户 */
+    /** 用户
+     */
     private Long userId;
 
-    /** 业务类型 */
+    /** 业务类型
+     */
     private String bizType;
 
-    /** 证书编号 */
+    /** 证书编号
+     */
     private String certNo;
 
-    /** 状态 */
+    /** 状态
+     */
     private String status;
 }

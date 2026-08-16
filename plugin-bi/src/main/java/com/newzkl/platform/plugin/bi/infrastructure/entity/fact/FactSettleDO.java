@@ -17,18 +17,23 @@ import java.math.BigDecimal;
 @Data
 public class FactSettleDO extends BaseDO {
 
-    /** 结算单号 */
+    /** 结算单号
+     */
     private String settleNo;
 
-    /** 事件类型 */
+    /** 事件类型
+     */
     private BiEventType eventType;
 
-    /** 所属端 */
+    /** 所属端
+     */
     private CommonEnum.Client client;
 
-    /** 金额(元) */
+    /** 金额(元)
+     */
     private BigDecimal amount;
 
-    /** 结算类型(待结算/佣金) */
+    /** 结算类型(待结算/佣金)
+     */
     private String settleType;
 }

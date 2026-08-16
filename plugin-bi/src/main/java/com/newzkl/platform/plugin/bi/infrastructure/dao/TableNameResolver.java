@@ -1,56 +1,44 @@
 package com.newzkl.platform.plugin.bi.infrastructure.dao;
 
+import cn.hutool.core.util.StrUtil;
+import com.newzkl.platform.base.common.core.mybatis.MybatisPlusConfig;
 import com.newzkl.platform.plugin.bi.domain.annotation.BITableName;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.BIBaseDO;
 
 /**
  * 宽表名解析器
  *
- * <p>根据 {@link BITableName} 注解和实体类名, 解析实时表/日表的表名。</p>
+ * <p>表名 = {@code dws_{realtime|day}_{client.code}_{entitySnake}},
+ * {@code entitySnake} 复用 {@link MybatisPlusConfig#buildTableName} 的表名处理规则
+ * (驼峰转下划线 + 去 DO/_d_o 后缀), 不在此复写。</p>
  */
 public final class TableNameResolver {
 
     private TableNameResolver() {}
 
-    /** 获取实时表名: dws_realtime_{client}_{entitySnake} */
+    /** 获取实时表名 */
     public static String realtimeTable(Class<? extends BIBaseDO> entityClass) {
-        BITableName ann = entityClass.getAnnotation(BITableName.class);
-        if (ann == null) {
-            throw new IllegalArgumentException(entityClass.getSimpleName() + " 缺少 @BITableName 注解");
-        }
-        return "dws_realtime_" + ann.client().getCode() + "_" + entitySnake(entityClass, ann);
+        return "dws_realtime_" + clientCode(entityClass) + "_" + entitySnake(entityClass);
     }
 
-    /** 获取日表名: dws_day_{client}_{entitySnake} */
+    /** 获取日表名 */
     public static String dayTable(Class<? extends BIBaseDO> entityClass) {
+        return "dws_day_" + clientCode(entityClass) + "_" + entitySnake(entityClass);
+    }
+
+    private static String clientCode(Class<? extends BIBaseDO> entityClass) {
         BITableName ann = entityClass.getAnnotation(BITableName.class);
         if (ann == null) {
             throw new IllegalArgumentException(entityClass.getSimpleName() + " 缺少 @BITableName 注解");
         }
-        return "dws_day_" + ann.client().getCode() + "_" + entitySnake(entityClass, ann);
+        return ann.client().getCode();
     }
 
-    /** 实体名蛇形小写: 去掉 Trend 后缀(如有) */
-    private static String entitySnake(Class<?> entityClass, BITableName ann) {
-        if (!ann.suffix().isEmpty()) {
-            return ann.suffix();
-        }
-        String name = entityClass.getSimpleName();
-        if (name.endsWith("Trend")) {
-            name = name.substring(0, name.length() - 5);
-        }
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < name.length(); i++) {
-            char c = name.charAt(i);
-            if (Character.isUpperCase(c)) {
-                if (sb.length() > 0) {
-                    sb.append('_');
-                }
-                sb.append(Character.toLowerCase(c));
-            } else {
-                sb.append(c);
-            }
-        }
-        return sb.toString();
+    /** 表名主体: 驼峰转下划线后走 MybatisPlusConfig 去 DO 后缀(不在此复写规则)
+     */
+    private static String entitySnake(Class<?> entityClass) {
+        // OverviewDO -> overview_d_o -> MybatisPlusConfig 去掉 _d_o -> overview
+        String snake = StrUtil.toUnderlineCase(entityClass.getSimpleName());
+        return MybatisPlusConfig.buildTableName(snake);
     }
 }

@@ -17,21 +17,27 @@ import java.math.BigDecimal;
 @Data
 public class FactPaymentDO extends BaseDO {
 
-    /** 支付单/分账单ID */
+    /** 支付单/分账单ID
+     */
     private Long paymentId;
 
-    /** 事件类型(支付/手续费/分账/对账) */
+    /** 事件类型(支付/手续费/分账/对账)
+     */
     private BiEventType eventType;
 
-    /** 所属端 */
+    /** 所属端
+     */
     private CommonEnum.Client client;
 
-    /** 关联订单 */
+    /** 关联订单
+     */
     private Long orderId;
 
-    /** 支付金额(元) */
+    /** 支付金额(元)
+     */
     private BigDecimal payAmount;
 
-    /** 手续费(元) */
+    /** 手续费(元)
+     */
     private BigDecimal feeAmount;
 }

@@ -19,27 +19,35 @@ import java.math.BigDecimal;
 @TableName
 public class FactOrderDO extends BaseDO {
 
-    /** 订单号 */
+    /** 订单号
+     */
     private Long orderId;
 
-    /** 事件类型(ORDER_PAY/ORDER_REFUND) */
+    /** 事件类型(ORDER_PAY/ORDER_REFUND)
+     */
     private BiEventType eventType;
 
-    /** 所属端 */
+    /** 所属端
+     */
     private CommonEnum.Client client;
 
-    /** 用户 */
+    /** 用户
+     */
     private Long userId;
 
-    /** 门店 */
+    /** 门店
+     */
     private Long storeId;
 
-    /** SPU */
+    /** SPU
+     */
     private Long spuId;
 
-    /** 订单状态 */
+    /** 订单状态
+     */
     private String status;
 
-    /** 交易额(元) */
+    /** 交易额(元)
+     */
     private BigDecimal amount;
 }

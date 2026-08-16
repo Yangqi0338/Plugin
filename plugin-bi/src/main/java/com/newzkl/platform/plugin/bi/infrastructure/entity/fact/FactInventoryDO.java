@@ -17,24 +17,31 @@ import lombok.EqualsAndHashCode;
 @TableName
 public class FactInventoryDO extends BaseDO {
 
-    /** SKU */
+    /** SKU
+     */
     private Long skuId;
 
-    /** 所属端 */
+    /** 所属端
+     */
     private CommonEnum.Client client;
 
-    /** 门店 */
+    /** 门店
+     */
     private Long storeId;
 
-    /** 变更类型 */
+    /** 变更类型
+     */
     private BiEventType eventType;
 
-    /** 总库存(变更后) */
+    /** 总库存(变更后)
+     */
     private Integer totalStock;
 
-    /** 当前库存(变更后) */
+    /** 当前库存(变更后)
+     */
     private Integer currentStock;
 
-    /** 变更数量 */
+    /** 变更数量
+     */
     private Integer changeCount;
 }
