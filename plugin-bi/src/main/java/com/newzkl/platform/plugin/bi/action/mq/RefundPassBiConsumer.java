@@ -1,39 +1,31 @@
 package com.newzkl.platform.plugin.bi.action.mq;
 
-import com.newzkl.platform.base.biz.order.model.support.api.order.RefundPassEvent;
+import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.core.mq.infrastructure.annotation.MQConsumer;
 import com.newzkl.platform.base.common.core.mq.infrastructure.consumer.AbstractMessageMQPushConsumer;
 import com.newzkl.platform.base.common.core.mq.model.constant.MQ;
-import com.newzkl.platform.plugin.bi.application.service.BiEventService;
-import com.newzkl.platform.plugin.bi.model.event.OrderBiEvent;
-import lombok.RequiredArgsConstructor;
+import com.newzkl.platform.plugin.bi.domain.service.BiEventWriteService;
+import com.newzkl.platform.plugin.bi.model.event.BiRefundPassEvent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.math.BigDecimal;
 import java.util.Map;
 
 /**
- * 订单售后 BI 消费者(订阅 REFUND_PASS)
+ * 退款通过消费者
  *
- * <p>售后通过 → 写事实表 + 实时宽表(售后中+1, 退款额累加)。</p>
+ * <p>消费 {@code REFUND_PASS}, 写 TodoDO(售后中+1)。</p>
  */
 @Slf4j
 @MQConsumer(consumerGroup = MQ.Tag.REFUND_PASS_MESSAGE, tag = MQ.Tag.REFUND_PASS)
-@RequiredArgsConstructor
-public class RefundPassBiConsumer extends AbstractMessageMQPushConsumer<RefundPassEvent> {
+public class RefundPassBiConsumer extends AbstractMessageMQPushConsumer<BiRefundPassEvent> {
 
-    private final BiEventService biEventService;
+    @Autowired
+    private BiEventWriteService biEventWriteService;
 
     @Override
-    public void remoteProcess(RefundPassEvent message, Map<String, Object> extMap) {
-        log.info("[BI] 售后通过事件: orderId={}, refundAmount={}", message.getOrderId(), message.getRefundAmount());
-
-        OrderBiEvent event = new OrderBiEvent();
-        event.setEventType(BiEventService.EVT_ORDER_REFUND);
-        event.setOrderId(message.getSpuOrderId() != null ? message.getSpuOrderId() : message.getOrderId());
-        event.setUserId(message.getChannelId()); // 缺省: 用户ID暂用渠道商ID, 调用侧后续修正
-        event.setClientId(null);
-        event.setRefundAmount(message.getRefundAmount() == null ? BigDecimal.ZERO : BigDecimal.valueOf(message.getRefundAmount()));
-        biEventService.handleOrderEvent(event);
+    public void remoteProcess(BiRefundPassEvent message, Map<String, Object> extMap) {
+        log.info("BI 退款通过消费, orderId: {}, refundAmount: {}", message.getOrderId(), message.getRefundAmount());
+        biEventWriteService.onRefundPass(CommonEnum.Client.ADMIN, null, message.getRefundAmount());
     }
 }
