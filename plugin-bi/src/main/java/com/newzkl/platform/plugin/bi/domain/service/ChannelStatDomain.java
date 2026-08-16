@@ -9,7 +9,7 @@ import com.newzkl.platform.plugin.bi.infrastructure.entity.channel.ChannelHomeDO
 import com.newzkl.platform.plugin.bi.infrastructure.entity.channel.ChannelWeekTradeDO;
 import com.newzkl.platform.plugin.bi.model.query.ChannelHomeQuery;
 import com.newzkl.platform.plugin.bi.model.res.ChannelHomeRes;
-import com.newzkl.platform.plugin.bi.model.res.ChannelHomeRes.WeekTradeItem;
+import com.newzkl.platform.plugin.bi.model.res.ChannelWeekTradeItemRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -42,17 +42,17 @@ public class ChannelStatDomain {
     }
 
     /** 渠道商本周交易走势(按星期) */
-    public List<WeekTradeItem> weekTrade(ChannelHomeQuery query) {
+    public List<ChannelWeekTradeItemRes> weekTrade(ChannelHomeQuery query) {
         query.addField("week_day");
         query.addSumField("amount");
         query.addGroupField("week_day");
         query.initSortField("week_day", false);
         BizCountMap countMap = realtimeRepo.sum(ChannelWeekTradeDO.class, new LambdaQueryWrapper<>(), query);
-        List<WeekTradeItem> list = new ArrayList<>();
+        List<ChannelWeekTradeItemRes> list = new ArrayList<>();
         if (countMap != null) {
             List<ChannelWeekTradeDO> rows = countMap.camelKeyCountMap().toList(ChannelWeekTradeDO.class);
             for (ChannelWeekTradeDO row : rows) {
-                WeekTradeItem item = new WeekTradeItem();
+                ChannelWeekTradeItemRes item = new ChannelWeekTradeItemRes();
                 item.setWeekDay(row.getWeekDay());
                 item.setAmount(row.getAmount());
                 list.add(item);
