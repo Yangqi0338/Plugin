@@ -70,7 +70,6 @@ public class BiApplicationService {
     private final SupplierStatDomain supplierStatDomain;
     private final ChannelStatDomain channelStatDomain;
     private final ServiceStatDomain serviceStatDomain;
-    private final BiProperties biProperties;
 
     // ==================== 首页·实时概况 ====================
 
@@ -88,7 +87,7 @@ public class BiApplicationService {
         HomeOverviewRes vo = adminStatDomain.homeOverview(adminHomeOverviewQuery);
 
         try {
-            RedisUtil.set(cacheKey, vo, biProperties.getOverviewCacheTtl());
+            RedisUtil.set(cacheKey, vo, BiProperties.overviewCacheTtl);
         } catch (Exception e) {
             log.warn("写入 overview 缓存失败", e);
         }
@@ -107,7 +106,7 @@ public class BiApplicationService {
         HomeTodoRes vo = adminStatDomain.homeTodo(new AdminHomeTodoQuery());
 
         try {
-            RedisUtil.set(cacheKey, vo, biProperties.getTodoCacheTtl());
+            RedisUtil.set(cacheKey, vo, BiProperties.todoCacheTtl);
         } catch (Exception e) {
             log.warn("写入 todo 缓存失败", e);
         }
@@ -145,7 +144,7 @@ public class BiApplicationService {
             return cached;
         }
         ProductSummaryRes res = adminStatDomain.productSummary(new AdminProductQuery());
-        try { RedisUtil.set(cacheKey, res, biProperties.getProductCacheTtl()); } catch (Exception e) { log.warn("cache err", e); }
+        try { RedisUtil.set(cacheKey, res, BiProperties.productCacheTtl); } catch (Exception e) { log.warn("cache err", e); }
         return res;
     }
 
@@ -156,7 +155,7 @@ public class BiApplicationService {
             return cached;
         }
         ProductCategoryRes res = adminStatDomain.productCategory(new AdminProductQuery());
-        try { RedisUtil.set(cacheKey, res, biProperties.getProductCacheTtl()); } catch (Exception e) { log.warn("cache err", e); }
+        try { RedisUtil.set(cacheKey, res, BiProperties.productCacheTtl); } catch (Exception e) { log.warn("cache err", e); }
         return res;
     }
 
@@ -167,7 +166,7 @@ public class BiApplicationService {
             return cached;
         }
         ProductStatusRes res = adminStatDomain.productStatus(new AdminProductQuery());
-        try { RedisUtil.set(cacheKey, res, biProperties.getProductCacheTtl()); } catch (Exception e) { log.warn("cache err", e); }
+        try { RedisUtil.set(cacheKey, res, BiProperties.productCacheTtl); } catch (Exception e) { log.warn("cache err", e); }
         return res;
     }
 
@@ -180,7 +179,7 @@ public class BiApplicationService {
             return cached;
         }
         MemberOverviewRes res = adminStatDomain.memberOverview(new AdminMemberQuery());
-        try { RedisUtil.set(cacheKey, res, biProperties.getMemberCacheTtl()); } catch (Exception e) { log.warn("cache err", e); }
+        try { RedisUtil.set(cacheKey, res, BiProperties.memberCacheTtl); } catch (Exception e) { log.warn("cache err", e); }
         return res;
     }
 
@@ -197,7 +196,7 @@ public class BiApplicationService {
             return cached;
         }
         StoreOverviewRes res = adminStatDomain.storeOverview(new AdminProductQuery());
-        try { RedisUtil.set(cacheKey, res, biProperties.getStoreCacheTtl()); } catch (Exception e) { log.warn("cache err", e); }
+        try { RedisUtil.set(cacheKey, res, BiProperties.storeCacheTtl); } catch (Exception e) { log.warn("cache err", e); }
         return res;
     }
 
@@ -210,7 +209,7 @@ public class BiApplicationService {
             return cached;
         }
         FinanceOverviewRes res = adminStatDomain.financeOverview(new AdminProductQuery());
-        try { RedisUtil.set(cacheKey, res, biProperties.getFinanceCacheTtl()); } catch (Exception e) { log.warn("cache err", e); }
+        try { RedisUtil.set(cacheKey, res, BiProperties.financeCacheTtl); } catch (Exception e) { log.warn("cache err", e); }
         return res;
     }
 
@@ -223,7 +222,7 @@ public class BiApplicationService {
             return cached;
         }
         EvidenceOverviewRes res = adminStatDomain.evidenceOverview(new AdminProductQuery());
-        try { RedisUtil.set(cacheKey, res, biProperties.getEvidenceCacheTtl()); } catch (Exception e) { log.warn("cache err", e); }
+        try { RedisUtil.set(cacheKey, res, BiProperties.evidenceCacheTtl); } catch (Exception e) { log.warn("cache err", e); }
         return res;
     }
 
@@ -236,7 +235,7 @@ public class BiApplicationService {
             return cached;
         }
         SupplierOverviewRes res = adminStatDomain.supplierOverview(new AdminSupplierQuery());
-        try { RedisUtil.set(cacheKey, res, biProperties.getSupplierCacheTtl()); } catch (Exception e) { log.warn("cache err", e); }
+        try { RedisUtil.set(cacheKey, res, BiProperties.supplierCacheTtl); } catch (Exception e) { log.warn("cache err", e); }
         return res;
     }
 
@@ -249,7 +248,7 @@ public class BiApplicationService {
             return cached;
         }
         PaymentOverviewRes res = adminStatDomain.paymentOverview(new AdminPaymentQuery());
-        try { RedisUtil.set(cacheKey, res, biProperties.getPaymentCacheTtl()); } catch (Exception e) { log.warn("cache err", e); }
+        try { RedisUtil.set(cacheKey, res, BiProperties.paymentCacheTtl); } catch (Exception e) { log.warn("cache err", e); }
         return res;
     }
 

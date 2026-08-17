@@ -475,9 +475,8 @@ public class AdminStatDomain {
 
     /** 商品销售排行(GoodsRankDO 按 goodsId 分组排序) */
     public RankGoodsRes goodsRank(AdminInsightQuery query) {
-        query.addField("goods_id");
         query.addSumField("sales_count", "sales_amount");
-        query.addGroupField("goods_id");
+        query.addGroupField(GoodsRankDO::getGoodsId);
         query.initSortField("sales_amount", true);
         BizCountMap countMap = realtimeRepo.sum(GoodsRankDO.class, new LambdaQueryWrapper<>(), query);
         RankGoodsRes res = new RankGoodsRes();
