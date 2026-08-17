@@ -6,6 +6,8 @@ import com.newzkl.platform.plugin.bi.model.enums.BiEventType;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.BIBaseDO;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.admin.CorrelationDO;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.admin.GoodsRankDO;
+import com.newzkl.platform.plugin.bi.infrastructure.entity.admin.GoodsStatusDO;
+import com.newzkl.platform.plugin.bi.infrastructure.entity.admin.MemberSummaryDO;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.admin.OverviewDO;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.admin.PaymentSummaryDO;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.admin.StoreRankDO;
@@ -97,6 +99,61 @@ public class AdminEventDomainImpl implements AdminEventDomain {
         todo.setRefundingDelta(1);
         realtimeRepo.insert(todo);
         log.info("退款通过: 金额 {}, 售后中+1", refundAmount);
+    }
+
+    // ==================== 待接入 tag(事件类 BiBizEvent 已定义) ====================
+
+    /** 会员注册: MemberSummaryDO.memberCount+1 */
+    @Override
+    public void onMemberRegister(CommonEnum.Client client, Long memberId, String level) {
+        MemberSummaryDO member = new MemberSummaryDO();
+        fillBase(member, client, memberId, BiEventType.MEMBER_REGISTER);
+        member.setMemberCount(1);
+        realtimeRepo.insert(member);
+        log.info("[BI] 会员注册: memberId={}, level={}", memberId, level);
+    }
+
+    /** 上链存证: OverviewDO.evidenceCount+1 + TradeDO.onChainCount+1 */
+    @Override
+    public void onEvidenceOnChain(CommonEnum.Client client, Long evidenceId, Long userId) {
+        OverviewDO overview = new OverviewDO();
+        fillBase(overview, client, userId, BiEventType.EVIDENCE_ON_CHAIN);
+        overview.setEvidenceCount(1);
+        realtimeRepo.insert(overview);
+
+        TradeDO trade = new TradeDO();
+        fillBase(trade, client, userId, BiEventType.EVIDENCE_ON_CHAIN);
+        trade.setOnChainCount(1);
+        realtimeRepo.insert(trade);
+        log.info("[BI] 上链存证: evidenceId={}, userId={}", evidenceId, userId);
+    }
+
+    /** 库存变更: TodoDO.stockWarnDelta/soldOutDelta(阈值 BiProperties.stockWarnRatio) */
+    @Override
+    public void onInventoryChange(CommonEnum.Client client, Long goodsId, Long storeId, String status) {
+        TodoDO todo = new TodoDO();
+        fillBase(todo, client, null, BiEventType.INVENTORY_CHANGE);
+        if ("SOLD_OUT".equals(status)) {
+            todo.setSoldOutDelta(1);
+        } else if ("WARN".equals(status)) {
+            todo.setStockWarnDelta(1);
+        }
+        realtimeRepo.insert(todo);
+        log.info("[BI] 库存变更: goodsId={}, storeId={}, status={}", goodsId, storeId, status);
+    }
+
+    /** 商品状态变更: GoodsStatusDO.onShelfCount/offShelfCount */
+    @Override
+    public void onGoodsStatus(CommonEnum.Client client, Long goodsId, String status) {
+        GoodsStatusDO goods = new GoodsStatusDO();
+        fillBase(goods, client, null, BiEventType.GOODS_ONLINE);
+        if ("ON_SHELF".equals(status)) {
+            goods.setOnShelfCount(1);
+        } else if ("OFF_SHELF".equals(status)) {
+            goods.setOffShelfCount(1);
+        }
+        realtimeRepo.insert(goods);
+        log.info("[BI] 商品状态变更: goodsId={}, status={}", goodsId, status);
     }
 
     // ==================== 私有 ====================
