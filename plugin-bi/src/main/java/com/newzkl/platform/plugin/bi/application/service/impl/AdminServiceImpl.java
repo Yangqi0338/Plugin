@@ -7,7 +7,7 @@ import com.newzkl.platform.base.common.core.model.money.Money;
 import com.newzkl.platform.base.common.core.redis.utils.RedisUtil;
 import com.newzkl.platform.plugin.bi.action.config.BiProperties;
 import com.newzkl.platform.plugin.bi.application.service.AdminService;
-import com.newzkl.platform.plugin.bi.domain.constant.BiRedisKey;
+import com.newzkl.platform.base.common.core.redis.RedisEnum;
 import com.newzkl.platform.plugin.bi.domain.service.AdminStatDomain;
 import com.newzkl.platform.plugin.bi.model.query.AdminHomeOverviewQuery;
 import com.newzkl.platform.plugin.bi.model.query.AdminHomeRevenueQuery;
@@ -58,7 +58,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public HomeOverviewRes homeOverview() {
-        String cacheKey = BiRedisKey.OVERVIEW;
+        String cacheKey = RedisEnum.Key.BI_OVERVIEW.getCode();
         HomeOverviewRes cached = RedisUtil.get(cacheKey);
         if (cached != null) {
             return cached;
@@ -82,7 +82,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public HomeTodoRes homeTodo() {
-        String cacheKey = BiRedisKey.TODO;
+        String cacheKey = RedisEnum.Key.BI_TODO.getCode();
         HomeTodoRes cached = RedisUtil.get(cacheKey);
         if (cached != null) {
             return cached;
@@ -126,7 +126,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public ProductSummaryRes productSummary() {
-        String cacheKey = BiRedisKey.PRODUCT + "summary";
+        String cacheKey = RedisEnum.Key.BI_PRODUCT.getCode() + "summary";
         ProductSummaryRes cached = RedisUtil.get(cacheKey);
         if (cached != null) {
             return cached;
@@ -138,7 +138,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public ProductCategoryRes productCategory() {
-        String cacheKey = BiRedisKey.PRODUCT + "category";
+        String cacheKey = RedisEnum.Key.BI_PRODUCT.getCode() + "category";
         ProductCategoryRes cached = RedisUtil.get(cacheKey);
         if (cached != null) {
             return cached;
@@ -150,7 +150,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public ProductStatusRes productStatus() {
-        String cacheKey = BiRedisKey.PRODUCT + "status";
+        String cacheKey = RedisEnum.Key.BI_PRODUCT.getCode() + "status";
         ProductStatusRes cached = RedisUtil.get(cacheKey);
         if (cached != null) {
             return cached;
@@ -164,7 +164,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public MemberOverviewRes memberOverview() {
-        String cacheKey = BiRedisKey.MEMBER + "overview";
+        String cacheKey = RedisEnum.Key.BI_MEMBER.getCode() + "overview";
         MemberOverviewRes cached = RedisUtil.get(cacheKey);
         if (cached != null) {
             return cached;
@@ -183,7 +183,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public StoreOverviewRes storeOverview() {
-        String cacheKey = BiRedisKey.STORE;
+        String cacheKey = RedisEnum.Key.BI_STORE.getCode();
         StoreOverviewRes cached = RedisUtil.get(cacheKey);
         if (cached != null) {
             return cached;
@@ -197,7 +197,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public FinanceOverviewRes financeOverview() {
-        String cacheKey = BiRedisKey.FINANCE;
+        String cacheKey = RedisEnum.Key.BI_FINANCE.getCode();
         FinanceOverviewRes cached = RedisUtil.get(cacheKey);
         if (cached != null) {
             return cached;
@@ -211,7 +211,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public EvidenceOverviewRes evidenceOverview() {
-        String cacheKey = BiRedisKey.EVIDENCE;
+        String cacheKey = RedisEnum.Key.BI_EVIDENCE.getCode();
         EvidenceOverviewRes cached = RedisUtil.get(cacheKey);
         if (cached != null) {
             return cached;
@@ -225,7 +225,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public SupplierOverviewRes supplierOverview() {
-        String cacheKey = BiRedisKey.SUPPLIER;
+        String cacheKey = RedisEnum.Key.BI_SUPPLIER.getCode();
         SupplierOverviewRes cached = RedisUtil.get(cacheKey);
         if (cached != null) {
             return cached;
@@ -239,7 +239,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public PaymentOverviewRes paymentOverview() {
-        String cacheKey = BiRedisKey.PAYMENT;
+        String cacheKey = RedisEnum.Key.BI_PAYMENT.getCode();
         PaymentOverviewRes cached = RedisUtil.get(cacheKey);
         if (cached != null) {
             return cached;
