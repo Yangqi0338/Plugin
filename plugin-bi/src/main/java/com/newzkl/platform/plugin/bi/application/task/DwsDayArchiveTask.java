@@ -21,7 +21,7 @@ import com.newzkl.platform.plugin.bi.infrastructure.entity.admin.TodoDO;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.admin.TradeDO;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.channel.ChannelHomeDO;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.channel.ChannelWeekTradeDO;
-import com.newzkl.platform.plugin.bi.infrastructure.entity.partner.ServiceHomeDO;
+import com.newzkl.platform.plugin.bi.infrastructure.entity.partner.PartnerHomeDO;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.supplier.SupplierHomeDO;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.supplier.SupplierSettleTrendDO;
 import com.xxl.job.core.handler.annotation.XxlJob;
@@ -83,7 +83,7 @@ public class DwsDayArchiveTask {
             SupplierSettleTrendDO.class,
             ChannelHomeDO.class,
             ChannelWeekTradeDO.class,
-            ServiceHomeDO.class
+            PartnerHomeDO.class
     );
     
     /** 单个实体归档 */
