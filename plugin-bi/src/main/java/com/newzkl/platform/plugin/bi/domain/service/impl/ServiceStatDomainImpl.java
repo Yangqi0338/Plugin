@@ -6,7 +6,7 @@ import com.newzkl.platform.base.common.core.utils.common.TransferUtils;
 import com.newzkl.platform.base.common.ddd.infrastructure.mybatis.model.BizCountMap;
 import com.newzkl.platform.plugin.bi.domain.adapt.repository.StatRealtimeRepository;
 import com.newzkl.platform.plugin.bi.domain.service.ServiceStatDomain;
-import com.newzkl.platform.plugin.bi.infrastructure.entity.partner.ServiceHomeDO;
+import com.newzkl.platform.plugin.bi.infrastructure.entity.partner.PartnerHomeDO;
 import com.newzkl.platform.plugin.bi.model.query.ServiceHomeQuery;
 import com.newzkl.platform.plugin.bi.model.res.partner.HomeOverviewRes;
 import lombok.RequiredArgsConstructor;
@@ -28,10 +28,10 @@ public class ServiceStatDomainImpl implements ServiceStatDomain {
     public HomeOverviewRes home(ServiceHomeQuery query) {
         query.addSumField("on_shelf_service_count", "month_new_count", "total_call_count",
                 "covered_channel_count", "month_revenue", "compliance_rate");
-        BizCountMap countMap = realtimeRepo.sum(ServiceHomeDO.class, new LambdaQueryWrapper<>(), query);
+        BizCountMap countMap = realtimeRepo.sum(PartnerHomeDO.class, new LambdaQueryWrapper<>(), query);
         HomeOverviewRes res = new HomeOverviewRes();
         if (countMap != null) {
-            ServiceHomeDO d = CollUtil.getFirst(countMap.camelKeyCountMap().toList(ServiceHomeDO.class));
+            PartnerHomeDO d = CollUtil.getFirst(countMap.camelKeyCountMap().toList(PartnerHomeDO.class));
             TransferUtils.transfer(res, d);
         }
         return res;

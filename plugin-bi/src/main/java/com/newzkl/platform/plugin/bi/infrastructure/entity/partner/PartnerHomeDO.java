@@ -13,8 +13,8 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@BITableName(client = CommonEnum.Client.SERVICE)
-public class ServiceHomeDO extends BIBaseDO {
+@BITableName(client = CommonEnum.Client.PARTNER)
+public class PartnerHomeDO extends BIBaseDO {
 
     /** 在架资源服务(项) */
     private Integer onShelfServiceCount;
