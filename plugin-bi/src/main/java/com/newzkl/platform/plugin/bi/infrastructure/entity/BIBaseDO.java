@@ -2,7 +2,8 @@ package com.newzkl.platform.plugin.bi.infrastructure.entity;
 
 import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.core.mybatis.entity.BaseIdDO;
-import com.newzkl.platform.plugin.bi.domain.constant.BiEventType;
+import com.newzkl.platform.plugin.bi.model.enums.BiEventType;
+import com.newzkl.platform.plugin.bi.model.annotation.BITableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 /**
  * BI 宽表抽象基类
  *
- * <p>所有宽表实体继承此类, 通过 {@link com.newzkl.platform.plugin.bi.domain.annotation.BITableName}
+ * <p>所有宽表实体继承此类, 通过 {@link BITableName}
  * 标注客户端类型, AutoTable 自动生成 dws_realtime_* / dws_day_* 两张表。
  * 日表自动增加 bizDate 字段(不在本类中, 由 AutoTable 生成时附加)。</p>
  */

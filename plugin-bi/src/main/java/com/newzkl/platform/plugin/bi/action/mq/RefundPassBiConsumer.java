@@ -4,7 +4,8 @@ import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.core.mq.infrastructure.annotation.MQConsumer;
 import com.newzkl.platform.base.common.core.mq.infrastructure.consumer.AbstractMessageMQPushConsumer;
 import com.newzkl.platform.base.common.core.mq.model.constant.MQ;
-import com.newzkl.platform.plugin.bi.domain.service.BiEventWriteService;
+import com.newzkl.platform.plugin.bi.domain.service.AdminEventDomain;
+import com.newzkl.platform.plugin.bi.domain.service.impl.AdminEventDomainImpl;
 import com.newzkl.platform.plugin.bi.model.event.BiRefundPassEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,11 @@ import java.util.Map;
 public class RefundPassBiConsumer extends AbstractMessageMQPushConsumer<BiRefundPassEvent> {
 
     @Autowired
-    private BiEventWriteService biEventWriteService;
+    private AdminEventDomain adminEventDomain;
 
     @Override
     public void remoteProcess(BiRefundPassEvent message, Map<String, Object> extMap) {
         log.info("BI 退款通过消费, orderId: {}, refundAmount: {}", message.getOrderId(), message.getRefundAmount());
-        biEventWriteService.onRefundPass(CommonEnum.Client.ADMIN, null, message.getRefundAmount());
+        adminEventDomain.onRefundPass(CommonEnum.Client.ADMIN, null, message.getRefundAmount());
     }
 }

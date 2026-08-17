@@ -2,7 +2,7 @@ package com.newzkl.platform.plugin.bi.infrastructure.dao;
 
 import cn.hutool.core.util.StrUtil;
 import com.newzkl.platform.base.common.core.mybatis.MybatisPlusConfig;
-import com.newzkl.platform.plugin.bi.domain.annotation.BITableName;
+import com.newzkl.platform.plugin.bi.model.annotation.BITableName;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.BIBaseDO;
 
 /**
