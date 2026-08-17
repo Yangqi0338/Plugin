@@ -3,7 +3,7 @@ package com.newzkl.platform.plugin.hdh;
 import cn.hutool.json.JSONUtil;
 import com.newzkl.platform.base.biz.goods.domain.spi.ThirdPartyGoodsStrategy;
 import com.newzkl.platform.base.common.ddd.facade.ThirdPartyGoodsResult;
-import com.newzkl.platform.base.common.ddd.model.enums.order.PlatformTypeEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.order.ThirdPartyOrderEnum;
 import com.newzkl.platform.plugin.hdh.model.Item;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class HuiDingHuoGoodsStrategy implements ThirdPartyGoodsStrategy {
 
     @Override
-    public ThirdPartyGoodsResult sync(PlatformTypeEnum platformType, String outSpuId, String itemJson) {
+    public ThirdPartyGoodsResult sync(ThirdPartyOrderEnum.PlatformTypeEnum platformType, String outSpuId, String itemJson) {
         // 反序列化会订货商品数据
         Item item = JSONUtil.toBean(itemJson, Item.class);
         log.info("会订货商品同步 outSpuId={} name={} shelfStatus={}",
@@ -36,6 +36,6 @@ public class HuiDingHuoGoodsStrategy implements ThirdPartyGoodsStrategy {
 
     @Override
     public boolean supports(Object type) {
-        return PlatformTypeEnum.HUI_DING_HUO == type;
+        return ThirdPartyOrderEnum.PlatformTypeEnum.HUI_DING_HUO == type;
     }
 }

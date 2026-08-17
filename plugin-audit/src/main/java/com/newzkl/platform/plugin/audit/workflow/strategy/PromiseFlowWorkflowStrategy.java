@@ -2,7 +2,7 @@ package com.newzkl.platform.plugin.audit.workflow.strategy;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.newzkl.platform.base.common.ddd.model.enums.RoleEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.user.RoleEnum;
 import com.newzkl.platform.plugin.audit.port.AuditEventPublishPort;
 import com.newzkl.platform.plugin.audit.port.PromiseFlowDataPort;
 import com.newzkl.platform.plugin.audit.workflow.constant.AuditEnum;

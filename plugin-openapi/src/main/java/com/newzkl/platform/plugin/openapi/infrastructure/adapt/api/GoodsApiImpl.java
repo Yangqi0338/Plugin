@@ -46,7 +46,7 @@ public class GoodsApiImpl implements GoodsApi {
     public ApiPage<ApiChannelSpuRelationVO> selectList(Long accountId, SelectListApiReq req) {
         GoodsListPageQuery query = new GoodsListPageQuery();
         query.setUserId(accountId);
-        query.setRelationType(GoodsRelationEnum.GoodsRelation.SELECT_GOODS.getRelationType());
+        query.setRelationType(GoodsRelationEnum.GoodsRelation.SELECT_GOODS.getCode());
         query.setGoodsIdList(req.getSpuIdList());
         query.setGoodsName(req.getSpuName());
         query.setSpuState(req.getSpuState());

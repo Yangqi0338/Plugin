@@ -2,8 +2,8 @@ package com.newzkl.platform.plugin.hdh;
 
 import cn.hutool.json.JSONUtil;
 import com.newzkl.platform.base.biz.goods.domain.spi.ThirdPartyGoodsRecordProcessor;
-import com.newzkl.platform.base.common.ddd.model.enums.order.PlatformTypeEnum;
 import com.newzkl.platform.base.common.core.model.res.PlatformResult;
+import com.newzkl.platform.base.common.ddd.model.enums.order.ThirdPartyOrderEnum;
 import com.newzkl.platform.plugin.hdh.model.Item;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +36,7 @@ public class HdhGoodsNotifyController {
     public PlatformResult<Void> hdhGoodsEvent(@Valid @RequestBody Item item) {
         log.info("收到会订货商品事件 outSpuId={}", item == null ? null : item.getId());
         String itemJson = JSONUtil.toJsonStr(item);
-        ThirdPartyGoodsRecordProcessor.find().sync(PlatformTypeEnum.HUI_DING_HUO, item == null ? null : item.getId(), itemJson);
+        ThirdPartyGoodsRecordProcessor.find().sync(ThirdPartyOrderEnum.PlatformTypeEnum.HUI_DING_HUO, item == null ? null : item.getId(), itemJson);
         return PlatformResult.success();
     }
 }

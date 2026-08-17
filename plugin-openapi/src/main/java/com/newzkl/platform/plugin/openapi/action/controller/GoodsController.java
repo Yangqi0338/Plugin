@@ -12,7 +12,7 @@ import com.newzkl.platform.base.common.ddd.facade.ApiSpuStateVO;
 import com.newzkl.platform.base.common.ddd.facade.ApiSpuVO;
 import com.newzkl.platform.base.common.ddd.facade.MarketRpcVO;
 import com.newzkl.platform.base.common.ddd.facade.SelectListApiReq;
-import com.newzkl.platform.base.common.ddd.model.enums.market.MarketTypeEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.market.MarketEnum;
 import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 import com.newzkl.platform.base.common.core.model.res.PlatformResult;
 import com.newzkl.platform.plugin.openapi.action.cmd.GoodsCmd;
@@ -21,7 +21,6 @@ import com.newzkl.platform.plugin.openapi.model.constants.Constants;
 import com.newzkl.platform.plugin.openapi.model.util.DeveloperContextUtil;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,7 +57,7 @@ public class GoodsController {
         // 黄金专区填充金价更新时间
         Object goldPriceUpdateTime = RedisUtil.get("GoldRealTimePrice::updateTime");
         page.getList().forEach(x -> {
-            if(MarketTypeEnum.GOLD_ZONE.getDesc().equals(x.getMarketType())){
+            if(MarketEnum.MarketTypeEnum.GOLD_ZONE.getDesc().equals(x.getMarketType())){
                 x.setGoldPriceUpdateTime(Objects.toString(goldPriceUpdateTime, null));
             }
         });

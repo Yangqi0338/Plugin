@@ -5,7 +5,7 @@ import com.alibaba.fastjson2.JSON;
 import com.newzkl.platform.base.common.core.model.exception.PlatformException;
 import com.newzkl.platform.base.common.core.utils.common.TransferUtils;
 import com.newzkl.platform.base.common.core.utils.generator.SnowflakeGenerator;
-import com.newzkl.platform.base.common.ddd.model.enums.RoleEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.user.RoleEnum;
 import com.newzkl.platform.plugin.audit.workflow.constant.AuditEnum;
 import com.newzkl.platform.plugin.audit.workflow.constant.AuditErrorCode;
 import com.newzkl.platform.plugin.audit.workflow.dag.NodeProcessHandler;

@@ -2,7 +2,7 @@ package com.newzkl.platform.plugin.channel.config;
 
 import com.newzkl.platform.base.common.ddd.application.spi.IdentityImpl;
 import com.newzkl.platform.base.common.ddd.application.spi.demo.IdentityConfigExt;
-import com.newzkl.platform.base.common.ddd.model.enums.RoleEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.user.RoleEnum;
 
 /**
  * 身份配置提供-渠道商实现(演示)。

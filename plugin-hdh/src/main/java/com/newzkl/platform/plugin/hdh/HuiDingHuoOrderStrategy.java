@@ -12,10 +12,9 @@ import com.newzkl.platform.base.biz.order.model.dto.SkuCountDTO;
 import com.newzkl.platform.base.biz.order.model.support.api.order.OrderSkuVO;
 import com.newzkl.platform.base.biz.order.model.vo.ShipVO;
 import com.newzkl.platform.base.common.core.model.money.Money;
-import com.newzkl.platform.base.common.ddd.facade.ThirdPartyOrderDTO;
 import com.newzkl.platform.base.common.ddd.facade.ThirdPartyOrderResult;
 import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
-import com.newzkl.platform.base.common.ddd.model.enums.order.PlatformTypeEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.order.ThirdPartyOrderEnum;
 import com.newzkl.platform.base.common.ddd.model.properties.PalletProperties;
 import com.newzkl.platform.plugin.hdh.model.req.HuiDingHuoCreateOrderReq;
 import com.newzkl.platform.plugin.hdh.model.res.HuiDingHuoCreateOrderRes;
@@ -133,6 +132,6 @@ public class HuiDingHuoOrderStrategy implements ThirdPartyOrderStrategy {
 	
 	@Override
 	public boolean supports(Object type) {
-		return PlatformTypeEnum.HUI_DING_HUO == type;
+		return ThirdPartyOrderEnum.PlatformTypeEnum.HUI_DING_HUO == type;
 	}
 }

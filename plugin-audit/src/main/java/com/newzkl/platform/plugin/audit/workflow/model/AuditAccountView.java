@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.audit.workflow.model;
 
-import com.newzkl.platform.base.common.ddd.model.enums.RoleEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.user.RoleEnum;
 import io.soabase.recordbuilder.core.RecordBuilder;
 
 /**

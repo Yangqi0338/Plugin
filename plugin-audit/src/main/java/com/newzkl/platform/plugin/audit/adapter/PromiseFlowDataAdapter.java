@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.audit.adapter;
 
-import com.newzkl.platform.base.common.ddd.model.enums.RoleEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.user.RoleEnum;
 import com.newzkl.platform.plugin.audit.port.PromiseFlowDataPort;
 import org.springframework.stereotype.Component;
 

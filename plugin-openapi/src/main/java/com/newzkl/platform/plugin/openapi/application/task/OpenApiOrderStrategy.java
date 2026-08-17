@@ -13,7 +13,7 @@ import com.newzkl.platform.base.biz.order.model.dto.SkuCountDTO;
 import com.newzkl.platform.base.biz.order.model.support.api.order.OrderSkuVO;
 import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.ddd.facade.ThirdPartyOrderResult;
-import com.newzkl.platform.base.common.ddd.model.enums.order.PlatformTypeEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.order.ThirdPartyOrderEnum;
 import com.newzkl.platform.plugin.openapi.model.constants.NotifyContants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -120,6 +120,6 @@ public class OpenApiOrderStrategy implements ThirdPartyOrderStrategy {
 	
 	@Override
 	public boolean supports(Object type) {
-		return PlatformTypeEnum.LE_TAI == type;
+		return ThirdPartyOrderEnum.PlatformTypeEnum.LE_TAI == type;
 	}
 }

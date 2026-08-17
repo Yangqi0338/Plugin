@@ -13,7 +13,7 @@ import com.newzkl.platform.base.common.core.mq.infrastructure.consumer.AbstractM
 import com.newzkl.platform.base.common.core.mq.model.constant.MQ;
 import com.newzkl.platform.base.common.core.mq.model.notify.NotifyEventMq;
 import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
-import com.newzkl.platform.base.common.ddd.model.enums.order.PlatformTypeEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.order.ThirdPartyOrderEnum;
 import com.newzkl.platform.plugin.openapi.domain.repository.IDeveloperRepository;
 import com.newzkl.platform.plugin.openapi.model.constants.NotifyContants;
 import com.newzkl.platform.plugin.openapi.model.vo.DeveloperRes;
@@ -80,12 +80,12 @@ public class DeveloperNotifyConsumer extends AbstractMessageMQPushConsumer<Notif
             if (isNotificationSuccess(responseBody, httpStatus)) {
                 log.info("开发者通知成功 url={} appId={} status={}", url, appId, httpStatus);
             } else {
-                thirdPartyOrderDomain.recordAction(PlatformTypeEnum.LE_TAI, appId, INTERFACE_NOTIFY, null,
+                thirdPartyOrderDomain.recordAction(ThirdPartyOrderEnum.PlatformTypeEnum.LE_TAI, appId, INTERFACE_NOTIFY, null,
                         requestBody, responseBody, CommonEnum.RequestStatusEnum.FAILED, "通知失败");
                 log.error("开发者通知失败 url={} appId={} status={} resp={}", url, appId, httpStatus, responseBody);
             }
         } catch (HttpException e) {
-            thirdPartyOrderDomain.recordAction(PlatformTypeEnum.LE_TAI, appId, INTERFACE_NOTIFY, null,
+            thirdPartyOrderDomain.recordAction(ThirdPartyOrderEnum.PlatformTypeEnum.LE_TAI, appId, INTERFACE_NOTIFY, null,
                     requestBody, "接口响应异常--调用失败", CommonEnum.RequestStatusEnum.FAILED, "通知失败");
             log.error("开发者通知异常 url={} appId={}", url, appId, e);
         }
