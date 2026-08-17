@@ -1,4 +1,4 @@
-package com.newzkl.platform.plugin.bi.action.admin;
+package com.newzkl.platform.plugin.bi.action.controller;
 
 import com.newzkl.platform.base.common.core.model.res.PlatformResult;
 import com.newzkl.platform.plugin.bi.application.BiApplicationService;

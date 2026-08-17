@@ -17,7 +17,7 @@ import java.util.Map;
  * <p>消费 {@code REFUND_PASS}, 写 TodoDO(售后中+1)。</p>
  */
 @Slf4j
-@MQConsumer(consumerGroup = MQ.Tag.REFUND_PASS_MESSAGE, tag = MQ.Tag.REFUND_PASS)
+@MQConsumer(consumerGroup = MQ.Tag.REFUND_PASS_BI_MESSAGE, tag = MQ.Tag.REFUND_PASS)
 public class RefundPassBiConsumer extends AbstractMessageMQPushConsumer<BiRefundPassEvent> {
 
     @Autowired

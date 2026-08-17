@@ -18,7 +18,7 @@ import java.util.Map;
  * 与商品订单支付({@code GOODS_ORDER_PAY_SUCCESS})区分: 本消费者统计与商品购买无关的全量支付。</p>
  */
 @Slf4j
-@MQConsumer(consumerGroup = MQ.Tag.PAYMENT_PAY_SUCCESS_MESSAGE, tag = MQ.Tag.PAYMENT_PAY_SUCCESS)
+@MQConsumer(consumerGroup = MQ.Tag.PAYMENT_PAY_SUCCESS_BI_MESSAGE, tag = MQ.Tag.PAYMENT_PAY_SUCCESS)
 public class PaySuccessBiConsumer extends AbstractMessageMQPushConsumer<BiPaySuccessEvent> {
 
     @Autowired
