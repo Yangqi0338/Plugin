@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * 平台BI控制器(所有统计接口归口)
+ * 平台BI控制器
  *
  * <p>按身份端分组: /bi/admin/* = 平台身份, /bi/supplier/* = 供应商身份(后续)。
  * 所有接口走 {@link BiApplicationService} 编排, 不直接调 Domain/DAO。</p>
