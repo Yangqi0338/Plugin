@@ -3,7 +3,7 @@ package com.newzkl.platform.plugin.bi.infrastructure.entity.fact;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.core.mybatis.entity.BaseDO;
-import com.newzkl.platform.plugin.bi.domain.constant.BiEventType;
+import com.newzkl.platform.plugin.bi.model.enums.BiEventType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

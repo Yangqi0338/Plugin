@@ -1,63 +1,15 @@
 package com.newzkl.platform.plugin.bi.domain.service;
 
-import cn.hutool.core.collection.CollUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.newzkl.platform.base.common.core.utils.common.TransferUtils;
-import com.newzkl.platform.base.common.ddd.infrastructure.mybatis.model.BizCountMap;
-import com.newzkl.platform.plugin.bi.domain.repository.StatRealtimeRepository;
-import com.newzkl.platform.plugin.bi.infrastructure.entity.channel.ChannelHomeDO;
-import com.newzkl.platform.plugin.bi.infrastructure.entity.channel.ChannelWeekTradeDO;
 import com.newzkl.platform.plugin.bi.model.query.ChannelHomeQuery;
-import com.newzkl.platform.plugin.bi.model.res.ChannelHomeRes;
-import com.newzkl.platform.plugin.bi.model.res.ChannelWeekTradeItemRes;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.newzkl.platform.plugin.bi.model.res.channel.HomeOverviewRes;
+import com.newzkl.platform.plugin.bi.model.res.channel.WeekTradeItemRes;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 渠道商侧(channel)统计领域服务
- *
- * <p>按 client 维度划分: 本类只负责 {@code channel} 端宽表的维度查询。</p>
- */
-@Service
-@RequiredArgsConstructor
-public class ChannelStatDomain {
-
-    private final StatRealtimeRepository realtimeRepo;
-
-    /** 渠道商 HOME 总览(实时 SUM) */
-    public ChannelHomeRes home(ChannelHomeQuery query) {
-        query.addSumField("month_order_amount", "month_order_count", "today_order_count",
-                "purchase_balance", "seat_total", "seat_used");
-        BizCountMap countMap = realtimeRepo.sum(ChannelHomeDO.class, new LambdaQueryWrapper<>(), query);
-        ChannelHomeRes res = new ChannelHomeRes();
-        if (countMap != null) {
-            ChannelHomeDO d = CollUtil.getFirst(countMap.camelKeyCountMap().toList(ChannelHomeDO.class));
-            TransferUtils.transfer(res, d);
-        }
-        // TODO: 环比(orderAmountMomRatio)需日表对比, 待日归档后计算
-        return res;
-    }
-
-    /** 渠道商本周交易走势(按星期) */
-    public List<ChannelWeekTradeItemRes> weekTrade(ChannelHomeQuery query) {
-        query.addField("week_day");
-        query.addSumField("amount");
-        query.addGroupField("week_day");
-        query.initSortField("week_day", false);
-        BizCountMap countMap = realtimeRepo.sum(ChannelWeekTradeDO.class, new LambdaQueryWrapper<>(), query);
-        List<ChannelWeekTradeItemRes> list = new ArrayList<>();
-        if (countMap != null) {
-            List<ChannelWeekTradeDO> rows = countMap.camelKeyCountMap().toList(ChannelWeekTradeDO.class);
-            for (ChannelWeekTradeDO row : rows) {
-                ChannelWeekTradeItemRes item = new ChannelWeekTradeItemRes();
-                item.setWeekDay(row.getWeekDay());
-                item.setAmount(row.getAmount());
-                list.add(item);
-            }
-        }
-        return list;
-    }
+public interface ChannelStatDomain {
+	/** 渠道商 HOME 总览(实时 SUM) */
+	HomeOverviewRes home(ChannelHomeQuery query);
+	
+	/** 渠道商本周交易走势(按星期) */
+	List<WeekTradeItemRes> weekTrade(ChannelHomeQuery query);
 }

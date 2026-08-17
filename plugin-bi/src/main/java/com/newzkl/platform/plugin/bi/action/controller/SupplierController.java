@@ -1,9 +1,9 @@
 package com.newzkl.platform.plugin.bi.action.controller;
 
 import com.newzkl.platform.base.common.core.model.res.PlatformResult;
-import com.newzkl.platform.plugin.bi.application.BiApplicationService;
-import com.newzkl.platform.plugin.bi.model.res.SupplierHomeRes;
-import com.newzkl.platform.plugin.bi.model.res.SupplierSettleTrendItemRes;
+import com.newzkl.platform.plugin.bi.application.service.SupplierService;
+import com.newzkl.platform.plugin.bi.model.res.supplier.HomeOverviewRes;
+import com.newzkl.platform.plugin.bi.model.res.supplier.SettleTrendItemRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,17 +19,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SupplierController {
 
-    private final BiApplicationService biAppService;
+    private final SupplierService biAppService;
 
     /** 供应商 HOME 总览 */
     @PostMapping("/home")
-    public PlatformResult<SupplierHomeRes> home() {
+    public PlatformResult<HomeOverviewRes> home() {
         return PlatformResult.success(biAppService.supplierHome());
     }
 
     /** 供应商供货结算趋势(万元) */
     @PostMapping("/settleTrend")
-    public PlatformResult<List<SupplierSettleTrendItemRes>> settleTrend() {
+    public PlatformResult<List<SettleTrendItemRes>> settleTrend() {
         return PlatformResult.success(biAppService.supplierSettleTrend());
     }
 }

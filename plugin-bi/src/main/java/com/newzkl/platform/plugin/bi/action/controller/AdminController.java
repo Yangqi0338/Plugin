@@ -1,8 +1,23 @@
 package com.newzkl.platform.plugin.bi.action.controller;
 
 import com.newzkl.platform.base.common.core.model.res.PlatformResult;
-import com.newzkl.platform.plugin.bi.application.BiApplicationService;
-import com.newzkl.platform.plugin.bi.model.res.*;
+import com.newzkl.platform.plugin.bi.application.service.AdminService;
+import com.newzkl.platform.plugin.bi.model.res.admin.EvidenceOverviewRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.FinanceOverviewRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.HomeChannelRevenueRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.HomeOverviewRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.HomeTodoRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.HomeTrendItemRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.InsightMonthGmvRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.MemberOverviewRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.PaymentOverviewRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.ProductCategoryRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.ProductStatusRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.ProductSummaryRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.RankGoodsRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.RankStoreRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.StoreOverviewRes;
+import com.newzkl.platform.plugin.bi.model.res.admin.SupplierOverviewRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,16 +27,13 @@ import java.util.List;
 
 /**
  * 平台BI控制器
- *
- * <p>按身份端分组: /bi/admin/* = 平台身份, /bi/supplier/* = 供应商身份(后续)。
- * 所有接口走 {@link BiApplicationService} 编排, 不直接调 Domain/DAO。</p>
  */
 @RestController("biAdminController")
 @RequestMapping("/bi/admin")
 @RequiredArgsConstructor
 public class AdminController {
 
-    private final BiApplicationService biAppService;
+    private final AdminService biAppService;
 
     // ==================== 首页工作台 ====================
 
