@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "bi")
+@ConfigurationProperties(prefix = "platform.bi")
 public class BiProperties {
 
     /** 库存紧张阈值(当前库存/总库存 <= 此比例视为紧张), 默认 10% */

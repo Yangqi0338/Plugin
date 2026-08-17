@@ -18,7 +18,7 @@ import java.util.Map;
  * TradeDO(交易额/订单量) + TodoDO(待付款-1/待发货+1) + 商品/店铺排行 + CorrelationDO。</p>
  */
 @Slf4j
-@MQConsumer(consumerGroup = MQ.Tag.GOODS_ORDER_PAY_SUCCESS_MESSAGE, tag = MQ.Tag.GOODS_ORDER_PAY_SUCCESS)
+@MQConsumer(consumerGroup = MQ.Tag.GOODS_ORDER_PAY_SUCCESS_BI_MESSAGE, tag = MQ.Tag.GOODS_ORDER_PAY_SUCCESS)
 public class GoodsPaySuccessBiConsumer extends AbstractMessageMQPushConsumer<BiGoodsPaySuccessEvent> {
 
     @Autowired

@@ -98,68 +98,6 @@ public class BiEventWriteService {
         log.info("退款通过: 金额 {}, 售后中+1", refundAmount);
     }
 
-    // ==================== 模拟事件(BiTriggerConsumer 分发) ====================
-
-    /** 会员注册: MemberSummaryDO.memberCount+1 */
-    public void onMemberRegister(CommonEnum.Client client, Long memberId, String level) {
-        MemberSummaryDO member = new MemberSummaryDO();
-        fillBase(member, client, memberId, BiEventType.MEMBER_REGISTER);
-        member.setMemberCount(1);
-        realtimeRepo.insert(member);
-    }
-
-    /** 上链存证: OverviewDO.evidenceCount+1 + TradeDO.onChainCount+1 */
-    public void onEvidenceOnChain(CommonEnum.Client client, Long evidenceId, Long userId) {
-        OverviewDO overview = new OverviewDO();
-        fillBase(overview, client, userId, BiEventType.EVIDENCE_ON_CHAIN);
-        overview.setEvidenceCount(1);
-        realtimeRepo.insert(overview);
-
-        TradeDO trade = new TradeDO();
-        fillBase(trade, client, userId, BiEventType.EVIDENCE_ON_CHAIN);
-        trade.setOnChainCount(1);
-        realtimeRepo.insert(trade);
-    }
-
-    /** 库存变更: TodoDO.stockWarnDelta/soldOutDelta(按 amount 表示库存比例, level 存状态) */
-    public void onInventoryChange(CommonEnum.Client client, Long goodsId, Long storeId, BigDecimal stockRatio, String status) {
-        TodoDO todo = new TodoDO();
-        fillBase(todo, client, null, BiEventType.INVENTORY_CHANGE);
-        if ("SOLD_OUT".equals(status)) {
-            todo.setSoldOutDelta(1);
-        } else if ("WARN".equals(status)) {
-            todo.setStockWarnDelta(1);
-        }
-        realtimeRepo.insert(todo);
-    }
-
-    /** 商品状态: GoodsStatusDO.onShelfCount/offShelfCount(审核态待扩展) */
-    public void onGoodsStatus(CommonEnum.Client client, String status) {
-        GoodsStatusDO goods = new GoodsStatusDO();
-        fillBase(goods, client, null, BiEventType.GOODS_ONLINE);
-        if ("ON_SHELF".equals(status)) {
-            goods.setOnShelfCount(1);
-        } else if ("OFF_SHELF".equals(status)) {
-            goods.setOffShelfCount(1);
-        }
-        realtimeRepo.insert(goods);
-    }
-
-    /** 订单创建: TodoDO.waitPayDelta+1 */
-    public void onOrderCreate(CommonEnum.Client client, Long userId) {
-        TodoDO todo = new TodoDO();
-        fillBase(todo, client, userId, BiEventType.ORDER_CREATE);
-        todo.setWaitPayDelta(1);
-        realtimeRepo.insert(todo);
-    }
-
-    /** 订单支付(回查金额): 调 onGoodsPaySuccess, 金额由回查填充 */
-    public void onOrderPay(CommonEnum.Client client, Long orderId) {
-        // TODO: 回查订单金额(orderId -> amount), 待 Base 提供订单查询端口
-        log.warn("订单支付回查待接入, orderId: {}", orderId);
-        // onGoodsPaySuccess(client, null, null, null, amount);
-    }
-
     // ==================== 私有 ====================
 
     private void fillBase(BIBaseDO entity, CommonEnum.Client client, Long userId, BiEventType eventType) {
