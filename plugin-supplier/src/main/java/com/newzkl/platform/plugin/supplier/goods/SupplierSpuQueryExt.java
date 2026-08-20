@@ -16,13 +16,9 @@ import lombok.RequiredArgsConstructor;
  *
  * @author KC
  */
-@IdentityImpl(AccountEnum.Identity.SUPPLIER)
+@IdentityImpl(identities = {AccountEnum.Identity.SUPPLIER})
 @RequiredArgsConstructor
 public class SupplierSpuQueryExt implements SpuQueryExt {
-
-    static {
-        assert AccountEnum.Identity.SUPPLIER.getCode() == 1001L : "CompanyRole SUPPLIER code 漂移";
-    }
 
     private final GoodsQueryService goodsQueryService;
 

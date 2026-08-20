@@ -16,13 +16,9 @@ import lombok.RequiredArgsConstructor;
  *
  * @author KC
  */
-@IdentityImpl(AccountEnum.Identity.CHANNEL)
+@IdentityImpl(identities = {AccountEnum.Identity.CHANNEL})
 @RequiredArgsConstructor
 public class ChannelSpuQueryExt implements SpuQueryExt {
-
-    static {
-        assert AccountEnum.Identity.CHANNEL.getCode() == 1002L : "CompanyRole CHANNEL code 漂移";
-    }
 
     private final GoodsQueryService goodsQueryService;
 

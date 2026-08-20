@@ -11,7 +11,7 @@ import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
  *
  * @author KC
  */
-@IdentityImpl(AccountEnum.Identity.SUPPLIER)
+@IdentityImpl(identities = {AccountEnum.Identity.SUPPLIER})
 public class SupplierConfigProvider implements IdentityConfigExt {
 
     @Override

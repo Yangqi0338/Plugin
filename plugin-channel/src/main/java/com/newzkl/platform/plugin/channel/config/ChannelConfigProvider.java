@@ -11,7 +11,7 @@ import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
  *
  * @author KC
  */
-@IdentityImpl(AccountEnum.Identity.CHANNEL)
+@IdentityImpl(identities = {AccountEnum.Identity.CHANNEL})
 public class ChannelConfigProvider implements IdentityConfigExt {
 
     @Override

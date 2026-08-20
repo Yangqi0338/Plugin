@@ -65,27 +65,11 @@
         </dependency>
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-notify-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-notify-infrastructure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>biz-order-action</artifactId>
         </dependency>
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>biz-order-infrastructure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-social-bang-action</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.newzkl.platform.Base</groupId>
-            <artifactId>biz-social-bang-infrastructure</artifactId>
         </dependency>
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>

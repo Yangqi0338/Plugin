@@ -66,7 +66,7 @@ public class ModelShopServiceImpl implements ModelShopService {
         if (targetModelShop == null) {
             throw new IllegalArgumentException("样板店不存在: " + targetStyleCode);
         }
-        modelShopDomain.updateUseStoreNum(targetStyleCode, 1);
+//        modelShopDomain.updateUseStoreNum(targetStyleCode, 1);
         modelShopDomain.updateTotalUseStoreNum(store.getId(), targetModelShop.getId());
         store.setModelShopId(targetModelShop.getId());
         StoreStyle oneselfStyle = storeStyleDomain.getOneselfStyle(targetStyleCode);
@@ -97,9 +97,9 @@ public class ModelShopServiceImpl implements ModelShopService {
     private void disposeOldModelShop(Store store) {
         if (store.getModelShopId() != null && store.getStyleCode() != null) {
             ModelShopDTO modelShop = modelShopDomain.queryById(store.getModelShopId());
-            if (modelShop != null) {
-                modelShopDomain.updateUseStoreNum(modelShop.getStyleCode(), -1);
-            }
+//            if (modelShop != null) {
+//                modelShopDomain.updateUseStoreNum(modelShop.getStyleCode(), -1);
+//            }
             storeStyleDomain.deleteCopyStyle(store.getStyleCode());
         }
     }

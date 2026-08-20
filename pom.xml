@@ -90,11 +90,6 @@
             </dependency>
             <dependency>
                 <groupId>com.newzkl.platform</groupId>
-                <artifactId>plugin-gateway</artifactId>
-                <version>${plugin.revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.newzkl.platform</groupId>
                 <artifactId>plugin-hdh</artifactId>
                 <version>${plugin.revision}</version>
             </dependency>
