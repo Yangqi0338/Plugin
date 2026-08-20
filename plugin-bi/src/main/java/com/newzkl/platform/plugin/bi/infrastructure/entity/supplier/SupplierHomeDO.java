@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.bi.infrastructure.entity.supplier;
 
-import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import com.newzkl.platform.plugin.bi.model.annotation.BITableName;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.BIBaseDO;
 import lombok.Data;
@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@BITableName(client = CommonEnum.Client.SUPPLIER)
+@BITableName(client = AccountEnum.Client.SUPPLIER)
 public class SupplierHomeDO extends BIBaseDO {
 
     /** 在架供货SKU */

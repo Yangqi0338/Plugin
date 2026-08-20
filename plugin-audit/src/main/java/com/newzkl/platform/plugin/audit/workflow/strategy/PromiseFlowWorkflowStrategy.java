@@ -2,7 +2,7 @@ package com.newzkl.platform.plugin.audit.workflow.strategy;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.newzkl.platform.base.common.ddd.model.enums.user.RoleEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import com.newzkl.platform.plugin.audit.port.AuditEventPublishPort;
 import com.newzkl.platform.plugin.audit.port.PromiseFlowDataPort;
 import com.newzkl.platform.plugin.audit.workflow.constant.AuditEnum;
@@ -58,7 +58,7 @@ public class PromiseFlowWorkflowStrategy extends WorkflowStrategy<String> {
     }
 
     @Override
-    public Object pageJson(Long accountId, RoleEnum.CompanyRole role, String pageQuery) {
+    public Object pageJson(Long accountId, AccountEnum.Identity identity, String pageQuery) {
         return promiseFlowDataPort.pageJson(pageQuery);
     }
 
@@ -70,8 +70,8 @@ public class PromiseFlowWorkflowStrategy extends WorkflowStrategy<String> {
     }
 
     @Override
-    protected List<Long> getOldFlowIdList(Long flowId, Long accountId, RoleEnum.CompanyRole role, String dataVO) {
-        return promiseFlowDataPort.oldFlowIds(accountId, role);
+    protected List<Long> getOldFlowIdList(Long flowId, Long accountId, AccountEnum.Identity identity, String dataVO) {
+        return promiseFlowDataPort.oldFlowIds(accountId, identity);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.newzkl.platform.plugin.bi.infrastructure.entity.fact;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.core.mybatis.entity.BaseDO;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import com.newzkl.platform.plugin.bi.model.enums.BiEventType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,7 +21,7 @@ public class FactGoodsDO extends BaseDO {
 
     /** 所属端
      */
-    private CommonEnum.Client client;
+    private AccountEnum.Client client;
 
     /** 门店
      */

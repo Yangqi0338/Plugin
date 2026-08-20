@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.bi.model.annotation;
 
-import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -22,6 +22,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface BITableName {
 
-    /** 统计所属端(平台/供应商/渠道商等), 由 {@link CommonEnum.Client} 决定宽表归属 */
-    CommonEnum.Client client();
+    /** 统计所属端(平台/供应商/渠道商等), 由 {@link AccountEnum.Client} 决定宽表归属 */
+    AccountEnum.Client client();
 }

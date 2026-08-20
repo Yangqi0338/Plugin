@@ -133,6 +133,6 @@ public class AuditController {
      */
     private Object pageByType(Long templateType, String pageQuery) {
         AuditAccountView account = adminAccountPort.currentAccount();
-        return workflowFactory.getPolicy(templateType).pageJson(account.accountId(), account.role(), pageQuery);
+        return workflowFactory.getPolicy(templateType).pageJson(account.accountId(), account.identity(), pageQuery);
     }
 }

@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.bi.domain.service.impl;
 
-import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import com.newzkl.platform.plugin.bi.domain.service.AdminEventDomain;
 import com.newzkl.platform.plugin.bi.model.enums.BiEventType;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.BIBaseDO;
@@ -38,7 +38,7 @@ public class AdminEventDomainImpl implements AdminEventDomain {
 
     /** 支付成功(任何支付): OverviewDO.gmv/payOrderCount + PaymentSummaryDO.payAmount */
     @Override
-    public void onPaySuccess(CommonEnum.Client client, Long userId, BigDecimal amount) {
+    public void onPaySuccess(AccountEnum.Client client, Long userId, BigDecimal amount) {
         OverviewDO overview = new OverviewDO();
         fillBase(overview, client, userId, BiEventType.ORDER_PAY);
         overview.setGmv(amount);
@@ -53,7 +53,7 @@ public class AdminEventDomainImpl implements AdminEventDomain {
 
     /** 商品订单支付成功: TradeDO + TodoDO + 排行 + CorrelationDO */
     @Override
-    public void onGoodsPaySuccess(CommonEnum.Client client, Long userId, Long storeId, Long goodsId, BigDecimal amount) {
+    public void onGoodsPaySuccess(AccountEnum.Client client, Long userId, Long storeId, Long goodsId, BigDecimal amount) {
         TradeDO trade = new TradeDO();
         fillBase(trade, client, userId, BiEventType.ORDER_PAY);
         trade.setAmount(amount);
@@ -93,7 +93,7 @@ public class AdminEventDomainImpl implements AdminEventDomain {
 
     /** 退款通过: TodoDO(售后中+1) */
     @Override
-    public void onRefundPass(CommonEnum.Client client, Long userId, BigDecimal refundAmount) {
+    public void onRefundPass(AccountEnum.Client client, Long userId, BigDecimal refundAmount) {
         TodoDO todo = new TodoDO();
         fillBase(todo, client, userId, BiEventType.ORDER_REFUND);
         todo.setRefundingDelta(1);
@@ -105,7 +105,7 @@ public class AdminEventDomainImpl implements AdminEventDomain {
 
     /** 会员注册: MemberSummaryDO.memberCount+1 */
     @Override
-    public void onMemberRegister(CommonEnum.Client client, Long memberId, String level) {
+    public void onMemberRegister(AccountEnum.Client client, Long memberId, String level) {
         MemberSummaryDO member = new MemberSummaryDO();
         fillBase(member, client, memberId, BiEventType.MEMBER_REGISTER);
         member.setMemberCount(1);
@@ -115,7 +115,7 @@ public class AdminEventDomainImpl implements AdminEventDomain {
 
     /** 上链存证: OverviewDO.evidenceCount+1 + TradeDO.onChainCount+1 */
     @Override
-    public void onEvidenceOnChain(CommonEnum.Client client, Long evidenceId, Long userId) {
+    public void onEvidenceOnChain(AccountEnum.Client client, Long evidenceId, Long userId) {
         OverviewDO overview = new OverviewDO();
         fillBase(overview, client, userId, BiEventType.EVIDENCE_ON_CHAIN);
         overview.setEvidenceCount(1);
@@ -130,7 +130,7 @@ public class AdminEventDomainImpl implements AdminEventDomain {
 
     /** 库存变更: TodoDO.stockWarnDelta/soldOutDelta(阈值 BiProperties.stockWarnRatio) */
     @Override
-    public void onInventoryChange(CommonEnum.Client client, Long goodsId, Long storeId, String status) {
+    public void onInventoryChange(AccountEnum.Client client, Long goodsId, Long storeId, String status) {
         TodoDO todo = new TodoDO();
         fillBase(todo, client, null, BiEventType.INVENTORY_CHANGE);
         if ("SOLD_OUT".equals(status)) {
@@ -144,7 +144,7 @@ public class AdminEventDomainImpl implements AdminEventDomain {
 
     /** 商品状态变更: GoodsStatusDO.onShelfCount/offShelfCount */
     @Override
-    public void onGoodsStatus(CommonEnum.Client client, Long goodsId, String status) {
+    public void onGoodsStatus(AccountEnum.Client client, Long goodsId, String status) {
         GoodsStatusDO goods = new GoodsStatusDO();
         fillBase(goods, client, null, BiEventType.GOODS_ONLINE);
         if ("ON_SHELF".equals(status)) {
@@ -158,7 +158,7 @@ public class AdminEventDomainImpl implements AdminEventDomain {
 
     // ==================== 私有 ====================
 
-    private void fillBase(BIBaseDO entity, CommonEnum.Client client, Long userId, BiEventType eventType) {
+    private void fillBase(BIBaseDO entity, AccountEnum.Client client, Long userId, BiEventType eventType) {
         entity.setClient(client);
         entity.setUserId(userId);
         entity.setEventType(eventType);

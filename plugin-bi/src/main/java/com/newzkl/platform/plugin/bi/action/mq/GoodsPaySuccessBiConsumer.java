@@ -1,11 +1,10 @@
 package com.newzkl.platform.plugin.bi.action.mq;
 
-import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.core.mq.infrastructure.annotation.MQConsumer;
 import com.newzkl.platform.base.common.core.mq.infrastructure.consumer.AbstractMessageMQPushConsumer;
 import com.newzkl.platform.base.common.core.mq.model.constant.MQ;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import com.newzkl.platform.plugin.bi.domain.service.AdminEventDomain;
-import com.newzkl.platform.plugin.bi.domain.service.impl.AdminEventDomainImpl;
 import com.newzkl.platform.plugin.bi.model.event.BiGoodsPaySuccessEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class GoodsPaySuccessBiConsumer extends AbstractMessageMQPushConsumer<BiG
     @Override
     public void remoteProcess(BiGoodsPaySuccessEvent message, Map<String, Object> extMap) {
         log.info("BI 商品订单支付成功消费, orderId: {}", message.getOrderId());
-        adminEventDomain.onGoodsPaySuccess(CommonEnum.Client.ADMIN,
+        adminEventDomain.onGoodsPaySuccess(AccountEnum.Client.ADMIN,
                 message.getUserId(), message.getStoreId(), message.getGoodsId(), message.getAmount());
     }
 }

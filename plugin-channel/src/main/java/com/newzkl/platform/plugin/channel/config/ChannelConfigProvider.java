@@ -2,7 +2,7 @@ package com.newzkl.platform.plugin.channel.config;
 
 import com.newzkl.platform.base.common.ddd.application.spi.IdentityImpl;
 import com.newzkl.platform.base.common.ddd.application.spi.demo.IdentityConfigExt;
-import com.newzkl.platform.base.common.ddd.model.enums.user.RoleEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 
 /**
  * 身份配置提供-渠道商实现(演示)。
@@ -11,7 +11,7 @@ import com.newzkl.platform.base.common.ddd.model.enums.user.RoleEnum;
  *
  * @author KC
  */
-@IdentityImpl(RoleEnum.CompanyRole.CHANNEL)
+@IdentityImpl(AccountEnum.Identity.CHANNEL)
 public class ChannelConfigProvider implements IdentityConfigExt {
 
     @Override

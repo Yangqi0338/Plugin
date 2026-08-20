@@ -1,7 +1,7 @@
 package com.newzkl.platform.plugin.bi.infrastructure.entity;
 
-import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.core.mybatis.entity.BaseIdDO;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import com.newzkl.platform.plugin.bi.model.enums.BiEventType;
 import com.newzkl.platform.plugin.bi.model.annotation.BITableName;
 import lombok.Data;
@@ -22,7 +22,7 @@ public abstract class BIBaseDO extends BaseIdDO {
 
     /** 统计所属端
      */
-    private CommonEnum.Client client;
+    private AccountEnum.Client client;
 
     /** 用户ID(如果统计到用户粒度)
      */

@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.bi.infrastructure.entity.admin;
 
-import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import com.newzkl.platform.plugin.bi.model.annotation.BITableName;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.BIBaseDO;
 import lombok.Data;
@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@BITableName(client = CommonEnum.Client.ADMIN)
+@BITableName(client = AccountEnum.Client.ADMIN)
 public class CorrelationDO extends BIBaseDO {
 
     /** 交易额(元) */

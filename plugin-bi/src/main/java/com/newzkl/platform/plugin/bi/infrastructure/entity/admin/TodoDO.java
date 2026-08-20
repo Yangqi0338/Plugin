@@ -1,6 +1,6 @@
 package com.newzkl.platform.plugin.bi.infrastructure.entity.admin;
 
-import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import com.newzkl.platform.plugin.bi.model.annotation.BITableName;
 import com.newzkl.platform.plugin.bi.infrastructure.entity.BIBaseDO;
 import lombok.Data;
@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@BITableName(client = CommonEnum.Client.ADMIN)
+@BITableName(client = AccountEnum.Client.ADMIN)
 public class TodoDO extends BIBaseDO {
 
     /** 等待付款(下单+1, 支付-1)

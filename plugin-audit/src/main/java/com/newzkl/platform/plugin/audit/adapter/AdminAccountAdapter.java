@@ -2,7 +2,7 @@ package com.newzkl.platform.plugin.audit.adapter;
 
 import com.newzkl.platform.base.biz.account.domain.service.AccountDomain;
 import com.newzkl.platform.base.biz.account.model.vo.AccountVO;
-import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import com.newzkl.platform.base.common.ddd.utils.auth.SecurityUtils;
 import com.newzkl.platform.plugin.audit.port.AdminAccountPort;
 import com.newzkl.platform.plugin.audit.workflow.model.AuditAccountView;
@@ -27,12 +27,12 @@ public class AdminAccountAdapter implements AdminAccountPort {
 
     @Override
     public AuditAccountView currentAccount() {
-        return new AuditAccountView(SecurityUtils.getAccountId(), SecurityUtils.getUsername(), SecurityUtils.getRole());
+        return new AuditAccountView(SecurityUtils.getAccountId(), SecurityUtils.getUsername(), SecurityUtils.getIdentity());
     }
 
     @Override
     public AuditAccountView byId(Long accountId) {
-        AccountVO res = accountDomain.account(CommonEnum.Client.ADMIN, accountId);
+        AccountVO res = accountDomain.account(AccountEnum.Client.ADMIN, accountId);
         if (res == null) {
             return null;
         }

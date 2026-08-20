@@ -2,7 +2,7 @@ package com.newzkl.platform.plugin.channel.goods;
 
 import com.newzkl.platform.base.biz.goods.application.goods.service.goods.GoodsQueryService;
 import com.newzkl.platform.base.biz.goods.application.goods.ext.SpuQueryExt;
-import com.newzkl.platform.base.common.ddd.model.enums.user.RoleEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import com.newzkl.platform.base.biz.goods.model.goods.vo.spu.SpuVO;
 import com.newzkl.platform.base.common.ddd.application.spi.IdentityImpl;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +16,12 @@ import lombok.RequiredArgsConstructor;
  *
  * @author KC
  */
-@IdentityImpl(RoleEnum.CompanyRole.CHANNEL)
+@IdentityImpl(AccountEnum.Identity.CHANNEL)
 @RequiredArgsConstructor
 public class ChannelSpuQueryExt implements SpuQueryExt {
 
     static {
-        assert RoleEnum.CompanyRole.CHANNEL.getCode() == 1002L : "CompanyRole CHANNEL code 漂移";
+        assert AccountEnum.Identity.CHANNEL.getCode() == 1002L : "CompanyRole CHANNEL code 漂移";
     }
 
     private final GoodsQueryService goodsQueryService;

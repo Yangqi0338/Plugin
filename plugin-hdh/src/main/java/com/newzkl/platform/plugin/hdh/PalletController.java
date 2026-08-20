@@ -3,9 +3,9 @@ package com.newzkl.platform.plugin.hdh;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.base.biz.goods.model.biz.vo.CategoryLayerVO;
 import com.newzkl.platform.base.biz.goods.model.goods.vo.spu.SpuVO;
-import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.core.model.res.PlatformResult;
 import com.newzkl.platform.base.common.ddd.action.auth.RoleLimit;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +41,7 @@ public class PalletController {
      * @param spuQuery 查询条件
      * @return SPU 分页
      */
-    @RoleLimit(client = CommonEnum.Client.ADMIN)
+    @RoleLimit(client = AccountEnum.Client.ADMIN)
     @PostMapping("/spu/palletSpuPage")
     public PlatformResult<Page<SpuVO>> palletSpuPage(@RequestBody @Validated com.newzkl.platform.plugin.hdh.model.PalletSpuQuery spuQuery) {
         return PlatformResult.success(palletGoodsService.palletSpuPage(spuQuery));
@@ -53,7 +53,7 @@ public class PalletController {
      * @param spuQuery 查询条件 (需 outSpuId)
      * @return SPU 详情
      */
-    @RoleLimit(client = CommonEnum.Client.ADMIN)
+    @RoleLimit(client = AccountEnum.Client.ADMIN)
     @PostMapping("/spu/palletSpu")
     public PlatformResult<SpuVO> palletSpu(@RequestBody com.newzkl.platform.plugin.hdh.model.PalletSpuQuery spuQuery) {
         return PlatformResult.success(palletGoodsService.palletSpuDetail(spuQuery));
@@ -65,7 +65,7 @@ public class PalletController {
      * @param categoryQuery 查询条件
      * @return 分类树
      */
-    @RoleLimit(client = CommonEnum.Client.ADMIN)
+    @RoleLimit(client = AccountEnum.Client.ADMIN)
     @PostMapping("/category/palletCategoryList")
     public PlatformResult<List<CategoryLayerVO>> palletCategoryList(@RequestBody @Validated com.newzkl.platform.plugin.hdh.model.PalletCategoryQuery categoryQuery) {
         return PlatformResult.success(palletGoodsService.palletCategoryList(categoryQuery));

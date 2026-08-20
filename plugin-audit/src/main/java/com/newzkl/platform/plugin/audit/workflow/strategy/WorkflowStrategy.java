@@ -5,7 +5,7 @@ import com.alibaba.fastjson2.JSON;
 import com.newzkl.platform.base.common.core.model.exception.PlatformException;
 import com.newzkl.platform.base.common.core.utils.common.TransferUtils;
 import com.newzkl.platform.base.common.core.utils.generator.SnowflakeGenerator;
-import com.newzkl.platform.base.common.ddd.model.enums.user.RoleEnum;
+import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import com.newzkl.platform.plugin.audit.workflow.constant.AuditEnum;
 import com.newzkl.platform.plugin.audit.workflow.constant.AuditErrorCode;
 import com.newzkl.platform.plugin.audit.workflow.dag.NodeProcessHandler;
@@ -63,7 +63,7 @@ public abstract class WorkflowStrategy<T> {
                 .id(SnowflakeGenerator.getSnowflakeId())
                 .accountId(account.accountId())
                 .username(account.username())
-                .role(account.role())
+                .identity(account.identity())
                 .templateId(templateId)
                 .state(AuditEnum.State.AUDITING.getCode())
                 .currentCode("start")
@@ -72,7 +72,7 @@ public abstract class WorkflowStrategy<T> {
                 .contextParams(getContextParams(dataVO))
                 .build();
         auditFlowRepository.createAuditFlow(auditFlow);
-        List<Long> oldFlowIdList = getOldFlowIdList(auditFlow.getId(), account.accountId(), account.role(), dataVO);
+        List<Long> oldFlowIdList = getOldFlowIdList(auditFlow.getId(), account.accountId(), account.identity(), dataVO);
         if (ObjectUtil.isNotEmpty(oldFlowIdList)) {
             auditFlowRepository.updateIsNew(oldFlowIdList, AuditEnum.Switch.OFF.getCode());
         }
@@ -238,12 +238,12 @@ public abstract class WorkflowStrategy<T> {
      * 审批分页
      *
      * @param accountId 账号主键
-     * @param role      角色主键
+     * @param identity      角色主键
      * @param pageQuery 分页查询 JSON
      *
      * @return 分页结果
      */
-    public abstract Object pageJson(Long accountId, RoleEnum.CompanyRole role, String pageQuery);
+    public abstract Object pageJson(Long accountId, AccountEnum.Identity identity, String pageQuery);
 
     /**
      * 保存审批业务数据
@@ -258,11 +258,11 @@ public abstract class WorkflowStrategy<T> {
      *
      * @param flowId 当前审批流主键
      * @param accountId 账号主键
-     * @param role 角色主键
+     * @param identity 角色主键
      * @param dataVO 审批业务数据
      * @return 历史审批流主键列表
      */
-    protected abstract List<Long> getOldFlowIdList(Long flowId, Long accountId, RoleEnum.CompanyRole role, T dataVO);
+    protected abstract List<Long> getOldFlowIdList(Long flowId, Long accountId, AccountEnum.Identity identity, T dataVO);
 
     /**
      * 修改业务数据
