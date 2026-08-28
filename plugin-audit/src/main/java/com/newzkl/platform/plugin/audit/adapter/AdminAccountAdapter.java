@@ -2,8 +2,9 @@ package com.newzkl.platform.plugin.audit.adapter;
 
 import com.newzkl.platform.base.biz.account.domain.service.AccountDomain;
 import com.newzkl.platform.base.biz.account.model.vo.AccountVO;
+import com.newzkl.platform.base.common.ddd.model.auth.SecurityUtils;
 import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
-import com.newzkl.platform.base.common.ddd.utils.auth.SecurityUtils;
+
 import com.newzkl.platform.plugin.audit.port.AdminAccountPort;
 import com.newzkl.platform.plugin.audit.workflow.model.AuditAccountView;
 import lombok.RequiredArgsConstructor;
