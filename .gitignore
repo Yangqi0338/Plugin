@@ -73,4 +73,8 @@ app-test/
 .codegraph/
 .codebase-memory/
 
+**/**/**/src/main/resources/rebel.xml
+**/**/src/main/resources/rebel.xml
+**/src/main/resources/rebel.xml
+
 .apifox-helper.properties
