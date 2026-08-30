@@ -181,7 +181,7 @@ public class PalletGoodsService {
         spuVO.setChannelType(SpuEnum.ChannelType.OUT);
         spuVO.setGoodsType(SpuEnum.SaleType.REAL.getCode());
         spuVO.setAccountId(Long.valueOf(SpuEnum.SpuChannelSource.HDH.getCode()));
-        spuVO.setCategoryName(StrJoiner.of(" / ").setNullMode(StrJoiner.NullMode.IGNORE)
+        spuVO.getExpand().setCategoryName(StrJoiner.of(" / ").setNullMode(StrJoiner.NullMode.IGNORE)
                 .append(item.getFirstCateName())
                 .append(item.getSecondCateName())
                 .append(item.getThirdCateName())
@@ -214,13 +214,13 @@ public class PalletGoodsService {
                     .filter(Objects::nonNull).sorted(Comparator.comparing(Money::getCent))
                     .collect(Collectors.toList());
 
-            spuVO.setMarketPriceBegan(CollUtil.getFirst(originalPriceList));
-            spuVO.setMarketPrice(Opt.ofNullable(spuVO.getMarketPriceBegan()).orElse(Money.of(0)));
-            spuVO.setMarketPriceEnd(CollUtil.getLast(originalPriceList));
+            spuVO.getExpand().setMarketPriceBegan(CollUtil.getFirst(originalPriceList));
+            spuVO.setMarketPrice(Opt.ofNullable(spuVO.getExpand().getMarketPriceBegan()).orElse(Money.of(0)));
+            spuVO.getExpand().setMarketPriceEnd(CollUtil.getLast(originalPriceList));
 
-            spuVO.setSupplierPriceBegan(CollUtil.getFirst(priceList));
-            spuVO.setSupplyPrice(Opt.ofNullable(spuVO.getSupplierPriceBegan()).orElse(Money.of(0)));
-            spuVO.setSupplierPriceEnd(CollUtil.getLast(priceList));
+            spuVO.getExpand().setSupplierPriceBegan(CollUtil.getFirst(priceList));
+            spuVO.setSupplyPrice(Opt.ofNullable(spuVO.getExpand().getSupplierPriceBegan()).orElse(Money.of(0)));
+            spuVO.getExpand().setSupplierPriceEnd(CollUtil.getLast(priceList));
             // 源 spuVO.setInventory(sum totalStock): Base SpuVO 无 inventory 字段, 略
         }
         spuVO.setSkuList(skuList);

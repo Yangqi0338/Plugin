@@ -12,7 +12,7 @@ import com.newzkl.platform.base.biz.store.model.store.entity.StoreStyle;
 import com.newzkl.platform.base.biz.store.model.template.dto.ModelShopDTO;
 import com.newzkl.platform.base.biz.store.model.template.dto.ModelShopUseRecordDTO;
 import com.newzkl.platform.base.common.core.model.exception.PlatformException;
-import com.newzkl.platform.base.common.ddd.utils.auth.SecurityUtils;
+import com.newzkl.platform.base.common.ddd.model.auth.SecurityUtils;
 import com.newzkl.platform.plugin.rule_template.application.service.ModelShopService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

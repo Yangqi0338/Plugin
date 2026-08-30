@@ -101,18 +101,6 @@ public class AuditController {
     }
 
     /**
-     * SPU 上传审批分页
-     *
-     * @param pageQuery 分页查询 JSON
-     * @return 分页结果
-     */
-    // TODO[auth-defer]: 源 @Limit(goods_audit, get)
-    @PostMapping("/page/spu")
-    public PlatformResult<?> pageSpu(@RequestBody String pageQuery) {
-        return PlatformResult.success(pageByType(AuditEnum.TemplateType.SPU_CREATE.getCode(), pageQuery));
-    }
-
-    /**
      * 工单审批分页
      *
      * @param pageQuery 分页查询 JSON

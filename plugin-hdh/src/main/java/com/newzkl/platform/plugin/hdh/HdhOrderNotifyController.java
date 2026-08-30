@@ -54,21 +54,6 @@ public class HdhOrderNotifyController {
         OrderCallbackResponse response = new OrderCallbackResponse();
         response.setSuccess(0);
         try {
-            // 中泽 D 平台采购单: userOrderNum 以 "D" 开头, 转发至 zzDOrderUrl (配置 pallet.zz-d-order-url)
-            if (callbackRequest != null
-                    && callbackRequest.getUserOrderNum() != null
-                    && callbackRequest.getUserOrderNum().startsWith("D")) {
-                String zzDOrderUrl = PalletProperties.zzDOrderUrl;
-                log.info("中泽D平台订单回调转发 outOrderNo={} url={}", callbackRequest.getUserOrderNum(), zzDOrderUrl);
-                HttpRequest.post(zzDOrderUrl)
-                        .contentType("application/json")
-                        .body(JSONUtil.toJsonStr(callbackRequest))
-                        .timeout(10000)
-                        .execute()
-                        .body();
-                response.setSuccess(1);
-                return response;
-            }
             boolean handled = orderFacade.handleStatusCallback(callbackRequest);
             if (handled) {
                 response.setSuccess(1);

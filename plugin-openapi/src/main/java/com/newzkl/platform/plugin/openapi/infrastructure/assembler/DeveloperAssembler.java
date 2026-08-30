@@ -25,9 +25,9 @@ public interface DeveloperAssembler {
      * @param developerDO
      * @return
      */
-    @Mapping(target = "creatorName", source = "executor.creatorName")
-    @Mapping(target = "updater", source = "executor.updater")
-    @Mapping(target = "updaterName", source = "executor.updaterName")
+//    @Mapping(target = "creatorName", source = "executor.creatorName")
+//    @Mapping(target = "updater", source = "executor.updater")
+//    @Mapping(target = "updaterName", source = "executor.updaterName")
     DeveloperRes doToVO(DeveloperDO developerDO);
     /**
      * Domain转DO

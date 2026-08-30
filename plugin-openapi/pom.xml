@@ -41,6 +41,10 @@
         </dependency>
         <dependency>
             <groupId>com.newzkl.platform.Base</groupId>
+            <artifactId>biz-finance-facade</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newzkl.platform.Base</groupId>
             <artifactId>biz-account-domain</artifactId>
         </dependency>
         <dependency>
