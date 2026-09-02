@@ -7,7 +7,7 @@ import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderRes;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderSubmitReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderVO;
-import com.newzkl.platform.base.biz.order.facade.model.order.SpuOrderStateVO;
+import com.newzkl.platform.base.biz.order.facade.model.order.OrderStateVO;
 import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 
 import java.util.List;
@@ -73,5 +73,5 @@ public interface OrderApi {
      * @param outOrderNoList 外部订单号列表
      * @return 订单状态列表
      */
-    List<SpuOrderStateVO> orderState(Long accountId, List<String> outOrderNoList);
+    List<OrderStateVO> orderState(Long accountId, List<String> outOrderNoList);
 }

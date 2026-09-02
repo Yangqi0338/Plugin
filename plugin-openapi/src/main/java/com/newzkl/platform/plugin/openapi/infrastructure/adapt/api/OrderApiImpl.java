@@ -9,7 +9,7 @@ import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderRes;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderSubmitReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderVO;
-import com.newzkl.platform.base.biz.order.facade.model.order.SpuOrderStateVO;
+import com.newzkl.platform.base.biz.order.facade.model.order.OrderStateVO;
 import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 import com.newzkl.platform.plugin.openapi.domain.adapt.api.OrderApi;
 import lombok.RequiredArgsConstructor;
@@ -58,7 +58,7 @@ public class OrderApiImpl implements OrderApi {
     }
 
     @Override
-    public List<SpuOrderStateVO> orderState(Long accountId, List<String> outOrderNoList) {
+    public List<OrderStateVO> orderState(Long accountId, List<String> outOrderNoList) {
         return orderFacade.apiOrderState(accountId, outOrderNoList);
     }
 }

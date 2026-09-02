@@ -304,7 +304,7 @@ public class PalletGoodsService {
                     });
 
             skuVO.setSaleAttribute(saleAttributeList);
-            skuVO.setExpand(JSONUtil.toJsonStr(skuExpandVO));
+            skuVO.setExpand(skuExpandVO);
             skuVO.setOutSkuId(itemSku.getSkuId());
 //            skuVO.setBarCode(itemSku.getUpc());
 //            skuVO.setWeight(NumberUtil.div(itemSku.getWeightG(), new java.math.BigDecimal(1000), 2,

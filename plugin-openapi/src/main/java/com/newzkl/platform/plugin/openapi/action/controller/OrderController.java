@@ -8,7 +8,7 @@ import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderRes;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderSubmitReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderVO;
-import com.newzkl.platform.base.biz.order.facade.model.order.SpuOrderStateVO;
+import com.newzkl.platform.base.biz.order.facade.model.order.OrderStateVO;
 import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 import com.newzkl.platform.base.common.core.model.res.PlatformResult;
 import com.newzkl.platform.plugin.openapi.model.constants.Constants;
@@ -102,7 +102,7 @@ public class OrderController {
      * 查询订单状态
      */
     @PostMapping("/orderState")
-    public PlatformResult<List<SpuOrderStateVO>> orderState(@RequestBody OrderCmd.OrderIdList orderIdList) {
+    public PlatformResult<List<OrderStateVO>> orderState(@RequestBody OrderCmd.OrderIdList orderIdList) {
         Long accountId = DeveloperContextUtil.get(Constants.ACCOUNT_ID, Long.class);
         return PlatformResult.success(orderService.orderState(accountId, orderIdList.getOutOrderNoList()));
     }

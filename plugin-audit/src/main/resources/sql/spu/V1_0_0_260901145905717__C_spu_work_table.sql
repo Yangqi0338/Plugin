@@ -1,0 +1,22 @@
+CREATE TABLE `spu_work_table` (
+  `id` bigint NOT NULL COMMENT '主键ID',
+  `account_id` bigint NULL COMMENT 'accountId',
+  `spu_id` bigint NULL COMMENT 'spuId',
+  `spu_name` varchar(255) NULL COMMENT 'spuName',
+  `operate_target` int NULL COMMENT 'operateTarget[1SPU基础信息,2销售属性,3参数属性,4SKU基础信息,5SPU状态]',
+  `operate_type` int NULL COMMENT 'operateType[1修改,2新增,3删除]',
+  `spu_info` json NULL COMMENT 'spuInfo',
+  `spu_edit_info` json NULL COMMENT 'spuEditInfo',
+  `sku_sale_price` json NULL COMMENT 'skuSalePrice',
+  `audit_state` int NULL COMMENT 'auditState[0待用户提交,1待审核,2通过,3未通过,4终止]',
+  `audit_refuse_reason` varchar(255) NULL COMMENT 'auditRefuseReason',
+  `executor` json NULL COMMENT '操作人信息',
+  `creator_id` bigint NULL COMMENT '创建人id',
+  `create_time` datetime NULL COMMENT '创建时间',
+  `update_time` datetime NULL COMMENT '更新时间',
+  `del_flag` int NULL DEFAULT 0 COMMENT '逻辑删除标记(正常 0, 删除为 NULL(确保唯一索引生效))',
+  PRIMARY KEY (`id`),
+  INDEX `auto_idx_spu_work_table_account_id`(`account_id`) COMMENT 'accountId',
+  INDEX `auto_idx_spu_work_table_audit_state`(`audit_state`) COMMENT 'auditState',
+  INDEX `auto_idx_spu_work_table_spu_id`(`spu_id`) COMMENT 'spuId'
+) COMMENT = 'SpuWorkTableDO表';
