@@ -1,5 +1,6 @@
 package com.newzkl.platform.plugin.audit.action;
 
+import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.base.biz.account.domain.service.SupplierClientDomain;
 import com.newzkl.platform.base.biz.account.model.req.SupplierQuery;
@@ -92,9 +93,11 @@ public class SupplierAuditController {
      */
     @PostMapping("/page")
     public PlatformResult<Page<SupplierAuditRes>> page(@RequestBody SupplierQuery supplierQuery) {
-        // 审核列表排除未提交态: state 去 INIT, auditState 去 CUSTOM
+        // 审核列表排除未提交态: state 去 INIT; 前端未指定审核态时兜底去 CUSTOM
         supplierQuery.setStateList(List.of(SupplierEnum.State.AUDITING, SupplierEnum.State.NORMAL));
-        supplierQuery.setAuditStateList(List.of(AuditEnum.State.AUDITING, AuditEnum.State.SUCCESS, AuditEnum.State.FAIL));
+        if (CollUtil.isEmpty(supplierQuery.getAuditStateList())) {
+            supplierQuery.setAuditStateList(List.of(AuditEnum.State.AUDITING, AuditEnum.State.SUCCESS, AuditEnum.State.FAIL));
+        }
         return PlatformResult.success(supplierClientDomain.supplierAuditPage(supplierQuery));
     }
 

@@ -1,9 +1,9 @@
 package com.newzkl.platform.plugin.audit.action;
 
+import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.base.biz.finance.facade.GoodsSeatFacade;
 import com.newzkl.platform.base.biz.goods.application.goods.service.goods.GoodsQueryService;
-import com.newzkl.platform.base.biz.goods.domain.spu.service.ExecuteLogDomain;
 import com.newzkl.platform.base.biz.goods.domain.spu.service.SpuDomain;
 import com.newzkl.platform.base.biz.goods.model.goods.res.spu.SpuAuditRes;
 import com.newzkl.platform.base.biz.goods.model.goods.vo.spu.SpuVO;
@@ -17,8 +17,6 @@ import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import com.newzkl.platform.base.common.ddd.model.enums.audit.AuditEnum;
 import com.newzkl.platform.plugin.audit.action.cmd.SpuAuditPassCommand;
 import com.newzkl.platform.plugin.audit.action.cmd.SpuAuditRefuseCommand;
-import com.newzkl.platform.plugin.audit.worktable.constant.WorktableConst;
-import com.alibaba.fastjson2.JSON;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -56,7 +54,6 @@ public class SpuAuditController {
     private final SpuDomain spuDomain;
     private final GoodsQueryService goodsQueryService;
     private final GoodsSeatFacade goodsSeatFacade;
-    private final ExecuteLogDomain executeLogDomain;
 
     /**
      * 供应商提交SPU审核
@@ -90,7 +87,10 @@ public class SpuAuditController {
      */
     @PostMapping("/page")
     public PlatformResult<Page<SpuAuditRes>> page(@RequestBody SpuQuery query) {
-        query.setAuditStateList(List.of(AuditEnum.State.AUDITING, AuditEnum.State.SUCCESS, AuditEnum.State.FAIL));
+        // 审核列表排除未提交态: 前端未指定审核态时兜底去 CUSTOM
+        if (CollUtil.isEmpty(query.getAuditStateList())) {
+            query.setAuditStateList(List.of(AuditEnum.State.AUDITING, AuditEnum.State.SUCCESS, AuditEnum.State.FAIL));
+        }
         return PlatformResult.success(spuDomain.spuAuditPage(query));
     }
 
@@ -109,7 +109,7 @@ public class SpuAuditController {
      * 平台侧SPU审核通过
      *
      * <p>置 auditState=SUCCESS 且 state=SALE 直接上架, skuSalePriceJson 非空时按平台改价刷新
-     * SKU销售价与SPU价格区间, 并留一条销售价变动执行日志</p>
+     * SKU销售价与SPU价格区间</p>
      *
      * @param command SPU审核通过命令
      * @return 空
@@ -119,8 +119,6 @@ public class SpuAuditController {
     public PlatformResult<String> pass(@Validated @RequestBody SpuAuditPassCommand command) {
         SpuVO spuVO = requireSpu(command.spuId(), true);
         spuDomain.spuAuditSuccess(spuVO, command.skuSalePriceJson());
-        executeLogDomain.executeLogSave(WorktableConst.EXECUTE_TYPE_SPU_SALE_PRICE, command.spuId(),
-                SecurityUtils.getUsername(), JSON.toJSONString(spuVO), command.skuSalePriceJson());
         return PlatformResult.success();
     }
 

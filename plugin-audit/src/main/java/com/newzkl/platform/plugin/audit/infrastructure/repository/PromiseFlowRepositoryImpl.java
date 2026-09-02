@@ -5,9 +5,9 @@ import com.newzkl.platform.base.common.core.mybatis.support.RepositorySupport;
 import com.newzkl.platform.base.common.core.utils.common.TransferUtils;
 import com.newzkl.platform.plugin.audit.infrastructure.dao.PromiseFlowDAO;
 import com.newzkl.platform.plugin.audit.infrastructure.entity.PromiseFlowDO;
-import com.newzkl.platform.plugin.audit.workflow.model.PromiseFlow;
-import com.newzkl.platform.plugin.audit.workflow.model.PromiseFlowQuery;
-import com.newzkl.platform.plugin.audit.workflow.repository.PromiseFlowRepository;
+import com.newzkl.platform.plugin.audit.model.dto.PromiseFlow;
+import com.newzkl.platform.plugin.audit.model.query.PromiseFlowQuery;
+import com.newzkl.platform.plugin.audit.domain.adapt.repository.PromiseFlowRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

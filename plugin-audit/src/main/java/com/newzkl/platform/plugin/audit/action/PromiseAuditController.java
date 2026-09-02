@@ -1,5 +1,6 @@
 package com.newzkl.platform.plugin.audit.action;
 
+import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.base.biz.account.domain.service.SupplierClientDomain;
 import com.newzkl.platform.base.common.core.model.money.Money;
@@ -11,9 +12,9 @@ import com.newzkl.platform.base.common.ddd.model.enums.account.AccountEnum;
 import com.newzkl.platform.base.common.ddd.model.enums.audit.AuditEnum;
 import com.newzkl.platform.plugin.audit.action.cmd.PromiseAuditRefuseCommand;
 import com.newzkl.platform.plugin.audit.action.cmd.PromiseFlowSubmitCommand;
-import com.newzkl.platform.plugin.audit.workflow.model.PromiseFlow;
-import com.newzkl.platform.plugin.audit.workflow.model.PromiseFlowQuery;
-import com.newzkl.platform.plugin.audit.workflow.service.PromiseFlowDomain;
+import com.newzkl.platform.plugin.audit.model.dto.PromiseFlow;
+import com.newzkl.platform.plugin.audit.model.query.PromiseFlowQuery;
+import com.newzkl.platform.plugin.audit.domain.PromiseFlowDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -49,30 +50,41 @@ public class PromiseAuditController {
      * 供应商提交保证金流水单
      *
      * <p>供应商填金额 + 上传支付凭证提交, 非审核动作。accountId 取登录态, 不信前端。
-     * 读供应商全局配置决定是否跳过审核: 跳过则建单即通过并直接充值</p>
+     * 读供应商全局配置决定是否跳过审核: 跳过则建单即通过并直接充值, 供应商主数据一并置保证金已缴;
+     * 否则建单为待审核, 供应商主数据置保证金审核中</p>
      *
      * @param command 保证金流水提交命令
      * @return 保证金流水单主键
      */
     @RoleLimit(client = AccountEnum.Client.SUPPLIER)
     @PostMapping("/submit")
+    @Transactional(rollbackFor = Exception.class)
     public PlatformResult<Long> submit(@Validated @RequestBody PromiseFlowSubmitCommand command) {
         PromiseFlow promiseFlow = TransferUtils.transfer(command, PromiseFlow::new);
         promiseFlow.setAccountId(SecurityUtils.getAccountId());
-        return PlatformResult.success(promiseFlowDomain.submitPromiseFlow(promiseFlow));
+        promiseFlow.setIdentity(SecurityUtils.getIdentity());
+        PromiseFlow created = promiseFlowDomain.submitPromiseFlow(promiseFlow);
+        if (AuditEnum.State.SUCCESS == created.getAuditState()) {
+            supplierClientDomain.promisePayAuditSuccess(created.getAccountId(), created.getAmount());
+        } else {
+            supplierClientDomain.promisePaySubmitAudit(created.getAccountId());
+        }
+        return PlatformResult.success(created.getId());
     }
 
     /**
      * 保证金审核列表
      *
-     * <p>审核列表排除未提交态: auditState 去 CUSTOM, 仅列待审核/通过/未通过</p>
+     * <p>审核列表排除未提交态: 前端未指定审核态时兜底为待审核/通过/未通过三态, 指定则按前端条件筛</p>
      *
      * @param query 查询条件
      * @return 分页结果
      */
     @PostMapping("/page")
     public PlatformResult<Page<PromiseFlow>> page(@RequestBody PromiseFlowQuery query) {
-        query.setAuditStateList(List.of(AuditEnum.State.AUDITING, AuditEnum.State.SUCCESS, AuditEnum.State.FAIL));
+        if (query.getAuditState() == null && CollUtil.isEmpty(query.getAuditStateList())) {
+            query.setAuditStateList(List.of(AuditEnum.State.AUDITING, AuditEnum.State.SUCCESS, AuditEnum.State.FAIL));
+        }
         return PlatformResult.success(promiseFlowDomain.promiseFlowPage(query));
     }
 
