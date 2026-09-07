@@ -1,13 +1,16 @@
 package com.newzkl.platform.plugin.audit.action.cmd;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.Map;
 
 /**
  * SPU审核通过命令
  *
  * @param spuId SPU主键
- * @param skuSalePriceJson SKU销售价调整 JSON (平台审核时可改价, 为空则沿用供应商提交价)
+ * @param skuSalePriceJson SKU销售价调整
  */
-public record SpuAuditPassCommand(@NotNull(message = "SPU主键不能为空") Long spuId,
-                                  String skuSalePriceJson) {
+public record SpuAuditPassCommand(@NotNull Long spuId,
+                                  @NotEmpty Map<Long, String> skuSalePriceJson) {
 }

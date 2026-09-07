@@ -8,6 +8,7 @@ import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.newzkl.platform.base.biz.goods.domain.spu.repository.SpuRepository;
 import com.newzkl.platform.base.common.core.model.money.Money;
 import com.newzkl.platform.base.common.core.utils.common.PatternUtil;
 import com.newzkl.platform.base.common.ddd.model.enums.goods.SpuEnum;
@@ -26,6 +27,7 @@ import com.newzkl.platform.plugin.hdh.model.res.HuiDingHuoGetCategoryListRes;
 import com.newzkl.platform.plugin.hdh.model.res.HuiDingHuoProductBatchRes;
 import com.newzkl.platform.plugin.hdh.model.res.HuiDingHuoProductDetailRes;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.RoundingMode;
@@ -56,6 +58,9 @@ public class PalletGoodsService {
 
     /** 会订货默认渠道类型 */
     private static final int HDH_FIX_CHANNEL_TYPE = 2;
+    
+    @Autowired
+    private SpuRepository spuRepository;
 
     /**
      * 货盘 SPU 分页
@@ -187,7 +192,7 @@ public class PalletGoodsService {
                 .append(item.getThirdCateName())
                 .toString());
         spuVO.setDetail(CollUtil.join(PatternUtil.getHtmlImgList(item.getRichDesc()), ","));
-        spuVO.setState(SpuEnum.State.STORE.getCode());
+        spuVO.setState(SpuEnum.State.STORE);
         spuVO.setOutState(item.getShelfStatus());
         spuVO.setFreightTemplateId(SpuEnum.SpuChannelSource.HDH.getCode().longValue());
 
@@ -243,9 +248,9 @@ public class PalletGoodsService {
 
         spuVO.setLimitBuy((item.getItemLimitCondition() != null
                 && item.getItemLimitCondition().getCycleLimitQuantity() != null) ? 1 : 0);
-
-        // TODO[capability-gap]: 源用 spuRepository.spuIdByQuery(outSpuId) 回填 choose (已选品标识),
-        // plugin-hdh 无 biz-goods spuId 反查端口, choose 保持默认 false
+        
+        Long exist = spuRepository.spuId(SpuEnum.ChannelType.OUT, spuVO.getOutSpuId());
+        spuVO.setChoose(exist != null);
         return spuVO;
     }
 

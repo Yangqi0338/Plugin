@@ -3,17 +3,12 @@ package com.newzkl.platform.plugin.hdh;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson2.JSONObject;
-import com.newzkl.platform.base.biz.order.domain.service.ThirdPartyOrderDomain;
 import com.newzkl.platform.base.biz.order.domain.spi.ThirdPartyOrderStrategy;
-import com.newzkl.platform.base.biz.order.facade.model.order.ThirdPartyOrderRecordDTO;
 import com.newzkl.platform.base.biz.order.model.dto.OrderDTO;
-import com.newzkl.platform.base.biz.order.model.dto.SkuCountDTO;
 import com.newzkl.platform.base.biz.order.model.support.api.order.OrderSkuVO;
-import com.newzkl.platform.base.biz.order.model.vo.ShipVO;
+import com.newzkl.platform.base.common.ddd.model.vo.ShipVO;
 import com.newzkl.platform.base.common.core.model.money.Money;
 import com.newzkl.platform.base.common.ddd.facade.ThirdPartyOrderResult;
-import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.ddd.model.enums.order.ThirdPartyOrderEnum;
 import com.newzkl.platform.base.common.ddd.model.properties.PalletProperties;
 import com.newzkl.platform.plugin.hdh.model.req.HuiDingHuoCreateOrderReq;
@@ -27,15 +22,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 惠订货第三方下单策略实现
+ * 惠订货第三方下单策略实现(下单轴 按商品级供货平台派发)
+ *
+ * <p>补偿重推是另一条轴 见 {@link HuiDingHuoCompensator}</p>
  */
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class HuiDingHuoOrderStrategy implements ThirdPartyOrderStrategy {
-	
-	private final ThirdPartyOrderDomain thirdPartyOrderDomain;
-	
+
 	@Override
 	public ThirdPartyOrderResult create(List<OrderSkuVO> outGoods, OrderDTO order) {
 		// 构建惠订货下单请求
@@ -44,34 +39,6 @@ public class HuiDingHuoOrderStrategy implements ThirdPartyOrderStrategy {
 		HuiDingHuoCreateOrderRes result = HuiDingHuoApiUtils.createOrder(req);
 		// 适配返回结果
 		return new HuiDingHuoOrderResultAdapter(result, req);
-	}
-	
-	@Override
-	public ThirdPartyOrderResult delivery(String outOrderNo, List<SkuCountDTO> skuCountDTOList, String expressCompanyName, String expressNo, Long channelId) {
-		return null;
-	}
-	
-	@Override
-	public void compensation(ThirdPartyOrderRecordDTO request) {
-		log.info("开始补偿惠订货订单: {}", request.getBizOrderNo());
-		if (!request.getInterfaceName().equals("create")) return;
-		try {
-			// 1. 反序列化请求参数 (假设是 HuiDingHuoCreateOrderReq)
-			HuiDingHuoCreateOrderReq createOrderReq = JSONObject.parseObject(request.getRequestJson(), HuiDingHuoCreateOrderReq.class);
-			
-			// 2. 调用第三方API进行补偿
-			HuiDingHuoCreateOrderRes order = HuiDingHuoApiUtils.createOrder(createOrderReq);
-			
-			// 3. 处理成功结果
-			request.setResponseJson(JSONObject.toJSONString(order));
-			request.setRequestStatus(CommonEnum.RequestStatusEnum.getByCode(order.getSuccess()));
-			request.setErrorMessage(order.getMessage());
-			// TODO
-//			thirdPartyOrderDomain.recordAction(request.getPlatformType(), request.getBizOrderNo(),request.getBizOrderNo());
-			log.info("惠订货订单补偿 id: {} , 补偿结果: {}", request.getBizOrderNo(), order.getCode());
-		} catch (Exception e) {
-			log.error("惠订货订单补偿失败，调用API异常。订单号: {}", request.getBizOrderNo(), e);
-		}
 	}
 
     /**

@@ -18,7 +18,6 @@ import java.util.List;
  * @date 2023/12/159:57
  */
 public interface IGoodsService {
-
     /**
      * 选品列表
      *

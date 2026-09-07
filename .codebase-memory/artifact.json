@@ -1,11 +1,11 @@
 {
     "schema_version": 2,
-    "commit": "7a92235f643d122c340501a5fc2330cc2009c4fd",
-    "indexed_at": "2026-09-02T03:42:54Z",
+    "commit": "3e7c6af47a9b950cdb44817005438db20c86b9b9",
+    "indexed_at": "2026-09-03T08:43:57Z",
     "project": "D-project-zhai-Plugin",
-    "nodes": 3713,
-    "edges": 8790,
+    "nodes": 3716,
+    "edges": 8791,
     "original_size": 9961472,
-    "compressed_size": 1358802,
+    "compressed_size": 1359241,
     "compression_level": 3
 }

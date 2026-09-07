@@ -70,7 +70,7 @@ public class SpuAuditController {
     public PlatformResult<Long> submit(@RequestParam("spuId") Long spuId) {
         SpuVO spuVO = requireSpu(spuId, false);
         Long supplierId = SecurityUtils.getAccountId();
-        ThrowsException.isTrue(supplierId.equals(spuVO.getAccountId()), BaseErrorCode.PARAM, "只能提交本供应商的SPU");
+        ThrowsException.isFalse(supplierId.equals(spuVO.getAccountId()), BaseErrorCode.PARAM, "只能提交本供应商的SPU");
         goodsSeatFacade.supplierSubmitSubGoodsSeat(supplierId, spuId);
         spuDomain.spuSubmit(spuId);
         return PlatformResult.success(spuId);
@@ -165,7 +165,7 @@ public class SpuAuditController {
      */
     private SpuVO requireSpu(Long spuId, Boolean needExtraInfo) {
         SpuVO spuVO = goodsQueryService.spuVO(spuId, needExtraInfo);
-        ThrowsException.isTrue(spuVO != null, BaseErrorCode.NODATA, "SPU");
+        ThrowsException.isTrue(spuVO == null, BaseErrorCode.NODATA, "SPU");
         return spuVO;
     }
 }

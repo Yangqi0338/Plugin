@@ -31,12 +31,14 @@ public class HuiDingHuoOrderResultAdapter implements ThirdPartyOrderResult {
 
 	@Override
 	public String getSkuIds() {
+		// 惠订货响应只回订单号 不回三方 skuId 故无可映射的值(下单请求侧的 skuId 是我方外部商品 ID 非三方主键)
 		return null;
 	}
 
 	@Override
 	public List<? extends ThirdPartyOrderResult> getSubOrders() {
-		return null; // 惠订货无嵌套子订单
+		// 惠订货一次下单只产生一张三方单 无嵌套子订单结构
+		return null;
 	}
 
     @Override

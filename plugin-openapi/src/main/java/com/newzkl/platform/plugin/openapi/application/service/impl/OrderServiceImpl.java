@@ -1,5 +1,6 @@
 package com.newzkl.platform.plugin.openapi.application.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderAggVO;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderConfirmReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderFreightReq;
@@ -33,7 +34,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public ApiPage<ApiOrderVO> list(Long accountId, ApiOrderReq spuOrderQuery) {
+    public Page<ApiOrderVO> list(Long accountId, ApiOrderReq spuOrderQuery) {
         return orderApi.list(accountId, spuOrderQuery);
     }
 

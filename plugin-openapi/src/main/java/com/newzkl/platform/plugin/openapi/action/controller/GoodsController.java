@@ -3,6 +3,7 @@ package com.newzkl.platform.plugin.openapi.action.controller;
 import cn.hutool.core.date.DateUtil;
 import com.newzkl.platform.base.biz.goods.model.goods.vo.spu.GoldVO;
 
+import com.newzkl.platform.base.common.core.redis.RedisEnum;
 import com.newzkl.platform.base.common.core.redis.utils.RedisUtil;
 import com.newzkl.platform.base.common.ddd.facade.ApiCategoryVO;
 import com.newzkl.platform.base.common.ddd.facade.ApiChannelSpuRelationVO;
@@ -36,7 +37,6 @@ import java.util.Objects;
  */
 @RestController("openApiGoodsController")
 @RequestMapping("/api/goods")
-@Setter(onMethod_ = @Autowired)
 @Validated
 public class GoodsController {
 
@@ -55,7 +55,7 @@ public class GoodsController {
         ApiPage<ApiChannelSpuRelationVO> page = goodsService.selectList(accountId, selectListApiReq);
 
         // 黄金专区填充金价更新时间
-        Object goldPriceUpdateTime = RedisUtil.get("GoldRealTimePrice::updateTime");
+        Object goldPriceUpdateTime = RedisUtil.get(RedisEnum.Key.GOLD_UPDATE_TIME.getCode());
         page.getList().forEach(x -> {
             if(MarketEnum.MarketTypeEnum.GOLD_ZONE.getDesc().equals(x.getMarketType())){
                 x.setGoldPriceUpdateTime(Objects.toString(goldPriceUpdateTime, null));
@@ -127,8 +127,8 @@ public class GoodsController {
      */
     @PostMapping("/saveGoldRealTimePrice" )
     public PlatformResult<Void> saveGoldRealTimePrice(@RequestBody GoodsCmd.GoldRealTimePriceReq req) {
-        RedisUtil.set("GoldRealTimePrice::realTimePrice",req.getPrice());
-        RedisUtil.set("GoldRealTimePrice::updateTime",DateUtil.now());
+        RedisUtil.set(RedisEnum.Key.GOLD_REAL_TIME_PRICE.getCode(), req.getPrice());
+        RedisUtil.set(RedisEnum.Key.GOLD_UPDATE_TIME.getCode(), DateUtil.now());
         return PlatformResult.success();
     }
 
@@ -136,10 +136,10 @@ public class GoodsController {
      * 获取黄金实时价格
      */
     @PostMapping("/getGoldRealTimePrice" )
-    public PlatformResult<GoldVO> saveGoldRealTimePrice() {
+    public PlatformResult<GoldVO> getGoldRealTimePrice() {
         GoldVO goldVO = new GoldVO();
-        goldVO.setRealTimePrice(RedisUtil.get("GoldRealTimePrice::realTimePrice"));
-        goldVO.setUpdateTime(RedisUtil.get("GoldRealTimePrice::updateTime"));
+        goldVO.setRealTimePrice(RedisUtil.get(RedisEnum.Key.GOLD_REAL_TIME_PRICE.getCode()));
+        goldVO.setUpdateTime(RedisUtil.get(RedisEnum.Key.GOLD_UPDATE_TIME.getCode()));
         return PlatformResult.success(goldVO);
     }
 }

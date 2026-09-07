@@ -1,5 +1,6 @@
 package com.newzkl.platform.plugin.openapi.action.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.plugin.openapi.action.cmd.OrderCmd;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderAggVO;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderConfirmReq;
@@ -71,9 +72,9 @@ public class OrderController {
      * @return
      */
     @PostMapping("list")
-    public PlatformResult<ApiPage<ApiOrderVO>> list(@Validated @RequestBody ApiOrderReq orderReq) {
+    public PlatformResult<Page<ApiOrderVO>> list(@Validated @RequestBody ApiOrderReq orderReq) {
         Long accountId = DeveloperContextUtil.get(Constants.ACCOUNT_ID, Long.class);
-        ApiPage<ApiOrderVO> page = orderService.list(accountId, orderReq);
+        Page<ApiOrderVO> page = orderService.list(accountId, orderReq);
         return PlatformResult.success(page);
     }
     /**

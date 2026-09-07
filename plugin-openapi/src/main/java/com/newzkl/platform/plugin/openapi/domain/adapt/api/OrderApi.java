@@ -1,5 +1,6 @@
 package com.newzkl.platform.plugin.openapi.domain.adapt.api;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderAggVO;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderConfirmReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderFreightReq;
@@ -38,7 +39,7 @@ public interface OrderApi {
      * @param spuOrderQuery 订单查询
      * @return 订单分页
      */
-    ApiPage<ApiOrderVO> list(Long accountId, ApiOrderReq spuOrderQuery);
+    Page<ApiOrderVO> list(Long accountId, ApiOrderReq spuOrderQuery);
 
     /**
      * 订单明细

@@ -2,6 +2,7 @@ package com.newzkl.platform.plugin.hdh.model;
 
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 
 import com.newzkl.platform.base.common.core.model.exception.BaseErrorCode;
 import com.newzkl.platform.base.common.core.model.exception.ThrowsException;
@@ -14,7 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.apache.dubbo.common.utils.JsonUtils;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -110,7 +110,7 @@ public class HdhCallBackFilter extends OncePerRequestFilter {
      */
     private void failResponse(HttpServletResponse servletResponse) throws IOException {
         ServletOutputStream out = servletResponse.getOutputStream();
-        out.write(JsonUtils.toJson(PlatformResult.fail()).getBytes());
+        out.write(JSONUtil.toJsonStr(PlatformResult.fail()).getBytes());
         out.flush();
         out.close();
     }
