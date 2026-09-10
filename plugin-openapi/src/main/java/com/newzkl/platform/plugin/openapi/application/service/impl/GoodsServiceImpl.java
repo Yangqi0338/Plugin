@@ -1,6 +1,7 @@
 package com.newzkl.platform.plugin.openapi.application.service.impl;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.base.common.ddd.facade.ApiCategoryVO;
 import com.newzkl.platform.base.common.ddd.facade.ApiChannelSpuRelationVO;
 import com.newzkl.platform.base.common.ddd.facade.ApiSkuVO;
@@ -9,7 +10,6 @@ import com.newzkl.platform.base.common.ddd.facade.ApiSpuStateVO;
 import com.newzkl.platform.base.common.ddd.facade.ApiSpuVO;
 import com.newzkl.platform.base.common.ddd.facade.MarketRpcVO;
 import com.newzkl.platform.base.common.ddd.facade.SelectListApiReq;
-import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 import com.newzkl.platform.plugin.openapi.application.service.IGoodsService;
 import com.newzkl.platform.plugin.openapi.domain.adapt.api.GoodsApi;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class GoodsServiceImpl implements IGoodsService {
     private final GoodsApi goodsApi;
 
     @Override
-    public ApiPage<ApiChannelSpuRelationVO> selectList(Long accountId, SelectListApiReq selectListApiReq) {
+    public Page<ApiChannelSpuRelationVO> selectList(Long accountId, SelectListApiReq selectListApiReq) {
         return goodsApi.selectList(accountId, selectListApiReq);
     }
 

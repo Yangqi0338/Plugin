@@ -1,5 +1,6 @@
 package com.newzkl.platform.plugin.openapi.application.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.base.common.ddd.facade.ApiCategoryVO;
 import com.newzkl.platform.base.common.ddd.facade.ApiChannelSpuRelationVO;
 import com.newzkl.platform.base.common.ddd.facade.ApiSkuVO;
@@ -8,7 +9,6 @@ import com.newzkl.platform.base.common.ddd.facade.ApiSpuStateVO;
 import com.newzkl.platform.base.common.ddd.facade.ApiSpuVO;
 import com.newzkl.platform.base.common.ddd.facade.MarketRpcVO;
 import com.newzkl.platform.base.common.ddd.facade.SelectListApiReq;
-import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public interface IGoodsService {
      * @param selectListApiReq
      * @return
      */
-    ApiPage<ApiChannelSpuRelationVO> selectList(Long accountId, SelectListApiReq selectListApiReq);
+    Page<ApiChannelSpuRelationVO> selectList(Long accountId, SelectListApiReq selectListApiReq);
     /**
      * SPU列表
      *

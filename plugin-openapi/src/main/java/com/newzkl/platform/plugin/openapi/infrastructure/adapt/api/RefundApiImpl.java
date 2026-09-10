@@ -1,7 +1,6 @@
 package com.newzkl.platform.plugin.openapi.infrastructure.adapt.api;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.newzkl.platform.base.biz.account.facade.SupplierFacade;
 import com.newzkl.platform.base.biz.order.facade.RefundFacade;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiFreightAddressReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundAggVO;
@@ -11,7 +10,6 @@ import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundStateVO;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundSubmitReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundVO;
-import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 import com.newzkl.platform.plugin.openapi.domain.adapt.api.RefundApi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -68,9 +66,8 @@ public class RefundApiImpl implements RefundApi {
     }
 
     @Override
-    public ApiPage<ApiRefundVO> list(Long accountId, ApiRefundReq apiRefundReq) {
-        Page<ApiRefundVO> page = refundFacade.apiList(accountId, apiRefundReq);
-        return ApiPage.of(page.getRecords(), (int) page.getCurrent(), (int) page.getSize(), page.getTotal());
+    public Page<ApiRefundVO> list(Long accountId, ApiRefundReq apiRefundReq) {
+        return refundFacade.apiList(accountId, apiRefundReq);
     }
 
     @Override

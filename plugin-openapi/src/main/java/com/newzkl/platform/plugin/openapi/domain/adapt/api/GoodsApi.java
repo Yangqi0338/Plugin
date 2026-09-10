@@ -1,6 +1,7 @@
 package com.newzkl.platform.plugin.openapi.domain.adapt.api;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.base.common.ddd.facade.ApiCategoryVO;
 import com.newzkl.platform.base.common.ddd.facade.ApiChannelSpuRelationVO;
 import com.newzkl.platform.base.common.ddd.facade.ApiSkuVO;
@@ -9,7 +10,6 @@ import com.newzkl.platform.base.common.ddd.facade.ApiSpuStateVO;
 import com.newzkl.platform.base.common.ddd.facade.ApiSpuVO;
 import com.newzkl.platform.base.common.ddd.facade.MarketRpcVO;
 import com.newzkl.platform.base.common.ddd.facade.SelectListApiReq;
-import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public interface GoodsApi {
      * @param selectListApiReq 选品查询
      * @return 渠道商 SPU 关系分页
      */
-    ApiPage<ApiChannelSpuRelationVO> selectList(Long accountId, SelectListApiReq selectListApiReq);
+    Page<ApiChannelSpuRelationVO> selectList(Long accountId, SelectListApiReq selectListApiReq);
 
     /**
      * SPU 列表

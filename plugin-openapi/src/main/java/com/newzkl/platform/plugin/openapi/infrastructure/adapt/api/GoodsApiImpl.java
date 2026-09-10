@@ -6,10 +6,8 @@ import com.newzkl.platform.base.biz.goods.application.goods.service.spu.SpuCateg
 import com.newzkl.platform.base.biz.goods.application.goods.service.spu.SpuService;
 import com.newzkl.platform.base.biz.goods.domain.spu.repository.SpuRepository;
 import com.newzkl.platform.base.biz.goods.domain.spu.service.SpuDomain;
-import com.newzkl.platform.base.biz.goods.model.biz.vo.CategoryLayerVO;
 import com.newzkl.platform.base.biz.goods.model.goods.query.spu.SpuCategoryQuery;
 import com.newzkl.platform.base.biz.goods.model.goods.vo.brand.SpuCategoryVO;
-import com.newzkl.platform.base.biz.goods.model.goods.vo.spu.SkuSaleAttributeVO;
 import com.newzkl.platform.base.biz.goods.model.goods.vo.spu.SkuVO;
 import com.newzkl.platform.base.biz.goods.model.goods.vo.spu.SpuStateVO;
 import com.newzkl.platform.base.biz.goods.model.goods.vo.spu.SpuVO;
@@ -32,7 +30,6 @@ import com.newzkl.platform.base.common.ddd.facade.SelectListApiReq;
 import com.newzkl.platform.base.common.ddd.facade.SpuQuery;
 import com.newzkl.platform.base.common.ddd.model.enums.goods.GoodsRelationEnum;
 import com.newzkl.platform.base.common.ddd.model.enums.goods.SpuEnum;
-import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 import com.newzkl.platform.plugin.openapi.domain.adapt.api.GoodsApi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -61,7 +58,7 @@ public class GoodsApiImpl implements GoodsApi {
     private final MarketDomain marketDomain;
 
     @Override
-    public ApiPage<ApiChannelSpuRelationVO> selectList(Long accountId, SelectListApiReq req) {
+    public Page<ApiChannelSpuRelationVO> selectList(Long accountId, SelectListApiReq req) {
         GoodsListPageQuery query = new GoodsListPageQuery();
         query.setUserId(accountId);
         query.setRelationType(GoodsRelationEnum.GoodsRelation.SELECT_GOODS.getCode());
@@ -86,8 +83,7 @@ public class GoodsApiImpl implements GoodsApi {
                 query.addSortField(field.getValue(), isDesc);
             }
         }
-        Page<ApiChannelSpuRelationVO> page = goodsRelationDomain.channelSpuRelationList(query);
-        return ApiPage.of(page.getRecords(), (int) page.getCurrent(), (int) page.getSize(), page.getTotal());
+        return goodsRelationDomain.channelSpuRelationList(query);
     }
 
     @Override

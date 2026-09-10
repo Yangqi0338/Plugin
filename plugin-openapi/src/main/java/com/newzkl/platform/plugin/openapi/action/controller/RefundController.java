@@ -1,5 +1,6 @@
 package com.newzkl.platform.plugin.openapi.action.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.base.common.ddd.model.enums.order.ExpressEnum;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiFreightAddressReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundAggVO;
@@ -11,7 +12,6 @@ import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundSubmi
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundVO;
 import com.newzkl.platform.base.common.core.model.exception.BaseErrorCode;
 import com.newzkl.platform.base.common.core.model.exception.ThrowsException;
-import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 import com.newzkl.platform.base.common.core.model.res.PlatformResult;
 import com.newzkl.platform.plugin.openapi.action.cmd.RefundCmd;
 import com.newzkl.platform.plugin.openapi.application.service.IRefundService;
@@ -98,9 +98,9 @@ public class RefundController {
      * 查询售后列表
      */
     @PostMapping("list")
-    public PlatformResult<ApiPage<ApiRefundVO>> list(@Validated @RequestBody ApiRefundReq apiRefundReq) {
+    public PlatformResult<Page<ApiRefundVO>> list(@Validated @RequestBody ApiRefundReq apiRefundReq) {
         Long accountId = DeveloperContextUtil.get(Constants.ACCOUNT_ID, Long.class);
-        ApiPage<ApiRefundVO> page = refundService.list(accountId, apiRefundReq);
+        Page<ApiRefundVO> page = refundService.list(accountId, apiRefundReq);
         return PlatformResult.success(page);
     }
     /**

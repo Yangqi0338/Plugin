@@ -10,14 +10,12 @@ import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderRes;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderSubmitReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.order.ApiOrderVO;
 import com.newzkl.platform.base.biz.order.facade.model.order.OrderStateVO;
-import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 import com.newzkl.platform.base.common.core.model.res.PlatformResult;
 import com.newzkl.platform.plugin.openapi.model.constants.Constants;
 import com.newzkl.platform.plugin.openapi.model.util.DeveloperContextUtil;
 import com.newzkl.platform.plugin.openapi.application.service.IOrderService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,8 +50,6 @@ public class OrderController {
         Long accountId = DeveloperContextUtil.get(Constants.ACCOUNT_ID, Long.class);
         return PlatformResult.success(orderService.submit(accountId, orderCommand));
     }
-
-
 
     /**
      * 查询下单运费

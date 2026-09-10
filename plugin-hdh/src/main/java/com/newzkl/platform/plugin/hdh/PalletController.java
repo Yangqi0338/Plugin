@@ -41,7 +41,7 @@ public class PalletController {
      * @param spuQuery 查询条件
      * @return SPU 分页
      */
-    @RoleLimit(client = AccountEnum.Client.ADMIN)
+    @RoleLimit(client = {AccountEnum.Client.ADMIN, AccountEnum.Client.MMT_CHANNEL})
     @PostMapping("/spu/palletSpuPage")
     public PlatformResult<Page<SpuVO>> palletSpuPage(@RequestBody @Validated com.newzkl.platform.plugin.hdh.model.PalletSpuQuery spuQuery) {
         return PlatformResult.success(palletGoodsService.palletSpuPage(spuQuery));
@@ -53,7 +53,7 @@ public class PalletController {
      * @param spuQuery 查询条件 (需 outSpuId)
      * @return SPU 详情
      */
-    @RoleLimit(client = AccountEnum.Client.ADMIN)
+    @RoleLimit(client = {AccountEnum.Client.ADMIN, AccountEnum.Client.MMT_CHANNEL})
     @PostMapping("/spu/palletSpu")
     public PlatformResult<SpuVO> palletSpu(@RequestBody com.newzkl.platform.plugin.hdh.model.PalletSpuQuery spuQuery) {
         return PlatformResult.success(palletGoodsService.palletSpuDetail(spuQuery));
@@ -65,7 +65,7 @@ public class PalletController {
      * @param categoryQuery 查询条件
      * @return 分类树
      */
-    @RoleLimit(client = AccountEnum.Client.ADMIN)
+    @RoleLimit(client = {AccountEnum.Client.ADMIN, AccountEnum.Client.MMT_CHANNEL})
     @PostMapping("/category/palletCategoryList")
     public PlatformResult<List<CategoryLayerVO>> palletCategoryList(@RequestBody @Validated com.newzkl.platform.plugin.hdh.model.PalletCategoryQuery categoryQuery) {
         return PlatformResult.success(palletGoodsService.palletCategoryList(categoryQuery));

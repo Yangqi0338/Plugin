@@ -1,5 +1,6 @@
 package com.newzkl.platform.plugin.openapi.application.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiFreightAddressReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundAggVO;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundFreightAddressVO;
@@ -8,7 +9,6 @@ import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundStateVO;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundSubmitReq;
 import com.newzkl.platform.base.biz.order.facade.model.api.refund.ApiRefundVO;
-import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ public interface IRefundService {
 
     List<ApiRefundStateVO> refundState(Long accountId, List<Long> refundIdList);
 
-    ApiPage<ApiRefundVO> list(Long accountId, ApiRefundReq apiRefundReq);
+    Page<ApiRefundVO> list(Long accountId, ApiRefundReq apiRefundReq);
 
     ApiRefundAggVO detail(Long accountId, Long refundId);
 }

@@ -1,6 +1,7 @@
 package com.newzkl.platform.plugin.openapi.action.controller;
 
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.newzkl.platform.base.biz.goods.model.goods.vo.spu.GoldVO;
 
 import com.newzkl.platform.base.common.core.redis.RedisEnum;
@@ -14,14 +15,11 @@ import com.newzkl.platform.base.common.ddd.facade.ApiSpuVO;
 import com.newzkl.platform.base.common.ddd.facade.MarketRpcVO;
 import com.newzkl.platform.base.common.ddd.facade.SelectListApiReq;
 import com.newzkl.platform.base.common.ddd.model.enums.market.MarketEnum;
-import com.newzkl.platform.base.common.ddd.model.res.ApiPage;
 import com.newzkl.platform.base.common.core.model.res.PlatformResult;
 import com.newzkl.platform.plugin.openapi.action.cmd.GoodsCmd;
 import com.newzkl.platform.plugin.openapi.application.service.IGoodsService;
 import com.newzkl.platform.plugin.openapi.model.constants.Constants;
 import com.newzkl.platform.plugin.openapi.model.util.DeveloperContextUtil;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,13 +48,13 @@ public class GoodsController {
      * 查询选品列表
      */
     @PostMapping("/selectList")
-    public PlatformResult<ApiPage<ApiChannelSpuRelationVO>> selectList(@RequestBody SelectListApiReq selectListApiReq) {
+    public PlatformResult<Page<ApiChannelSpuRelationVO>> selectList(@RequestBody SelectListApiReq selectListApiReq) {
         Long accountId = DeveloperContextUtil.get(Constants.ACCOUNT_ID, Long.class);
-        ApiPage<ApiChannelSpuRelationVO> page = goodsService.selectList(accountId, selectListApiReq);
+        Page<ApiChannelSpuRelationVO> page = goodsService.selectList(accountId, selectListApiReq);
 
         // 黄金专区填充金价更新时间
         Object goldPriceUpdateTime = RedisUtil.get(RedisEnum.Key.GOLD_UPDATE_TIME.getCode());
-        page.getList().forEach(x -> {
+        page.getRecords().forEach(x -> {
             if(MarketEnum.MarketTypeEnum.GOLD_ZONE.getDesc().equals(x.getMarketType())){
                 x.setGoldPriceUpdateTime(Objects.toString(goldPriceUpdateTime, null));
             }

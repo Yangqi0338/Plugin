@@ -4,8 +4,8 @@ import cn.hutool.core.map.MapUtil;
 import com.newzkl.platform.base.biz.goods.domain.spu.service.SpuDomain;
 import com.newzkl.platform.base.biz.goods.model.goods.dto.spu.SkuDTO;
 import com.newzkl.platform.base.biz.goods.model.goods.dto.spu.SpuDTO;
-import com.newzkl.platform.base.biz.market.domain.distribution.DistributionDomain;
-import com.newzkl.platform.base.biz.market.model.event.distribution.WorkTableUpDownEventMq;
+import com.newzkl.platform.base.biz.market.facade.DistributionFacade;
+import com.newzkl.platform.base.biz.market.facade.model.UpDownReq;
 import com.newzkl.platform.base.biz.market.model.req.distribution.DistributionsBatchUpdateReq;
 import com.newzkl.platform.base.common.core.model.enums.CommonEnum;
 import com.newzkl.platform.base.common.core.model.exception.BaseErrorCode;
@@ -39,7 +39,7 @@ public class SpuWorkTableServiceImpl implements SpuWorkTableService {
 
     private final SpuWorkTableDomain spuWorkTableDomain;
     private final SpuDomain spuDomain;
-    private final DistributionDomain distributionDomain;
+    private final DistributionFacade distributionFacade;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -124,12 +124,10 @@ public class SpuWorkTableServiceImpl implements SpuWorkTableService {
      * @param spuId SPU 主键
      */
     private void distribution(Long spuId) {
-        WorkTableUpDownEventMq event = new WorkTableUpDownEventMq();
+        UpDownReq event = new UpDownReq();
         event.setEnable(SpuEnum.State.PLATFORM_DOWN);
         event.setSpuIdList(Collections.singletonList(spuId));
-        event.setNeedUpdate(CommonEnum.YesOrNo.NO);
-        DistributionsBatchUpdateReq req = distributionDomain.upDownEvent(event);
-        distributionDomain.batchUpdateDistributions(req);
+        distributionFacade.upDownEvent(event);
     }
 
     /**
